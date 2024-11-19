@@ -29,6 +29,17 @@ const config: Config = {
       minWidth: px0_200,
       minHeight: px0_200,
       spacing: px0_200,
+
+      colors: {
+        MainColor: '#2AA971',
+        BlockColor: '#EDEAE3',
+        SemiBlack: '#242424',
+        Gray: '#A2A2A2',
+        DarkGray: '#707070',
+        LightGray: '#DDDDDD',
+        SemiWhite: '#F3F3F3',
+        White: '#FFFFFF',
+      },
     },
   },
   plugins: [],
