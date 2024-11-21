@@ -1,15 +1,21 @@
 import React, { useState } from 'react';
 
-const ProfileStep1 = ({ onNext }: { onNext: () => void }) => {
+interface ProfileStep1Props {
+  onNext: () => void;
+}
+const ProfileStep1: React.FC<ProfileStep1Props> = ({ onNext }) => {
+  // const ProfileStep1 = ({ onNext }: { onNext: () => void }) => {
   const [nickname, setNickname] = useState<string>('');
   const [photo, setPhoto] = useState<string | null>(null);
 
   const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     if (value.length <= 15) setNickname(value);
+
+    console.log(value);
   };
 
-  const handlePhotoUpload = (e: React.ChangeEvent<HTMLElement>) => {
+  const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = (e.target as HTMLInputElement).files?.[0];
     if (file) {
       const reader = new FileReader();
@@ -68,14 +74,13 @@ const ProfileStep1 = ({ onNext }: { onNext: () => void }) => {
         {/* <p className="text-sm text-MainColor mt-2">{nickname.length}/15</p> */}
       </div>
 
-      {/* 다음으로 넘어가기 버튼 */}
       <button
         onClick={onNext}
         disabled={!nickname || !photo}
         className={`mt-60 px-85 py-15 rounded-[20px] ${
           nickname && photo
-            ? 'bg-MainColor text-White'
-            : 'bg-SemiWhite text-SemiBlack cursor-not-allowed'
+            ? 'bg-MainColor text-White font-medium'
+            : 'bg-SemiWhite text-SemiBlack font-medium cursor-not-allowed'
         }`}
       >
         다음으로 넘어가기
