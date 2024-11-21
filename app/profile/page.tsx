@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 
 import ProfileStep1 from './components/ProfileStep1';
 import ProfileStep2 from './components/ProfileStep2';
+import ProfileStep3 from './components/ProfileStep3';
 
 export default function ProfilePage() {
   const [step, setStep] = useState(1);
@@ -22,9 +23,9 @@ export default function ProfilePage() {
         <ProfileStep2 onNext={handleNextStep} onBack={handlePrevStep} />
       )}
 
-      {/* {step === 3 && (
-        <ProfileStep3 onFinish={() => alert("프로필 설정 완료!")} onBack={handlePreviousStep} />
-      )}  */}
+      {step === 3 && (
+        <ProfileStep3 onBack={handlePrevStep} onComplete={() => {}} />
+      )}
     </div>
   );
 }
