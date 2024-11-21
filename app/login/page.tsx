@@ -7,10 +7,6 @@ export default function LoginPage() {
   /**
    * TODO
    * 카카오 간편 로그인 연동 기능 추가
-   *
-   * CHECKLIST
-   * [ ] 카카오 간편 로그인 연동
-   *
    */
 
   return (
