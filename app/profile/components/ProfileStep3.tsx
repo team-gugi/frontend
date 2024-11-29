@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
-
+import { profileAtom } from '@/recoil/profileAtom';
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
+import registerProfile from '@/lib/api/profileApi';
 interface ProfileStep3Props {
   onBack: () => void;
-  onComplete: (profileData: { team: string }) => void;
+  registerToken: string;
 }
 
-const ProfileStep3: React.FC<ProfileStep3Props> = ({ onBack, onComplete }) => {
+const ProfileStep3: React.FC<ProfileStep3Props> = ({
+  onBack,
+  registerToken,
+}) => {
   const teams = [
     'KIA 타이거즈',
     'KT 위즈',
@@ -21,14 +27,28 @@ const ProfileStep3: React.FC<ProfileStep3Props> = ({ onBack, onComplete }) => {
   ];
 
   const [selectedTeam, setSelectedTeam] = useState<string>('');
+  const [profile, setProfile] = useRecoilState(profileAtom);
+  const router = useRouter();
 
   const handleTeamChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedTeam(e.target.value);
+    const team = e.target.value;
+    setSelectedTeam(team);
+    setProfile((prevProfile) => ({
+      ...prevProfile,
+      team: team,
+    }));
+  };
+  console.log(profile);
+
+  const handleProfileSubmit = async () => {
+    if (registerToken) {
+      await registerProfile(registerToken, profile);
+    } else {
+      console.log('register token이 없음!');
+    }
+    // await registerProfile(registerToken, profile);
   };
 
-  const handleCompleteProfile = () => {
-    // onComplete({team: selectedTeam});
-  };
   return (
     <div className="flex flex-col items-center w-full">
       <div className="flex flex-col items-center w-full gap-55">
@@ -59,7 +79,7 @@ const ProfileStep3: React.FC<ProfileStep3Props> = ({ onBack, onComplete }) => {
 
       {/* 뒤로 가기 버튼은 보류 */}
       <button
-        onClick={handleCompleteProfile}
+        onClick={handleProfileSubmit}
         disabled={selectedTeam === ''}
         className={`mt-60 px-85 py-15 rounded-[20px] ${
           selectedTeam
@@ -67,7 +87,7 @@ const ProfileStep3: React.FC<ProfileStep3Props> = ({ onBack, onComplete }) => {
             : 'bg-SemiWhite text-SemiBlack font-medium cursor-not-allowed'
         }`}
       >
-        다음으로 넘어가기
+        프로필 설정 완료
       </button>
     </div>
   );

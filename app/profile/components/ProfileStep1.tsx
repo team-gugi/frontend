@@ -1,31 +1,48 @@
-import React, { useState } from 'react';
+import { profileAtom } from '@/recoil/profileAtom';
+import React, { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
 
 interface ProfileStep1Props {
   onNext: () => void;
 }
 const ProfileStep1: React.FC<ProfileStep1Props> = ({ onNext }) => {
   // const ProfileStep1 = ({ onNext }: { onNext: () => void }) => {
-  const [nickname, setNickname] = useState<string>('');
-  const [photo, setPhoto] = useState<string | null>(null);
+  const [nickName, setNickName] = useState<string>('');
+  const [profileImg, setProfileImg] = useState<File | null>(null);
+
+  const [profile, setProfile] = useRecoilState(profileAtom);
 
   const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    if (value.length <= 15) setNickname(value);
-
-    console.log(value);
+    if (value.length <= 15) setNickName(value);
+    setProfile((prev) => ({ ...prev, nickName: value }));
   };
 
   const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = (e.target as HTMLInputElement).files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPhoto(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
+    const file = e.target.files ? e.target.files[0] : null;
+    setProfileImg(file);
+    setProfile((prevProfile) => ({
+      ...prevProfile,
+      profileImg: file, // File | null을 상태에 업데이트
+    }));
 
-    console.log(file); // 파일 확인
+    // const file = (e.target as HTMLInputElement).files?.[0];
+    // if (file) {
+    //   const reader = new FileReader();
+    //   reader.onloadend = () => {
+    //     setPhoto(reader.result as string);
+    //     setProfile((prevProfile) => ({
+    //       ...prevProfile,
+    //       photo: reader.result as string, // string 타입으로 변환
+    //     }));
+    //   };
+    //   reader.readAsDataURL(file);
+    // }
+    console.log(file);
+  };
+
+  const handleSave = () => {
+    console.log('step1 상태 화인:', profile); // 상태 확인
   };
 
   return (
@@ -42,9 +59,9 @@ const ProfileStep1: React.FC<ProfileStep1Props> = ({ onNext }) => {
           htmlFor="photo-upload"
           className="flex items-center justify-center w-120 h-120 rounded-full bg-SemiWhite cursor-pointer overflow-hidden"
         >
-          {photo ? (
+          {profileImg ? (
             <img
-              src={photo}
+              src={URL.createObjectURL(profileImg)}
               alt="Uploaded"
               className="w-full h-full object-cover"
             />
@@ -66,7 +83,7 @@ const ProfileStep1: React.FC<ProfileStep1Props> = ({ onNext }) => {
       <div className="w-full flex items-center justify-center">
         <input
           type="text"
-          value={nickname}
+          value={nickName}
           placeholder="닉네임을 입력해주세요     (0/15)"
           onChange={handleNicknameChange}
           className="w-[236px] px-10 py-10 text-17 text-center font-normal border-b-1 border-Gray outline-none placeholder:text-Gray focus:border-MainColor text-MainColor"
@@ -75,10 +92,13 @@ const ProfileStep1: React.FC<ProfileStep1Props> = ({ onNext }) => {
       </div>
 
       <button
-        onClick={onNext}
-        disabled={!nickname || !photo}
+        onClick={() => {
+          handleSave();
+          onNext();
+        }}
+        disabled={!nickName || !profileImg}
         className={`mt-60 px-85 py-15 rounded-[20px] ${
-          nickname && photo
+          nickName && profileImg
             ? 'bg-MainColor text-White font-medium'
             : 'bg-SemiWhite text-SemiBlack font-medium cursor-not-allowed'
         }`}

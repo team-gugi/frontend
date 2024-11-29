@@ -3,12 +3,8 @@ import React from 'react';
 import Image from 'next/image';
 
 import kakakIcon from '../public/icons/Kakao.svg';
+import { redirectToKakao } from '@/lib/api/kakaoAuthApi';
 export default function LoginPage() {
-  /**
-   * TODO
-   * 카카오 간편 로그인 연동 기능 추가
-   */
-
   return (
     <>
       <div className="flex flex-col items-center px-40 mt-[248px]">
@@ -26,7 +22,10 @@ export default function LoginPage() {
       </div>
 
       <div className="flex px-40 py-10 items-center mt-63">
-        <button className="flex flex-row w-full px-20 items-center justify-center py-20 gap-8 bg-[#FEE500] rounded-lg">
+        <button
+          onClick={redirectToKakao}
+          className="flex flex-row w-full px-20 items-center justify-center py-20 gap-8 bg-[#FEE500] rounded-lg"
+        >
           <Image
             src={kakakIcon}
             alt="카카오 간편 로그인 아이콘"
