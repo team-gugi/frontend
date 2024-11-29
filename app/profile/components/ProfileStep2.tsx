@@ -1,4 +1,6 @@
+import { profileAtom } from '@/recoil/profileAtom';
 import React, { useState } from 'react';
+import { useRecoilState } from 'recoil';
 
 interface ProfileStep2Props {
   onNext: () => void;
@@ -12,14 +14,25 @@ interface ProfileStep2Props {
 //   onNext: () => void;
 //   onBack: () => void;
 // }) => {
-const ProfileStep2: React.FC<ProfileStep2Props> = ({ onNext, onBack }) => {
-  const [description, setDescription] = useState<string>('');
-  const maxLength = 100;
 
-  const handleDescripitonChange = (
+const ProfileStep2: React.FC<ProfileStep2Props> = ({ onNext, onBack }) => {
+  const [introduction, setIntroduction] = useState<string>('');
+  const maxLength = 100;
+  const [profile, setProfile] = useRecoilState(profileAtom);
+
+  const handleIntroductionChange = (
     e: React.ChangeEvent<HTMLTextAreaElement>,
   ) => {
-    setDescription(e.target.value);
+    const value = e.target.value;
+    setIntroduction(value);
+    setProfile((prevProfile) => ({
+      ...prevProfile,
+      introduction: value,
+    }));
+  };
+
+  const handleSave = () => {
+    console.log('step2 상태 확인 : ', profile);
   };
 
   return (
@@ -30,8 +43,8 @@ const ProfileStep2: React.FC<ProfileStep2Props> = ({ onNext, onBack }) => {
       {/* 자기 소개 입력 */}
       <div className="relative w-full max-w-[285px] max-h-[124px]">
         <textarea
-          value={description}
-          onChange={handleDescripitonChange}
+          value={introduction}
+          onChange={handleIntroductionChange}
           placeholder="간단한 소개로 많은 사람들이 당신에 대해 알 수 있게 해주세요! (최대 100자)"
           maxLength={maxLength}
           className="w-full px-25 py-16 text-14 font-light leading-[1.6] rounded-[10px] bg-SemiWhite border focus:border-MainColor"
@@ -40,16 +53,19 @@ const ProfileStep2: React.FC<ProfileStep2Props> = ({ onNext, onBack }) => {
 
         <div className="flex justify-end mt-4 text-14 text-light text-Gray">
           <span>
-            {description.length}/{maxLength}
+            {introduction.length}/{maxLength}
           </span>
         </div>
       </div>
       {/* 뒤로 가기 버튼은 보류 */}
       <button
-        onClick={onNext}
-        disabled={description.length === 0}
+        onClick={() => {
+          handleSave();
+          onNext();
+        }}
+        disabled={introduction.length === 0}
         className={`mt-60 px-85 py-15 rounded-[20px] ${
-          description.length > 0
+          introduction.length > 0
             ? 'bg-MainColor text-White font-medium'
             : 'bg-SemiWhite text-SemiBlack font-medium cursor-not-allowed'
         }`}
