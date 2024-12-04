@@ -46,7 +46,6 @@ const ProfileStep3: React.FC<ProfileStep3Props> = ({
     } else {
       console.log('register token이 없음!');
     }
-    // await registerProfile(registerToken, profile);
   };
 
   return (
@@ -59,7 +58,6 @@ const ProfileStep3: React.FC<ProfileStep3Props> = ({
             {teams.map((team) => (
               <label
                 key={team}
-                //   className="flex items-center gap-10 w-1/2 my-14 font-semibold text-16"
                 className={`flex items-center gap-10 w-1/2 my-14 font-semibold text016 cursor-pointer ${selectedTeam === team ? 'text-MainColor' : 'text-SemiBlack'}`}
               >
                 <input
@@ -77,7 +75,6 @@ const ProfileStep3: React.FC<ProfileStep3Props> = ({
         </div>
       </div>
 
-      {/* 뒤로 가기 버튼은 보류 */}
       <button
         onClick={handleProfileSubmit}
         disabled={selectedTeam === ''}

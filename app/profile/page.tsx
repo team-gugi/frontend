@@ -18,11 +18,9 @@ export default function ProfilePage() {
   useEffect(() => {
     const token = searchParams.get('register_token');
     if (token) {
-      //   setProfile((prev) => ({ ...prev, registerToken: token }));
       setRegisterToken(token);
     }
   }, [searchParams]);
-  //   console.log('register token', registerToken);
 
   const handleNextStep = () => {
     setStep((prevStep) => prevStep + 1);
@@ -41,7 +39,7 @@ export default function ProfilePage() {
       {step === 3 && (
         <ProfileStep3
           onBack={handlePrevStep}
-          registerToken={registerToken || ''} // registerToken을 ProfileStep3로 전달
+          registerToken={registerToken || ''}
         />
       )}
     </div>
