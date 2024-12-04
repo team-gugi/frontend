@@ -50,7 +50,6 @@ const registerProfile = async (registerToken: string, profile: any) => {
     document.cookie = `access_token=${data.accessToken}; path=/`;
     document.cookie = `refresh_token=${data.refreshToken}; path=/`;
 
-    // URL 리다이렉션 (필요한 경우)
     // useRouter().push(redirectUrl);
   } catch (error) {
     console.log('프로필 등록 오류', error);

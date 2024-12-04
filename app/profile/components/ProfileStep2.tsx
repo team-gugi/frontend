@@ -7,14 +7,6 @@ interface ProfileStep2Props {
   onBack: () => void;
 }
 
-// const ProfileStep2 = ({
-//   onNext,
-//   onBack,
-// }: {
-//   onNext: () => void;
-//   onBack: () => void;
-// }) => {
-
 const ProfileStep2: React.FC<ProfileStep2Props> = ({ onNext, onBack }) => {
   const [introduction, setIntroduction] = useState<string>('');
   const maxLength = 100;
@@ -57,7 +49,7 @@ const ProfileStep2: React.FC<ProfileStep2Props> = ({ onNext, onBack }) => {
           </span>
         </div>
       </div>
-      {/* 뒤로 가기 버튼은 보류 */}
+
       <button
         onClick={() => {
           handleSave();

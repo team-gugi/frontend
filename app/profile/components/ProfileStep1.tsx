@@ -88,7 +88,6 @@ const ProfileStep1: React.FC<ProfileStep1Props> = ({ onNext }) => {
           onChange={handleNicknameChange}
           className="w-[236px] px-10 py-10 text-17 text-center font-normal border-b-1 border-Gray outline-none placeholder:text-Gray focus:border-MainColor text-MainColor"
         />
-        {/* <p className="text-sm text-MainColor mt-2">{nickname.length}/15</p> */}
       </div>
 
       <button
