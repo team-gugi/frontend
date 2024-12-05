@@ -20,7 +20,7 @@ import MypageIcon from '../app/public/icons/Mypage.svg';
 
 export default function Navigation() {
   return (
-    <nav className="fixed bottom-0 left-0 w-full px-16 gap-4">
+    <nav className="fixed bottom-0 left-0 w-full px-16 gap-4 bg-White">
       <div className="flex justify-around">
         <Link
           href="/"
