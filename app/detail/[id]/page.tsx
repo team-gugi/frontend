@@ -16,7 +16,7 @@ interface Team {
   schedule: string[];
 }
 
-const TeamDetailPage = () => {
+export default function TeamDetailPage() {
   const router = useRouter();
   //   const { id } = router.query;
 
@@ -50,6 +50,6 @@ const TeamDetailPage = () => {
       <Navigation />
     </>
   );
-};
+}
 
-export default TeamDetailPage;
+// export default TeamDetailPage;
