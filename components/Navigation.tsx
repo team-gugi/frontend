@@ -44,7 +44,7 @@ export default function Navigation() {
         </Link>
 
         <Link
-          href="/"
+          href="/home"
           className="flex flex-col items-center justify-center px-21 py-10 gap-4 "
         >
           <Image src={HomeIcon} alt="홈 아이콘" width={18} height={18} />
@@ -52,7 +52,7 @@ export default function Navigation() {
         </Link>
 
         <Link
-          href="/"
+          href="/detail"
           className="flex flex-col items-center justify-center px-21 py-10 gap-4 "
         >
           <Image src={BallIcon} alt="야구정보 아이콘" width={18} height={18} />
@@ -63,7 +63,12 @@ export default function Navigation() {
           href="/"
           className="flex flex-col items-center justify-center px-21 py-10 gap-4 "
         >
-          <Image src={MypageIcon} alt="홈 아이콘" width={18} height={18} />
+          <Image
+            src={MypageIcon}
+            alt="마이페이지 아이콘"
+            width={18}
+            height={18}
+          />
           <span className="font-normal text-7 text-Gray">마이페이지</span>
         </Link>
       </div>
