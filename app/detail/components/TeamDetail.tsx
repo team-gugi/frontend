@@ -1,4 +1,4 @@
-// components/TeamDetail.tsx
+'use client';
 import Image from 'next/image';
 import { StaticImageData } from 'next/image';
 import Link from 'next/link';
@@ -10,22 +10,35 @@ import ShopIcon from '../../public/icons/Shop.svg';
 import { useState } from 'react';
 import BottomSheet from './SnsBottomSheet';
 import SnsBottomSheet from './SnsBottomSheet';
+import SamsungIcon from '../../public/icons/logo_samsung.svg';
 
-interface TeamDetailProps {
+interface ITeamDetailProps {
   //   logo: StaticImageData;
   logo: string;
   name: string;
   description: string;
+  instagram: string;
+  youtube: string;
+  ticketShop: string;
+  mdShop: string;
 }
 
-const TeamDetail = ({ logo, name, description }: TeamDetailProps) => {
+const TeamDetail = ({
+  logo,
+  name,
+  description,
+  instagram,
+  youtube,
+  ticketShop,
+  mdShop,
+}: ITeamDetailProps) => {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   return (
     <>
       <section className="flex flex-row py-20 mx-24 my-20 gap-10 items-center border-b-1 border-solid border-Gray">
-        <Image src={logo} alt={name} width={300} />
-        <div className="flex flex-col gap-14 ">
-          <h1 className="font-bold text-32 text-[#0066B3]">삼성 라이온즈</h1>
+        <Image src={SamsungIcon} alt={name} width={300} height={300} />
+        <div className="flex flex-col gap-14">
+          <h1 className="font-bold text-32 text-[#0066B3]">{name}</h1>
           <p className="font-normal text-14 leading-[140%]">{description}</p>
         </div>
       </section>
@@ -44,7 +57,6 @@ const TeamDetail = ({ logo, name, description }: TeamDetailProps) => {
           <span className="font-medium text-12 text-SemiBlack">
             메인 홈구장
           </span>
-          <span className="font-medium text-12 text-SemiBlack">정보</span>
         </Link>
 
         <button
@@ -52,7 +64,7 @@ const TeamDetail = ({ logo, name, description }: TeamDetailProps) => {
           onClick={() => {
             setIsSheetOpen(true);
           }}
-          className="flex flex-col gap-4 items-center justify-center "
+          className="flex flex-col gap-4 items-center justify-center"
         >
           <Image
             src={InstagramIcon}
@@ -60,46 +72,46 @@ const TeamDetail = ({ logo, name, description }: TeamDetailProps) => {
             width={24}
             height={24}
           />
-          <span className="font-medium text-12 text-SemiBlack">구단 공식</span>
-          <span className="font-medium text-12 text-SemiBlack">SNS</span>
+          <span className="font-medium text-12 text-SemiBlack">
+            구단 공식 SNS
+          </span>
         </button>
 
         <Link
-          href=""
+          href={ticketShop}
           className="flex flex-col gap-4 items-center justify-center"
         >
           <Image
             src={TicketIcon}
-            alt="구단별 공식 예매처 바로가기 아이콘"
+            alt="구단 예매 플랫폼"
             width={24}
             height={24}
           />
           <span className="font-medium text-12 text-SemiBlack">
             예매 플랫폼
           </span>
-          <span className="font-medium text-12 text-SemiBlack">바로가기</span>
         </Link>
 
         <Link
-          href=""
+          href={mdShop}
           className="flex flex-col gap-4 items-center justify-center"
         >
-          <Image
-            src={ShopIcon}
-            alt="구단별 공식 md 스토어 바로가기 아이콘"
-            width={24}
-            height={24}
-          />
+          <Image src={ShopIcon} alt="구단 MD 스토어" width={24} height={24} />
           <span className="font-medium text-12 text-SemiBlack">
             공식 MD 스토어
           </span>
-          <span className="font-medium text-12 text-SemiBlack">바로가기</span>
         </Link>
       </nav>
 
-      {isSheetOpen && <SnsBottomSheet onClose={() => setIsSheetOpen(false)} />}
+      {isSheetOpen && (
+        <SnsBottomSheet
+          onClose={() => setIsSheetOpen(false)}
+          teamName={name}
+          instagramLink={instagram}
+          youtubeLink={youtube}
+        />
+      )}
     </>
   );
 };
-
 export default TeamDetail;

@@ -1,7 +1,28 @@
+'use client';
+import { useEffect } from 'react';
+import { useRecoilState } from 'recoil';
+import { kboRankingAtom } from '@/recoil/kboRankingAtom';
+import { getKboRanking } from '@/lib/api/kboRanking';
 import TableBodyText from './TableBodyText';
 import TableHeadText from './TableHeadText';
 
 export default function Rank() {
+  const [kboRanking, setKboRanking] = useRecoilState(kboRankingAtom);
+
+  useEffect(() => {
+    const fetchRanking = async () => {
+      try {
+        const rankingData = await getKboRanking();
+        setKboRanking(rankingData);
+        console.log('rankingData:', rankingData);
+      } catch (error) {
+        console.error('KBO 순위 데이터를 가져오는 데 실패했습니다.', error);
+      }
+    };
+
+    fetchRanking();
+  }, [setKboRanking]);
+
   return (
     <section className="pt-10 pb-20 px-24">
       <div className="flex flex-row gap-4 items-center">
@@ -23,22 +44,22 @@ export default function Rank() {
           </tr>
         </thead>
         <tbody className="flex flex-col gap-20 max-h-[250px] overflow-y-auto">
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((element, index) => {
-            return (
-              <tr className="flex gap-14 it-center" key={index}>
-                <td className="font-normal text-14 shrink-0 min-w-15">
-                  {index + 1}
-                </td>
-                <td className="font-normal text-14 shrink-0">삼성</td>
-                <TableBodyText text="94" />
-                <TableBodyText text="57" />
-                <TableBodyText text="35" />
-                <TableBodyText text="2" />
-                <TableBodyText text="0.431" />
-                <TableBodyText text="94" />
-              </tr>
-            );
-          })}
+          {kboRanking.map((team) => (
+            <tr className="flex gap-14 it-center" key={team.teamRank}>
+              <td className="font-normal text-14 shrink-0 min-w-15">
+                {team.teamRank}
+              </td>
+              <td className="flex font-normal items-center justify-center text-14 shrink-0">
+                {team.team}
+              </td>
+              <TableBodyText text={team.game.toString()} />
+              <TableBodyText text={team.win.toString()} />
+              <TableBodyText text={team.lose.toString()} />
+              <TableBodyText text={team.draw.toString()} />
+              <TableBodyText text={team.winningRate.toFixed(3)} />
+              <TableBodyText text={team.difference.toString()} />
+            </tr>
+          ))}
         </tbody>
       </table>
     </section>
