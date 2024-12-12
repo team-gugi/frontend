@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { kboRankingAtom } from '@/recoil/kboRankingAtom';
-import { getKboRanking } from '@/lib/api/kboRanking';
+import { getKboRanking } from '@/lib/api/kboRankingApi';
 import TableBodyText from './TableBodyText';
 import TableHeadText from './TableHeadText';
 
@@ -34,7 +34,7 @@ export default function Rank() {
 
       <table className="w-full">
         <thead>
-          <tr className="pt-16 pl-60 pb-10 my-14 flex gap-27 border-b-1 border-solid border-Gray">
+          <tr className="pt-16 pl-58 pb-10 my-14 flex gap-22 border-b-1 border-solid border-Gray">
             <TableHeadText text="경기수" />
             <TableHeadText text="승" />
             <TableHeadText text="패" />
@@ -45,11 +45,11 @@ export default function Rank() {
         </thead>
         <tbody className="flex flex-col gap-20 max-h-[250px] overflow-y-auto">
           {kboRanking.map((team) => (
-            <tr className="flex gap-14 it-center" key={team.teamRank}>
-              <td className="font-normal text-14 shrink-0 min-w-15">
+            <tr className="flex gap-14 items-center" key={team.teamRank}>
+              <td className="font-normal text-14 shrink-0 min-w-10">
                 {team.teamRank}
               </td>
-              <td className="flex font-normal items-center justify-center text-14 shrink-0">
+              <td className="flex font-normal items-center justify-center text-center text-14 shrink-0 w-[28px]">
                 {team.team}
               </td>
               <TableBodyText text={team.game.toString()} />

@@ -1,10 +1,11 @@
 import Header from '@/components/Header';
-import { getTeamDetails } from '@/lib/api/teamDetails';
+import { getTeamDetails } from '@/lib/api/teamDetailsApi';
 import TeamDetail from '../components/TeamDetail';
 import Navigation from '@/components/Navigation';
 
 interface ITeamDetails {
   teamCode: string;
+  teamLogo: string;
   teamName: string;
   description: string;
   instagram: string;
@@ -22,12 +23,14 @@ export default async function TeamDetailPage({
 
   try {
     const teamData: ITeamDetails = await getTeamDetails(id);
+    console.log(teamData);
 
     return (
       <>
         <Header />
         <TeamDetail
-          logo={`/icons/logo_${teamData.teamCode}.svg`}
+          code={teamData.teamCode}
+          logo={teamData.teamLogo}
           name={teamData.teamName}
           description={teamData.description}
           instagram={teamData.instagram}

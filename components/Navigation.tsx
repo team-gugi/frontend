@@ -10,14 +10,6 @@ import HomeIcon from '../app/public/icons/Home.svg';
 import BallIcon from '../app/public/icons/Ball.svg';
 import MypageIcon from '../app/public/icons/Mypage.svg';
 
-/**
- * CHECKLIST
- * [ ] 네비게이션 링크 url 수정
- * [ ] 현재 url에 따라 아이콘 색상 변경
- *
- *
- */
-
 export default function Navigation() {
   return (
     <nav className="fixed bottom-0 left-0 w-full px-16 gap-4 bg-White">
@@ -29,6 +21,7 @@ export default function Navigation() {
           <Image
             src={MateIcon}
             alt="직관메이트 아이콘"
+            // style={{ width: 'auto', height: 'auto' }}
             width={20}
             height={18}
           />

@@ -3,6 +3,7 @@ interface ITeamDetailsResponse {
   message: string;
   payload: {
     teamCode: string;
+    teamLogo: string;
     teamName: string;
     description: string;
     instagram: string;
@@ -19,8 +20,8 @@ export const getTeamDetails = async (teamCode: string) => {
   );
 
   if (!response.ok) {
-    throw new Error('팀별 상세 정보를 불러오는 데 실패했습니다');
     console.log('팀코드', teamCode);
+    throw new Error('팀별 상세 정보를 불러오는 데 실패했습니다');
   }
 
   const data: ITeamDetailsResponse = await response.json();
