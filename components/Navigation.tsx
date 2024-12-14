@@ -29,7 +29,7 @@ export default function Navigation() {
         </Link>
 
         <Link
-          href="/"
+          href="/diary"
           className="flex flex-col items-center justify-center px-21 py-10 gap-4 "
         >
           <Image src={DiaryIcon} alt="직관일기 아이콘" width={17} height={17} />
