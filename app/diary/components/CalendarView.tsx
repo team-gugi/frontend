@@ -5,34 +5,37 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './CalendarView.css';
 import moment from 'moment';
+import { useRecoilValue } from 'recoil';
+import { diaryAtom } from '@/recoil/diary/diaryAtom';
 
 interface DiaryEntry {
-  date: string; // 'YYYY-MM-DD' 형식
-  result: 'win' | 'lose' | 'draw';
+  gameDate: string; // 'YYYY-MM-DD' 형식
+  gameResult: 'WIN' | 'LOSE' | 'DRAW';
 }
 
-const diaryEntries: DiaryEntry[] = [
-  { date: '2024-07-10', result: 'win' },
-  { date: '2024-07-12', result: 'lose' },
-  { date: '2024-07-15', result: 'draw' },
-];
-
 export default function CalendarView() {
+  const diaries = useRecoilValue(diaryAtom);
+
+  const diaryEntries: DiaryEntry[] = diaries.map((diary) => ({
+    gameDate: diary.gameDate,
+    gameResult: diary.gameResult,
+  }));
+
   const tileContent = ({ date, view }: { date: Date; view: string }) => {
     if (view === 'month') {
       const formattedDate = date.toISOString().split('T')[0];
       const diaryEntry = diaryEntries.find(
-        (entry) => entry.date === formattedDate,
+        (entry) => entry.gameDate === formattedDate,
       );
 
       if (diaryEntry) {
         let dotColor = '';
-        if (diaryEntry.result === 'win') {
+        if (diaryEntry.gameResult === 'WIN') {
           dotColor = 'bg-MainColor'; // 승리: 초록색
-        } else if (diaryEntry.result === 'lose') {
-          dotColor = 'bg-BlockColor'; // 패배: 빨간색
+        } else if (diaryEntry.gameResult === 'LOSE') {
+          dotColor = 'bg-BlockColor';
         } else {
-          dotColor = 'bg-BlockColor'; // 비김: 노란색
+          dotColor = 'bg-BlockColor';
         }
 
         return (

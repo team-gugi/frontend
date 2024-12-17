@@ -24,10 +24,13 @@ export const postDiaryApi = async (
   }
 
   try {
-    const response = await fetch('/api/v1/diary', {
-      method: 'POST',
-      body: formData,
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/v1/diary`,
+      {
+        method: 'POST',
+        body: formData,
+      },
+    );
 
     if (!response.ok) {
       throw new Error('직관 일기 등록에 실패했습니다');
