@@ -4,9 +4,13 @@ import WinningRateBanner from './WinningRateBanner';
 import CalendarView from './CalendarView';
 import ListView from './ListView';
 import Button from './Button';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { diaryAtom } from '@/recoil/diary/diaryAtom';
 
 export default function Tabs() {
   const [activeTab, setActiveTab] = useState<'calendar' | 'all'>('calendar');
+  const diaries = useRecoilValue(diaryAtom);
+  const [error, setError] = useState<string | null>(null);
 
   return (
     <>
