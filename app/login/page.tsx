@@ -5,6 +5,55 @@ import Image from 'next/image';
 import kakakIcon from '../public/icons/Kakao.svg';
 import { redirectToKakao } from '@/lib/api/kakaoAuthApi';
 export default function LoginPage() {
+  // const router = useRouter();
+
+  // useEffect(() => {
+  //   // 카카오 로그인 후 리디렉션된 경우, 쿠키에서 register token을 확인
+  //   const cookies = document.cookie.split('; ').reduce(
+  //     (acc, cookie) => {
+  //       const [key, value] = cookie.split('=');
+  //       acc[key] = value;
+  //       return acc;
+  //     },
+  //     {} as Record<string, string>,
+  //   );
+
+  //   const registerToken = cookies['register_token'];
+
+  //   if (registerToken) {
+  //     // 가입 여부 확인 API 호출
+  //     checkUserRegistration(registerToken);
+  //   }
+  // }, [router]);
+
+  // const checkUserRegistration = async (registerToken: string) => {
+  //   try {
+  //     const response = await fetch(
+  //       `${process.env.NEXT_PUBLIC_API_URL}/api/v1/users/check-registration`,
+  //       {
+  //         method: 'POST',
+  //         headers: {
+  //           Authorization: `Bearer ${registerToken}`,
+  //         },
+  //       },
+  //     );
+
+  //     if (response.ok) {
+  //       const data = await response.json();
+  //       if (data.isRegistered) {
+  //         // 이미 가입된 유저는 홈 화면으로 리디렉션
+  //         router.push('/home');
+  //       } else {
+  //         // 가입되지 않은 유저는 프로필 설정 페이지로 리디렉션
+  //         router.push('/profile');
+  //       }
+  //     } else {
+  //       console.error('가입 여부 확인 실패');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error checking user registration:', error);
+  //   }
+  // };
   return (
     <>
       <div className="flex flex-col items-center px-40 mt-[248px]">
