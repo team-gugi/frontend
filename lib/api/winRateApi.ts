@@ -1,6 +1,7 @@
 export const getWinRate = async () => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/v1/diary/win-rate`,
+    { credentials: 'include' },
   );
 
   if (!response.ok) {

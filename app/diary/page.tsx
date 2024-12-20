@@ -9,7 +9,6 @@ import { fetchDiaryList } from '@/lib/api/fetchDiaryApi';
 import { getWinRate } from '@/lib/api/winRateApi';
 import { winRateAtom } from '@/recoil/diary/winRateAtom';
 
-//일기 메인 홈 페이지
 export default function DiaryPage() {
   const [diaries, setDiaries] = useRecoilState(diaryAtom);
   const [winRateData, setWinRateData] = useRecoilState(winRateAtom);
@@ -38,19 +37,6 @@ export default function DiaryPage() {
     getDiaryList();
     getWinRateData();
   }, [setDiaries, setWinRateData]);
-
-  // useEffect(() => {
-  //   const getDiaryList = async () => {
-  //     try {
-  //       const diaryData = await fetchDiaryList();
-  //       setDiaries(diaryData);
-  //     } catch (error) {
-  //       setError('일기 데이터를 가져오는데 실패했습니다. 다시 시도해주세요.');
-  //     }
-  //   };
-
-  //   getDiaryList();
-  // }, [setDiaries]);
 
   return (
     <>

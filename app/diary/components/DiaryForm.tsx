@@ -64,9 +64,9 @@ export default function DiaryForm({
       awayScore: parseInt(awayScore),
       content,
     };
-    console.log(diaryInfo);
-    console.log(selectedImage);
-    // 부모 컴포넌트로부터 받은 onSubmit 호출
+    console.log('diaryInfo', diaryInfo);
+    console.log('gameImg', selectedImage);
+
     onSubmit(diaryInfo, selectedImage);
   };
   return (
@@ -74,7 +74,6 @@ export default function DiaryForm({
       onSubmit={handleSubmit}
       className="flex flex-col px-24 py-14 gap-24 mb-100"
     >
-      {/* 경기 일자 */}
       <div className="flex flex-col gap-8">
         <label
           htmlFor="date"
@@ -92,7 +91,6 @@ export default function DiaryForm({
         />
       </div>
 
-      {/* 구장 선택 */}
       <div className="flex flex-col gap-8">
         <label
           htmlFor="stadium"
@@ -104,22 +102,27 @@ export default function DiaryForm({
           id="stadium"
           value={gameStadium}
           onChange={(e) => setGameStadium(e.target.value)}
-          className="border-1 border-solid border-Gray rounded-xl px-15 py-8 focus:outline-none focus:border-MainColor"
+          className="border-1 border-solid border-Gray rounded-xl px-14 py-8 focus:outline-none focus:border-MainColor"
         >
-          <option value="">구장을 선택하세요</option>
-          <option value="stadium1">고척 스카이돔</option>
-          <option value="stadium2">광주 기아 챔피언스 필드</option>
-          <option value="stadium3">대구 삼성 라이온즈 파크</option>
-          <option value="stadium4">대전 한화생명 이글스 파크</option>
-          <option value="stadium5">부산 사직 야구장</option>
-          <option value="stadium6">수원 KT 위즈 파크</option>
-          <option value="stadium7">인천 SSG 랜더스필드</option>
-          <option value="stadium8">잠실 야구장</option>
-          <option value="stadium9">창원 NC 파크</option>
+          <option>구장을 선택하세요</option>
+          <option value="고척 스카이돔">고척 스카이돔</option>
+          <option value="광주 기아 챔피언스 필드">
+            광주 기아 챔피언스 필드
+          </option>
+          <option value="대구 삼성 라이온즈 파크">
+            대구 삼성 라이온즈 파크
+          </option>
+          <option value="대전 한화생명 이글스파크">
+            대전 한화생명 이글스파크
+          </option>
+          <option value="부산 사직 야구장">부산 사직 야구장</option>
+          <option value="수원 KT 위즈 파크">수원 KT 위즈 파크</option>
+          <option value="인천 SSG 랜더스필드">인천 SSG 랜더스필드</option>
+          <option value="잠실 야구장">잠실 야구장</option>
+          <option value="창원 NC 파크">창원 NC 파크</option>
         </select>
       </div>
 
-      {/* 팀 선택 */}
       <div className="flex flex-col gap-8">
         <label
           htmlFor="homeTeam"
@@ -132,7 +135,7 @@ export default function DiaryForm({
             id="homeTeam"
             value={homeTeam}
             onChange={(e) => setHomeTeam(e.target.value)}
-            className="border-1 border-solid border-Gray rounded-xl px-15 py-8 focus:outline-none focus:border-MainColor w-full"
+            className="border-1 border-solid border-Gray rounded-xl px-14 py-8 focus:outline-none focus:border-MainColor w-full"
           >
             <option className="text-Gray">응원팀</option>
             <option value="키움 히어로즈">키움 히어로즈</option>
@@ -151,7 +154,7 @@ export default function DiaryForm({
             id="awayTeam"
             value={awayTeam}
             onChange={(e) => setAwayTeam(e.target.value)}
-            className="border-1 border-solid border-Gray rounded-xl px-15 py-8 focus:outline-none focus:border-MainColor w-full "
+            className="border-1 border-solid border-Gray rounded-xl px-14 py-8 focus:outline-none focus:border-MainColor w-full "
           >
             <option className="text-Gray">상대팀</option>
             <option value="키움 히어로즈">키움 히어로즈</option>
@@ -168,7 +171,6 @@ export default function DiaryForm({
         </div>
       </div>
 
-      {/* 경기 스코어 */}
       <div className="flex flex-col gap-8">
         <label
           htmlFor="homeScore"
@@ -184,7 +186,7 @@ export default function DiaryForm({
             value={homeScore}
             // onChange={(e) => setHomeScore(Number(e.target.value))}
             onChange={(e) => setHomeScore(e.target.value)}
-            className="border-1 border-solid border-Gray rounded-xl px-15 py-8 focus:outline-none focus:border-MainColor w-full"
+            className="border-1 border-solid border-Gray rounded-xl px-14 py-8 focus:outline-none focus:border-MainColor w-full"
           />
           <span className="text-16 font-normal text-Gray">VS</span>
           <input
@@ -194,12 +196,11 @@ export default function DiaryForm({
             value={awayScore}
             onChange={(e) => setAwayScore(e.target.value)}
             // onChange={(e) => setAwayScore(Number(e.target.value))}
-            className="border-1 border-solid border-Gray rounded-xl px-15 py-8 focus:outline-none focus:border-MainColor w-full"
+            className="border-1 border-solid border-Gray rounded-xl px-14 py-8 focus:outline-none focus:border-MainColor w-full"
           />
         </div>
       </div>
 
-      {/* 사진 첨부 */}
       <div className="flex flex-col gap-8">
         <label
           htmlFor="image-upload"
@@ -230,7 +231,6 @@ export default function DiaryForm({
         )}
       </div>
 
-      {/* 일기 작성 */}
       <div className="flex flex-col gap-8">
         <label
           htmlFor="content"

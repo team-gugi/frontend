@@ -39,7 +39,7 @@ export default function CalendarView() {
         }
 
         return (
-          <div className={`w-2 h-2 rounded-full ${dotColor} mx-auto mt-1`} />
+          <div className={`w-10 h-10 rounded-full ${dotColor} mx-auto mt-1`} />
         );
       }
     }

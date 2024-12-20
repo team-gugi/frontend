@@ -16,7 +16,7 @@ export default function ListView() {
           <Link key={index} href={`/diary/${diary.diaryId}`} passHref>
             <div
               key={index}
-              className="flex px-10 tems-center justify-between bg-SemiWhite rounded-lg gap-84"
+              className="flex px-10 tems-center justify-between bg-SemiWhite rounded-lg "
             >
               <div className="flex flex-col my-18 gap-8">
                 <p className="text-16 font-normal text-SemiBlack">

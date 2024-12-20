@@ -10,8 +10,16 @@ export default function WinningRateBanner() {
   const winRateData = useRecoilValue(winRateAtom);
 
   if (!winRateData) {
-    return <p>승률 데이터 로딩 중...</p>;
+    return (
+      <div className="flex flex-row justify-center gap-24 mx-24 my-20 rounded-xl py-10 border-1 border-solid border-Gray">
+        <div className="flex flex-col items-end gap-8 justify-center">
+          <span>승률 정보 로딩중...</span>
+        </div>
+        <Image src={CharacterIcon} alt="승요 캐릭터" width={100} height={100} />
+      </div>
+    );
   }
+
   const { nickName, winRate, totalDiaryCount, totalWins } = winRateData;
   const formattedWinRate = Math.floor(parseFloat(winRate));
 
