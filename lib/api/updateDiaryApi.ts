@@ -1,4 +1,4 @@
-export interface IUpdateDiaryInfo {
+export interface IUpdateDiaryPayload {
   diaryId: string;
   diaryInfo: {
     gameDate: string;
@@ -9,28 +9,18 @@ export interface IUpdateDiaryInfo {
     awayScore: number;
     content: string;
   };
-  gameImg?: File;
+  gameImg: string;
 }
 
-export interface IUpdateDiaryResponse {
-  code: string;
-  message: string;
-  isSuccess: boolean;
-}
-
-export const editDiaryApi = async ({
-  diaryId,
-  diaryInfo,
-  gameImg,
-}: IUpdateDiaryInfo): Promise<IUpdateDiaryResponse> => {
-  const formData = new FormData();
-  formData.append('diaryId', diaryId);
-  formData.append('diaryInfo', JSON.stringify(diaryInfo));
-  if (gameImg) {
-    formData.append('gameImg', gameImg);
-  }
-
+export const updateDiaryDetails = async (
+  payload: IUpdateDiaryPayload,
+): Promise<void> => {
   try {
+    const formData = new FormData();
+    formData.append('diaryId', payload.diaryId);
+    formData.append('diaryInfo', JSON.stringify(payload.diaryInfo));
+    formData.append('gameImg', payload.gameImg);
+
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/v1/diary`,
       {
@@ -40,17 +30,13 @@ export const editDiaryApi = async ({
       },
     );
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.log('서버 응답 오류:', errorText);
-      throw new Error('일기 수정 요청 실패');
-    }
+    const responseBody = await response.json();
 
-    const result = (await response.json()) as IUpdateDiaryResponse;
-    return result;
+    if (!response.ok || !responseBody.isSuccess) {
+      throw new Error(responseBody.message || '수정 요청 실패');
+    }
   } catch (error) {
-    console.log('실패', error);
-    console.log('일기 수정 API 호출 오류:', error);
+    console.error('Error updating diary:', error);
     throw error;
   }
 };
