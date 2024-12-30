@@ -1,96 +1,106 @@
-import { IDiaryInfo } from '@/lib/api/createDiaryApi';
+'use client';
+
+import { IUpdateDiaryPayload } from '@/lib/api/updateDiaryApi';
+import { IDiaryDetails } from '@/recoil/diary/diaryDetailsAtom';
 import { useState } from 'react';
 
-interface IDiaryFormProps {
-  buttonText: string;
-  initialData?: {
-    gameDate: string;
-    gameStadium: string;
-    homeTeam: string;
-    awayTeam: string;
-    homeScore: string;
-    awayScore: string;
-    gameImg?: string;
-    content: string;
-  };
-  onSubmit: (diaryInfo: IDiaryInfo, gameImg: File | null) => void;
+interface IDiaryEditFormProps {
+  formData: IDiaryDetails;
+  onUpdate: (payload: IUpdateDiaryPayload) => Promise<void>;
+  isLoading: boolean;
 }
 
-export default function DiaryForm({
-  buttonText,
-  initialData,
-  onSubmit,
-}: IDiaryFormProps) {
-  const [gameDate, setGameDate] = useState(initialData?.gameDate || '');
-  const [gameStadium, setGameStadium] = useState(
-    initialData?.gameStadium || '',
-  );
-  const [homeTeam, setHomeTeam] = useState(initialData?.homeTeam || '');
-  const [awayTeam, setAwayTeam] = useState(initialData?.awayTeam || '');
+export default function DiaryEditForm({
+  formData,
+  onUpdate,
+  isLoading,
+}: IDiaryEditFormProps) {
+  // 상태 객체로 모든 필드값을 관리
+  const [formState, setFormState] = useState({
+    gameDate: formData.gameDate,
+    gameStadium: formData.gameStadium,
+    homeTeam: formData.homeTeam,
+    awayTeam: formData.awayTeam,
+    homeScore: formData.homeScore.toString(),
+    awayScore: formData.awayScore.toString(),
+    content: formData.content,
+    gameImg: formData.gameImg || '', // 초기값으로 이미지 URL 설정
+  });
 
-  const [homeScore, setHomeScore] = useState(initialData?.homeScore || '');
-  const [awayScore, setAwayScore] = useState(initialData?.awayScore || '');
-
-  const [content, setContent] = useState(initialData?.content || '');
-  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  // 필드값 변경 처리
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
+  ) => {
+    const { name, value } = e.target;
+    setFormState((prevState) => ({
+      ...prevState,
+      [name]: value, // 동적으로 상태의 값을 갱신
+    }));
+  };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files ? e.target.files[0] : null;
-    if (file) {
-      setSelectedImage(file);
+    if (e.target.files) {
+      const file = e.target.files[0];
+      setFormState((prevState) => ({
+        ...prevState,
+        gameImg: file ? URL.createObjectURL(file) : '',
+      }));
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const diaryInfo = {
-      gameDate,
-      gameStadium,
-      homeTeam,
-      awayTeam,
-      homeScore: parseInt(homeScore),
-      awayScore: parseInt(awayScore),
-      content,
-    };
-    console.log('diaryInfo', diaryInfo);
-    console.log('gameImg', selectedImage);
-
-    onSubmit(diaryInfo, selectedImage);
+  const handleSubmit = () => {
+    onUpdate({
+      diaryId: formData.diaryId, // diaryId는 변경되지 않음
+      diaryInfo: {
+        gameDate: formState.gameDate,
+        gameStadium: formState.gameStadium,
+        homeTeam: formState.homeTeam,
+        awayTeam: formState.awayTeam,
+        homeScore: parseInt(formState.homeScore),
+        awayScore: parseInt(formState.awayScore),
+        content: formState.content,
+      },
+      gameImg: formState.gameImg,
+    });
   };
   return (
     <form
-      onSubmit={handleSubmit}
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSubmit();
+      }}
       className="flex flex-col px-24 py-14 gap-24 mb-100"
     >
       <div className="flex flex-col gap-8">
         <label
-          htmlFor="date"
+          htmlFor="gameDate"
           className="block text-16 font-semibold text-SemiBlack"
         >
           경기 일자
         </label>
         <input
           required
-          id="date"
+          id="gameDate"
           type="date"
-          value={gameDate}
-          onChange={(e) => setGameDate(e.target.value)}
+          value={formState.gameDate}
+          onChange={handleChange}
           className="border-1 border-solid border-Gray rounded-xl px-15 py-8 focus:outline-none focus:border-MainColor"
         />
       </div>
 
       <div className="flex flex-col gap-8">
         <label
-          htmlFor="stadium"
+          htmlFor="gameStadium"
           className="block text-16 font-semibold text-SemiBlack"
         >
           구장
         </label>
         <select
-          id="stadium"
-          value={gameStadium}
-          onChange={(e) => setGameStadium(e.target.value)}
+          id="gameStadium"
+          value={formState.gameStadium}
+          onChange={handleChange}
           className="border-1 border-solid border-Gray rounded-xl px-14 py-8 focus:outline-none focus:border-MainColor"
         >
           <option>구장을 선택하세요</option>
@@ -122,8 +132,8 @@ export default function DiaryForm({
         <div className="flex flex-row items-center gap-10 w-full">
           <select
             id="homeTeam"
-            value={homeTeam}
-            onChange={(e) => setHomeTeam(e.target.value)}
+            value={formState.homeTeam}
+            onChange={handleChange}
             className="border-1 border-solid border-Gray rounded-xl px-14 py-8 focus:outline-none focus:border-MainColor w-full"
           >
             <option className="text-Gray">응원팀</option>
@@ -141,8 +151,8 @@ export default function DiaryForm({
           <span className="text-16 font-normal text-Gray">VS</span>
           <select
             id="awayTeam"
-            value={awayTeam}
-            onChange={(e) => setAwayTeam(e.target.value)}
+            value={formState.awayTeam}
+            onChange={handleChange}
             className="border-1 border-solid border-Gray rounded-xl px-14 py-8 focus:outline-none focus:border-MainColor w-full "
           >
             <option className="text-Gray">상대팀</option>
@@ -172,9 +182,8 @@ export default function DiaryForm({
             id="homeScore"
             type="number"
             placeholder="응원팀 점수"
-            value={homeScore}
-            // onChange={(e) => setHomeScore(Number(e.target.value))}
-            onChange={(e) => setHomeScore(e.target.value)}
+            value={formState.homeScore}
+            onChange={handleChange}
             className="border-1 border-solid border-Gray rounded-xl px-14 py-8 focus:outline-none focus:border-MainColor w-full"
           />
           <span className="text-16 font-normal text-Gray">VS</span>
@@ -182,9 +191,8 @@ export default function DiaryForm({
             id="awayScore"
             type="number"
             placeholder="상대팀 점수"
-            value={awayScore}
-            onChange={(e) => setAwayScore(e.target.value)}
-            // onChange={(e) => setAwayScore(Number(e.target.value))}
+            value={formState.awayScore}
+            onChange={handleChange}
             className="border-1 border-solid border-Gray rounded-xl px-14 py-8 focus:outline-none focus:border-MainColor w-full"
           />
         </div>
@@ -205,10 +213,11 @@ export default function DiaryForm({
           onChange={handleImageChange}
           className=" text-white px-4 py-2 rounded-lg transition-colors"
         />
-        {selectedImage ? (
+        {formState.gameImg ? (
           <div className="mt-4">
             <img
-              src={URL.createObjectURL(selectedImage)}
+              //   src={URL.createObjectURL(selectedImage)}
+              src={formState.gameImg}
               alt="Selected Preview"
               className="w-100 h-100 object-cover"
             />
@@ -230,8 +239,8 @@ export default function DiaryForm({
         <textarea
           id="content"
           placeholder="오늘의 직관 일기를 작성해주세요"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
+          value={formState.content}
+          onChange={handleChange}
           className="text-18 font-normal border-b-1 border-solid border-Gray py-8 leading-[140%] min-h-[170px] focus:outline-none focus:border-MainColor"
         />
       </div>
@@ -240,7 +249,8 @@ export default function DiaryForm({
         type="submit"
         className="flex items-center justify-center px-74 py-16 rounded-xl bg-MainColor text-18 font-light text-White"
       >
-        {buttonText}
+        일기 수정 완료
+        {/* {buttonText} */}
       </button>
     </form>
   );

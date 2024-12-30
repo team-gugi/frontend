@@ -1,58 +1,90 @@
-// 'use client';
+import Header from '@/components/Header';
+import Navigation from '@/components/Navigation';
+import PageTitle from '@/components/PageTitle';
+import { fetchDiaryDetails } from '@/lib/api/diaryDetailsApi';
+import { diaryDetailsAtom } from '@/recoil/diary/diaryDetailsAtom';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import DiaryForm from '../../components/DiaryForm';
+import { updateDiaryDetails } from '@/lib/api/updateDiaryApi';
 
-// import Header from '@/components/Header';
-// import Navigation from '@/components/Navigation';
-// import PageTitle from '@/components/PageTitle';
-// import DiaryForm from '../../components/DiaryForm';
-// import { useEffect, useState } from 'react';
-// import { redirect, useParams } from 'next/navigation';
-// import { editDiaryApi, IUpdateDiaryInfo } from '@/lib/api/updateDiaryApi';
-// import { useRouter } from 'next/router';
-// import { fetchDiaryDetails } from '@/lib/api/diaryDetailsApi';
-// import { useRecoilValue } from 'recoil';
-// import { diaryDetailsAtom } from '@/recoil/diary/diaryDetailsAtom';
+interface IDiaryDetails {
+  gameDate: string;
+  gameStadium: string;
+  homeTeam: string;
+  awayTeam: string;
+  homeScore: string;
+  awayScore: string;
+  gameImg?: string;
+  content: string;
+}
 
-// export default function DiaryEditPage() {
-//   const [isSubmitting, setIsSubmitting] = useState(false);
-//   const [error, setError] = useState('');
+export default function DiaryEditPage() {
+  const [diaryDetails, setDiaryDetails] = useState<IDiaryDetails | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
+  const { diaryId } = router.query;
 
-//   const initialData = useRecoilValue(diaryDetailsAtom);
-//   const { diaryId } = useParams();
+  useEffect(() => {
+    if (diaryId) {
+      setLoading(true);
+      fetchDiaryDetails(diaryId as string)
+        .then((data) => {
+          setDiaryDetails(data); // 상세 정보 상태 설정
+          setLoading(false);
+        })
+        .catch((err) => {
+          setError(err.message);
+          setLoading(false);
+        });
+    }
+  }, [diaryId]);
 
-//   const handleSubmit = async (
-//     // diaryId: IUpdateDiaryInfo,
-//     diaryInfo: IUpdateDiaryInfo,
-//     gameImg: File | null,
-//   ) => {
-//     setIsSubmitting(true);
-//     setError('');
+  const handleSubmit = async (updatedDiary: any) => {
+    try {
+      const updatedData = {
+        diaryId: diaryId as string,
+        diaryInfo: {
+          gameDate: updatedDiary.gameDate,
+          gameStadium: updatedDiary.gameStadium,
+          homeTeam: updatedDiary.homeTeam,
+          awayTeam: updatedDiary.awayTeam,
+          homeScore: updatedDiary.homeScore,
+          awayScore: updatedDiary.awayScore,
+          content: updatedDiary.content,
+        },
+        gameImg: updatedDiary.gameImg, // 이미지 처리 부분
+      };
 
-//     try {
-//       const response = await editDiaryApi(
-//         //diaryId,
-//         // diaryInfo,
-//         // gameImg || undefined,
-//       );
-//       if (response.isSuccess) {
-//         console.log('일기가 성공적으로 수정되었습니다');
-//         redirect('/diary');
-//       }
-//     } catch (error) {
-//       setError('일기 수정에 실패 했습니다. 다시 시도 해주세요');
-//     } finally {
-//       setIsSubmitting(false);
-//     }
-//   };
-//   return (
-//     <>
-//       <Header />
-//       <PageTitle title="일기 수정하기" />
-//       {/* <DiaryForm
-//         buttonText="수정 완료"
-//         initialData={initialData}
-//         onSubmit={handleSubmit}
-//       /> */}
-//       <Navigation />
-//     </>
-//   );
-// }
+      await updateDiaryDetails(updatedData); // 수정 API 호출
+      router.push('/diary');
+    } catch (err) {
+      console.log('수정 실패');
+    }
+  };
+
+  return (
+    <>
+      <Header />
+      <PageTitle title="직관 일기 수정하기" />
+      {/* <DiaryForm
+        buttonText="수정 완료"
+        initialData={diaryDetails} // 수정할 일기 데이터
+        onSubmit={handleSubmit} // 제출 시 처리할 함수
+      />
+       */}
+      {diaryDetails ? (
+        <DiaryForm
+          buttonText="수정 완료"
+          initialData={diaryDetails} // 수정할 일기 데이터
+          onSubmit={handleSubmit} // 제출 시 처리할 함수
+        />
+      ) : (
+        <div>Loading...</div> // 데이터가 없을 경우 대체 UI 표시
+      )}
+      <Navigation />
+    </>
+  );
+}
