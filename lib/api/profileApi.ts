@@ -1,5 +1,5 @@
 import { profileAtom } from '@/recoil/profileAtom';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import { useRecoilValue } from 'recoil';
 
 const registerProfile = async (registerToken: string, profile: any) => {
@@ -28,13 +28,14 @@ const registerProfile = async (registerToken: string, profile: any) => {
 
   try {
     const response = await fetch(
-      'http://52.79.47.101:8080/api/v1/users/onboarding',
+      `${process.env.NEXT_PUBLIC_API_URL}/api/v1/users/onboarding`,
       {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${registerToken}`,
         },
         body: formData,
+        credentials: 'include',
       },
     );
 
@@ -46,9 +47,17 @@ const registerProfile = async (registerToken: string, profile: any) => {
 
     const data = await response.json();
     const redirectUrl = data.redirectUrl;
+    console.log('data', data);
 
-    document.cookie = `access_token=${data.accessToken}; path=/`;
-    document.cookie = `refresh_token=${data.refreshToken}; path=/`;
+    // document.cookie = `access_token=${data.access_token}; path=/; SameSite=None; Secure`;
+    // document.cookie = `refresh_token=${data.refresh_token}; path=/; SameSite=None; Secure`;
+
+    document.cookie = `access_token=${data.access_token}; path=/; SameSite=None; Secure;`;
+    document.cookie = `refresh_token=${data.refresh_token}; path=/; SameSite=None; Secure`;
+
+    console.log(document.cookie);
+    // window.location.href = '/home';
+    // window.location.href = '/onboarding';
 
     // useRouter().push(redirectUrl);
   } catch (error) {
