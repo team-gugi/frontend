@@ -12,7 +12,10 @@ interface IOptionSelectorProps {
   onOpenBottomSheet: () => void;
 }
 
-function OptionSelector({ options, onOpenBottomSheet }: IOptionSelectorProps) {
+export default function OptionSelector({
+  options,
+  onOpenBottomSheet,
+}: IOptionSelectorProps) {
   //   const optionLabels = [
   //     { label: options.gender || '성별' },
   //     { label: options.age || '연령' },
@@ -28,6 +31,7 @@ function OptionSelector({ options, onOpenBottomSheet }: IOptionSelectorProps) {
         <button
           key={index}
           type="button"
+          onClick={onOpenBottomSheet}
           className="px-14 py-8 border border-LightGray text-SemiBlack text-16 font-normal whitespace-nowrap"
           style={{ borderRadius: '30px' }}
         >
@@ -38,5 +42,3 @@ function OptionSelector({ options, onOpenBottomSheet }: IOptionSelectorProps) {
     </div>
   );
 }
-
-export default OptionSelector;

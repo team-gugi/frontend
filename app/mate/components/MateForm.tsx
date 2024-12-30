@@ -4,9 +4,15 @@ import { useMateForm } from '@/hooks/useMateForm';
 import TextInput from '../components/TextInput';
 import OptionSelector from './OptionSelector';
 import SubmitButton from './SubmitButton';
+import { useState } from 'react';
+import BottomSheet from './BottomSheet';
 
 export default function MateForm() {
   const { formState, handleInputChange, handleOptionSelect } = useMateForm();
+  const [isBottomSheetOpen, setBottomSheetOpen] = useState(false);
+
+  const openBottomSheet = () => setBottomSheetOpen(true);
+  const closeBottomSheet = () => setBottomSheetOpen(false);
 
   const handleSubmit = () => {
     console.log('폼 제출:', formState);
@@ -39,7 +45,8 @@ export default function MateForm() {
             options={['성별', '연령', '직관일자', '응원팀', '모집인원']}
             //   selectedOptions={formState.options}
             //   onSelect={handleOptionSelect}
-            onOpenBottomSheet={() => console.log('옵션 바텀시트 열기')}
+            onOpenBottomSheet={openBottomSheet}
+            // onOpenBottomSheet={() => console.log('옵션 바텀시트 열기')}
           />
         </div>
 
@@ -53,6 +60,14 @@ export default function MateForm() {
 
         <SubmitButton onClick={handleSubmit} label="등록하기" />
       </div>
+      {isBottomSheetOpen && (
+        <BottomSheet
+          onClose={closeBottomSheet}
+          onApply={() => {
+            console.log('ㅇㅇ');
+          }}
+        />
+      )}
     </>
   );
 }
