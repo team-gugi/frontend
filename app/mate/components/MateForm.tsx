@@ -28,15 +28,6 @@ export default function MateForm() {
           name="title"
         />
 
-        <TextInput
-          label="내용"
-          placeholder="내용을 작성해 주세요."
-          value={formState.content}
-          onChange={handleInputChange}
-          name="content"
-          multiline={true}
-        />
-
         <div className="flex flex-col gap-16">
           <label className="text-16 font-semibold text-left flex items-center">
             매칭 옵션
@@ -49,6 +40,15 @@ export default function MateForm() {
             // onOpenBottomSheet={() => console.log('옵션 바텀시트 열기')}
           />
         </div>
+
+        <TextInput
+          label="내용"
+          placeholder="내용을 작성해 주세요."
+          value={formState.content}
+          onChange={handleInputChange}
+          name="content"
+          multiline={true}
+        />
 
         <TextInput
           label="연락 수단"
