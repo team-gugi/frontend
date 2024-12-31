@@ -1,9 +1,15 @@
+'use client';
 import Header from '@/components/Header';
 import Navigation from '@/components/Navigation';
 import PageTitle from '@/components/PageTitle';
 import { fetchDiaryDetails } from '@/lib/api/diaryDetailsApi';
 import { diaryDetailsAtom } from '@/recoil/diary/diaryDetailsAtom';
-import { useRouter } from 'next/router';
+import {
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import DiaryForm from '../../components/DiaryForm';
@@ -16,6 +22,7 @@ interface IDiaryDetails {
   awayTeam: string;
   homeScore: string;
   awayScore: string;
+  // gameImg?: File;
   gameImg?: string;
   content: string;
 }
@@ -24,8 +31,9 @@ export default function DiaryEditPage() {
   const [diaryDetails, setDiaryDetails] = useState<IDiaryDetails | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const router = useRouter();
-  const { diaryId } = router.query;
+  // const router = useRouter();
+  // const { diaryId } = router.query;
+  const { diaryId } = useParams();
 
   useEffect(() => {
     if (diaryId) {
@@ -42,10 +50,11 @@ export default function DiaryEditPage() {
     }
   }, [diaryId]);
 
-  const handleSubmit = async (updatedDiary: any) => {
+  const handleSubmit = async (updatedDiary: any, gameImg: File | null) => {
     try {
       const updatedData = {
-        diaryId: diaryId as string,
+        // diaryId: diaryId as string,
+        diaryId: `"${diaryId}"`,
         diaryInfo: {
           gameDate: updatedDiary.gameDate,
           gameStadium: updatedDiary.gameStadium,
@@ -55,11 +64,14 @@ export default function DiaryEditPage() {
           awayScore: updatedDiary.awayScore,
           content: updatedDiary.content,
         },
-        gameImg: updatedDiary.gameImg, // 이미지 처리 부분
+        // gameImg: updatedDiary.gameImg,
+        gameImg: gameImg || updatedDiary.gameImg || null,
       };
+      console.log(updatedData);
 
       await updateDiaryDetails(updatedData); // 수정 API 호출
-      router.push('/diary');
+
+      // router.push('/diary');
     } catch (err) {
       console.log('수정 실패');
     }
