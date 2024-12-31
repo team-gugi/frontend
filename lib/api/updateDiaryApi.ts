@@ -9,7 +9,8 @@ export interface IUpdateDiaryPayload {
     awayScore: number;
     content: string;
   };
-  gameImg: string;
+  gameImg: File;
+  // gameImg: string;
 }
 
 export const updateDiaryDetails = async (
@@ -36,7 +37,7 @@ export const updateDiaryDetails = async (
       throw new Error(responseBody.message || '수정 요청 실패');
     }
   } catch (error) {
-    console.error('Error updating diary:', error);
+    // console.error('Error updating diary:', error);
     throw error;
   }
 };
