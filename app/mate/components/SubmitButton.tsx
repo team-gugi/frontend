@@ -11,7 +11,7 @@ export default function SubmitButton({ onClick, label }: ISubmitButtonProps) {
       <button
         type="button"
         onClick={onClick}
-        className="w-full bg-Gray text-White text-18 text-semibold py-16 rounded-xl mt-70"
+        className="w-full bg-Gray text-White text-18 text-semibold py-16 rounded-xl mt-56"
       >
         {label}
       </button>
