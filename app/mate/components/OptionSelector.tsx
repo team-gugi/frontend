@@ -1,41 +1,39 @@
-import React from 'react';
-
 interface IOptionSelectorProps {
-  //   options: {
-  //     gender: string;
-  //     age: string;
-  //     date: string;
-  //     team: string;
-  //     memberCount: string;
-  //   };
-  options: string[];
+  options: {
+    gender: string | null;
+    age: string | null;
+    date: string | null;
+    team: string | null;
+    member: number | null;
+    stadium: string | null;
+  };
   onOpenBottomSheet: () => void;
+  onBlur?: () => void;
 }
 
 export default function OptionSelector({
   options,
   onOpenBottomSheet,
+  onBlur,
 }: IOptionSelectorProps) {
-  //   const optionLabels = [
-  //     { label: options.gender || '성별' },
-  //     { label: options.age || '연령' },
-  //     { label: options.date || '직관일자' },
-  //     { label: options.team || '응원팀' },
-  //     { label: options.memberCount || '모집인원' },
-  //   ];
+  const optionLabels = [
+    options.gender || '성별',
+    options.age || '연령',
+    options.date || '직관일자',
+    options.team || '응원팀',
+    options.member ? `${options.member}명` : '모집인원',
+    options.stadium || '구장',
+  ];
 
   return (
     <div className="flex overflow-x-auto gap-10" onClick={onOpenBottomSheet}>
-      {/* {optionLabels.map((option, index) => ( */}
-      {options.map((label, index) => (
+      {optionLabels.map((label, index) => (
         <button
           key={index}
           type="button"
-          onClick={onOpenBottomSheet}
           className="px-14 py-8 border border-LightGray text-SemiBlack text-16 font-normal whitespace-nowrap"
           style={{ borderRadius: '30px' }}
         >
-          {/* {option.label} */}
           {label}
         </button>
       ))}

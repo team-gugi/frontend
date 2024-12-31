@@ -8,6 +8,15 @@ interface IBottomSheetProps {
   onApply: (filters: any) => void;
 }
 
+interface IFilters {
+  gender?: string | null;
+  age?: string | null;
+  date?: string | null;
+  team?: string | null;
+  member?: number;
+  stadium?: string | null;
+}
+
 export default function BottomSheet({ onClose, onApply }: IBottomSheetProps) {
   const handleOverlayClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -19,32 +28,40 @@ export default function BottomSheet({ onClose, onApply }: IBottomSheetProps) {
   };
 
   const [activeTab, setActiveTab] = useState<string>('성별/연령');
-  const [filters, setFilters] = useState({
+
+  const [filters, setFilters] = useState<IFilters>({
     gender: null,
     age: null,
     date: null,
     team: null,
-    participants: 1,
+    member: 1,
     stadium: null,
   });
 
   const updateFilter = (key: string, value: any) => {
+    // 상태 업데이트를 이곳에서 비동기적으로 처리
     setFilters((prev) => ({ ...prev, [key]: value }));
   };
+  // const updateFilter = (key: keyof IFilters, value: any) => {
+  //   setFilters((prevFilters) => ({
+  //     ...prevFilters,
+  //     [key]: value,
+  //   }));
+  // };
 
-  // 초기화 버튼 클릭
   const handleReset = () => {
     setFilters({
       gender: null,
       age: null,
       date: null,
       team: null,
-      participants: 1,
+      member: 1,
       stadium: null,
     });
   };
 
   const handleApply = () => {
+    // 필터를 부모 컴포넌트로 전달하고 BottomSheet 닫기
     onApply(filters);
     onClose();
   };
@@ -78,6 +95,7 @@ export default function BottomSheet({ onClose, onApply }: IBottomSheetProps) {
             onTabChange={setActiveTab}
           />
 
+          {/* 필터가 바뀔 때마다 상태 업데이트 */}
           <TabContent
             activeTab={activeTab}
             filters={filters}

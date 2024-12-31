@@ -9,6 +9,7 @@ interface ITextInputProps {
   ) => void;
   name: string;
   multiline?: boolean;
+  // onBlur?: () => void;
 }
 
 export default function TextInput({
@@ -18,6 +19,7 @@ export default function TextInput({
   onChange,
   name,
   multiline = false,
+  // onBlur,
 }: ITextInputProps) {
   return (
     <div>
