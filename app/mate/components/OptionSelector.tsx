@@ -31,7 +31,7 @@ export default function OptionSelector({
         <button
           key={index}
           type="button"
-          className="px-14 py-8 border border-LightGray text-SemiBlack text-16 font-normal whitespace-nowrap"
+          className="px-14 py-6 border-1 border-Gray bg-White text-Gray text-16 font-normal whitespace-nowrap"
           style={{ borderRadius: '30px' }}
         >
           {label}
