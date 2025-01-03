@@ -3,20 +3,49 @@ import Image from 'next/image';
 
 import Header from '@/components/Header';
 import Navigation from '@/components/Navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import OptionSelector from './components/OptionSelector';
 import BottomSheet from './components/BottomSheet';
 import MatchingCard from './components/MatchingCard';
 
 import PlusIcon from '../../app/public/icons/Plus.svg';
 import { redirect, useRouter } from 'next/navigation';
+import { fetchLatestPosts, IMatePost } from '@/lib/api/fetchLatestMatchApi';
 
 export default function MateMainPage() {
+  const [posts, setPosts] = useState<IMatePost[]>([]);
+  const [cursor, setCursor] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
   const router = useRouter();
   const [isBottomSheetOpen, setBottomSheetOpen] = useState(false);
 
   const openBottomSheet = () => setBottomSheetOpen(true);
   const closeBottomSheet = () => setBottomSheetOpen(false);
+
+  useEffect(() => {
+    loadLatestPosts();
+  }, []);
+
+  const loadLatestPosts = async () => {
+    if (loading || !hasMore) return;
+
+    setLoading(true);
+    try {
+      const newPosts = await fetchLatestPosts(cursor);
+
+      if (newPosts.length > 0) {
+        setPosts((prev) => [...prev, ...newPosts]);
+        setCursor(newPosts[newPosts.length - 1].updatedAt); // 마지막 post의 updatedAt 저장
+      } else {
+        setHasMore(false); // 더 이상 데이터가 없음을 표시
+      }
+    } catch (error) {
+      console.error('Failed to load posts:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const [selectedOptions, setSelectedOptions] = useState({
     gender: '',
@@ -47,7 +76,18 @@ export default function MateMainPage() {
           // onBlur={handleFinalSubmit}
         />
 
-        <MatchingCard />
+        {posts.map((post) => (
+          <MatchingCard
+            key={post.mateId}
+            title={post.title}
+            content={post.content}
+            options={post.options}
+            confirmedMembers={post.confirmedMembers}
+            maxMembers={post.options.member}
+            daysUntilGame={post.daysUntilGame}
+            daysSinceWritten={post.daysSinceWritten}
+          />
+        ))}
       </div>
 
       <Navigation />
@@ -59,6 +99,16 @@ export default function MateMainPage() {
       </button>
       {isBottomSheetOpen && (
         <BottomSheet onClose={closeBottomSheet} onApply={handleApplyOptions} />
+      )}
+
+      {hasMore && (
+        <button
+          onClick={loadLatestPosts}
+          disabled={loading}
+          className="block mx-auto mt-8 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50"
+        >
+          {loading ? '로딩 중...' : '더 보기'}
+        </button>
       )}
     </>
   );
