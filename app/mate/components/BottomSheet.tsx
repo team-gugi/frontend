@@ -64,6 +64,7 @@ export default function BottomSheet({ onClose, onApply }: IBottomSheetProps) {
     // 필터를 부모 컴포넌트로 전달하고 BottomSheet 닫기
     onApply(filters);
     onClose();
+    console.log('selected filters on BottomSheet : ', filters);
   };
 
   return (

@@ -4,13 +4,17 @@ import Image from 'next/image';
 import Header from '@/components/Header';
 import Navigation from '@/components/Navigation';
 import { useEffect, useState } from 'react';
-import OptionSelector from './components/OptionSelector';
 import BottomSheet from './components/BottomSheet';
 import MatchingCard from './components/MatchingCard';
 
 import PlusIcon from '../../app/public/icons/Plus.svg';
 import { redirect, useRouter } from 'next/navigation';
-import { fetchLatestPosts, IMatePost } from '@/lib/api/fetchLatestMatchApi';
+import {
+  fetchFilteredPosts,
+  fetchLatestPosts,
+  IMatePost,
+} from '@/lib/api/fetchMatchApi';
+import Filter from './components/Filter';
 
 export default function MateMainPage() {
   const [posts, setPosts] = useState<IMatePost[]>([]);
@@ -20,12 +24,37 @@ export default function MateMainPage() {
   const router = useRouter();
   const [isBottomSheetOpen, setBottomSheetOpen] = useState(false);
 
+  const [selectedOptions, setSelectedOptions] = useState({
+    gender: '',
+    age: '',
+    date: '',
+    team: '',
+    member: 1,
+    stadium: '',
+  });
+
   const openBottomSheet = () => setBottomSheetOpen(true);
   const closeBottomSheet = () => setBottomSheetOpen(false);
 
   useEffect(() => {
     loadLatestPosts();
   }, []);
+
+  useEffect(() => {
+    if (selectedOptions) {
+      console.log('updated selected options on UseEffect: ', selectedOptions);
+      loadFilteredPosts(); // selectedOptions가 변경될 때마다 호출
+    }
+  }, [selectedOptions]); // selectedOptions가 변경될 때마다 실행
+
+  const handleApplyOptions = (filters: any) => {
+    console.log('filters on page.tsx : ', filters);
+    setSelectedOptions(filters);
+    setPosts([]); // 이전 게시물 초기화
+    setHasMore(true); // 새로운 요청 시 더보기 버튼 활성화
+    setCursor(null); // 커서 초기화
+    loadFilteredPosts(); // 필터된 게시물 로드
+  };
 
   const loadLatestPosts = async () => {
     if (loading || !hasMore) return;
@@ -47,18 +76,41 @@ export default function MateMainPage() {
     }
   };
 
-  const [selectedOptions, setSelectedOptions] = useState({
-    gender: '',
-    age: '',
-    date: '',
-    team: '',
-    member: 1,
-    stadium: '',
-  });
+  // 필터가 적용된 후 게시물 로드
+  const loadFilteredPosts = async () => {
+    if (loading || !hasMore) return;
 
-  const handleApplyOptions = (filters: any) => {
-    setSelectedOptions(filters);
+    setLoading(true);
+    console.log('selected options on loadFilteredPosts : ', selectedOptions);
+    console.log('cursor : ', cursor);
+    try {
+      const newPosts = await fetchFilteredPosts(selectedOptions, cursor); // 필터된 게시물 요청
+
+      if (newPosts.length > 0) {
+        setPosts((prev) => [...prev, ...newPosts]);
+        setCursor(newPosts[newPosts.length - 1].nextCursor ?? null); // 마지막 post의 nextCursor 저장
+      } else {
+        setHasMore(false);
+      }
+    } catch (error) {
+      console.error('Failed to load filtered posts:', error);
+    } finally {
+      setLoading(false);
+    }
   };
+
+  // const handleApplyOptions = (filters: any) => {
+  //   setSelectedOptions(filters);
+  // };
+  // 필터 적용
+  // const handleApplyOptions = (filters: any) => {
+  //   console.log('filters on page.tsx : ', filters);
+  //   setSelectedOptions(filters);
+  //   setPosts([]); // 이전 게시물 초기화
+  //   setHasMore(true); // 새로운 요청 시 더보기 버튼 활성화
+  //   setCursor(null); // 커서 초기화
+  //   loadFilteredPosts(); // 필터된 게시물 로드
+  // };
 
   return (
     <>
@@ -70,10 +122,16 @@ export default function MateMainPage() {
         <span className="flex text-12 font-normal text-Gray ">
           맞춤 조건을 설정해보세요!
         </span>
-        <OptionSelector
+        {/* <Filter
           options={selectedOptions} // onSelect={handleOptionSelect}
           onOpenBottomSheet={openBottomSheet}
           // onBlur={handleFinalSubmit}
+        /> */}
+
+        <Filter
+          options={selectedOptions}
+          onOpenBottomSheet={openBottomSheet}
+          // onApply={handleApplyOptions} // 옵션 적용 시 필터 상태 업데이트
         />
 
         {posts.map((post) => (
@@ -86,6 +144,7 @@ export default function MateMainPage() {
             maxMembers={post.options.member}
             daysUntilGame={post.daysUntilGame}
             daysSinceWritten={post.daysSinceWritten}
+            mateId={post.mateId}
           />
         ))}
       </div>
@@ -105,7 +164,7 @@ export default function MateMainPage() {
         <button
           onClick={loadLatestPosts}
           disabled={loading}
-          className="block mx-auto mt-8 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50"
+          className="block mx-auto px-80 py-20 bg-BlockColor text-Gray rounded-lg disabled:opacity-50"
         >
           {loading ? '로딩 중...' : '더 보기'}
         </button>

@@ -7,6 +7,14 @@ interface IMateFormState {
   contact: string;
 }
 
+interface ISelectedOptionState {
+  date: string;
+  gender: string;
+  age: string;
+  team: string;
+  stadium: string;
+  member: number;
+}
 export const mateFormState = atom<IMateFormState>({
   key: 'mateFormState',
   default: {
@@ -14,5 +22,17 @@ export const mateFormState = atom<IMateFormState>({
     options: [],
     content: '',
     contact: '',
+  },
+});
+
+export const selectedOptionState = atom<ISelectedOptionState>({
+  key: 'selectedOptionState',
+  default: {
+    date: '',
+    gender: '',
+    age: '',
+    team: '',
+    stadium: '',
+    member: 1,
   },
 });
