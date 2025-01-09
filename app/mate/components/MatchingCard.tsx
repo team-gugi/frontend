@@ -48,8 +48,8 @@ export default function MatchingCard({
     setSelectedTitle(title); // 모달에 전달할 제목 설정
     setIsModalOpen(true);
   };
-  console.log(isModalOpen);
-  console.log('selected Title : ', selectedTitle);
+  // console.log(isModalOpen);
+  // console.log('selected Title : ', selectedTitle);
 
   // const handleConfirmMatch = () => {
   //   setToastMessage('마이페이지의 알림창에서 매칭 결과를 확인해보세요! ⚾');

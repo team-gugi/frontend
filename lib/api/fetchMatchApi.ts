@@ -76,14 +76,6 @@ export async function fetchFilteredPosts(
   const buildQueryParams = (filters: IFilters, cursor: string | null) => {
     const params: Record<string, string> = {};
 
-    // if (filters.gender) params.gender = encodeURIComponent(filters.gender);
-    // if (filters.age) params.age = encodeURIComponent(filters.age);
-    // if (filters.date) params.date = encodeURIComponent(filters.date);
-    // if (filters.team) params.team = encodeURIComponent(filters.team);
-    // if (filters.member !== null && filters.member !== undefined)
-    //   params.member = String(filters.member);
-    // if (filters.stadium) params.stadium = encodeURIComponent(filters.stadium);
-    // if (cursor) params.cursor = cursor;
     if (filters.gender) params.gender = filters.gender;
     if (filters.age) params.age = filters.age;
     if (filters.date) params.date = filters.date;
