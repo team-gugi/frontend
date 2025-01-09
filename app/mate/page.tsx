@@ -42,7 +42,7 @@ export default function MateMainPage() {
 
   useEffect(() => {
     if (selectedOptions) {
-      console.log('updated selected options on UseEffect: ', selectedOptions);
+      console.log('updated selected options on UseEffect : ', selectedOptions);
       loadFilteredPosts(); // selectedOptions가 변경될 때마다 호출
     }
   }, [selectedOptions]); // selectedOptions가 변경될 때마다 실행
@@ -81,7 +81,7 @@ export default function MateMainPage() {
     if (loading || !hasMore) return;
 
     setLoading(true);
-    console.log('selected options on loadFilteredPosts : ', selectedOptions);
+    console.log('selected options : ', selectedOptions);
     console.log('cursor : ', cursor);
     try {
       const newPosts = await fetchFilteredPosts(selectedOptions, cursor); // 필터된 게시물 요청
@@ -160,9 +160,31 @@ export default function MateMainPage() {
         <BottomSheet onClose={closeBottomSheet} onApply={handleApplyOptions} />
       )}
 
-      {hasMore && (
+      {/* {hasMore && (
         <button
           onClick={loadLatestPosts}
+          disabled={loading}
+          className="block mx-auto px-80 py-20 bg-BlockColor text-Gray rounded-lg disabled:opacity-50"
+        >
+          {loading ? '로딩 중...' : '더 보기'}
+        </button>
+      )} */}
+      {hasMore && (
+        <button
+          onClick={() => {
+            if (
+              !selectedOptions.gender &&
+              !selectedOptions.age &&
+              !selectedOptions.date &&
+              !selectedOptions.team &&
+              selectedOptions.member === 1 &&
+              !selectedOptions.stadium
+            ) {
+              loadLatestPosts(); // 필터 옵션이 기본값일 때
+            } else {
+              loadFilteredPosts(); // 필터 옵션이 적용되었을 때
+            }
+          }}
           disabled={loading}
           className="block mx-auto px-80 py-20 bg-BlockColor text-Gray rounded-lg disabled:opacity-50"
         >

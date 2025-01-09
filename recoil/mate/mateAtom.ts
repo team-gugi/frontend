@@ -7,14 +7,6 @@ interface IMateFormState {
   contact: string;
 }
 
-interface ISelectedOptionState {
-  date: string;
-  gender: string;
-  age: string;
-  team: string;
-  stadium: string;
-  member: number;
-}
 export const mateFormState = atom<IMateFormState>({
   key: 'mateFormState',
   default: {
@@ -24,15 +16,44 @@ export const mateFormState = atom<IMateFormState>({
     contact: '',
   },
 });
+// interface IFilters {
+//   gender?: string | null;
+//   age?: string | null;
+//   date?: string | null;
+//   team?: string | null;
+//   member?: number | null;
+//   stadium?: string | null;
+// }
 
-export const selectedOptionState = atom<ISelectedOptionState>({
-  key: 'selectedOptionState',
+// export const mateFiltersAtom = atom<IFilters>({
+//   key: 'mateFiltersAtom',
+//   default: {
+//     gender: null,
+//     age: null,
+//     date: null,
+//     team: null,
+//     member: null,
+//     stadium: null,
+//   },
+// });
+
+export interface IFilters {
+  gender?: string | null;
+  age?: string | null;
+  date?: string | null;
+  team?: string | null;
+  member?: number;
+  stadium?: string | null;
+}
+
+export const filtersAtom = atom<IFilters>({
+  key: 'filtersAtom',
   default: {
-    date: '',
-    gender: '',
-    age: '',
-    team: '',
-    stadium: '',
+    gender: null,
+    age: null,
+    date: null,
+    team: null,
     member: 1,
+    stadium: null,
   },
 });
