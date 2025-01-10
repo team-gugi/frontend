@@ -99,19 +99,6 @@ export default function MateMainPage() {
     }
   };
 
-  // const handleApplyOptions = (filters: any) => {
-  //   setSelectedOptions(filters);
-  // };
-  // 필터 적용
-  // const handleApplyOptions = (filters: any) => {
-  //   console.log('filters on page.tsx : ', filters);
-  //   setSelectedOptions(filters);
-  //   setPosts([]); // 이전 게시물 초기화
-  //   setHasMore(true); // 새로운 요청 시 더보기 버튼 활성화
-  //   setCursor(null); // 커서 초기화
-  //   loadFilteredPosts(); // 필터된 게시물 로드
-  // };
-
   return (
     <>
       <Header />
