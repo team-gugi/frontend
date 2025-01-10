@@ -54,6 +54,8 @@ const config: Config = {
         LightGray: '#DDDDDD',
         SemiWhite: '#F3F3F3',
         White: '#FFFFFF',
+        Red: '#E46662',
+        Toast: '#4E4E4E',
       },
     },
   },
