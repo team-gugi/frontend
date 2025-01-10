@@ -15,7 +15,7 @@ export default function Navigation() {
     <nav className="fixed bottom-0 left-0 w-full px-16 gap-4 bg-White">
       <div className="flex justify-around">
         <Link
-          href="/"
+          href="/mate/post"
           className="flex flex-col items-center justify-cente px-21 py-10 gap-4 "
         >
           <Image
