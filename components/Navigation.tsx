@@ -53,7 +53,7 @@ export default function Navigation() {
         </Link>
 
         <Link
-          href="/"
+          href="/mypage"
           className="flex flex-col items-center justify-center px-21 py-10 gap-4 "
         >
           <Image
