@@ -1,12 +1,11 @@
-// lib/api/getUserProfile.ts
-interface IUserProfile {
+export interface IUserProfile {
   nickName: string;
   profileImg: string;
   team: string;
   introduction: string;
 }
 
-interface IApiResponse {
+export interface IApiResponse {
   code: string;
   message: string;
   payload: IUserProfile;
