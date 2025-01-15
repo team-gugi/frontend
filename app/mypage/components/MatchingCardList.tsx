@@ -8,18 +8,29 @@ interface IMatchingCardListProps {
   activeTab: string;
   notifications: string[];
   pending: string[];
-  accepted: string[];
-  rejected: string[];
+  // accepted: string[];
+  // rejected: string[];
 }
 
 export default function MatchingCardList({
   activeTab,
+  // notifications = [], // 기본값을 빈 배열로 설정
+  // pending = [],
   notifications,
   pending,
-  accepted,
-  rejected,
+  // accepted,
+  // rejected,
 }: IMatchingCardListProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const options = ['여자만', '10대', '8/21', '두산', '4인', '잠실야구장'];
+  // const optionLabels = [
+  //   '상관없음',
+  //   '10대',
+  //   '08-21',
+  //   'KIA',
+  //   // '4인',
+  //   '광주 기아 챔피언스필드',
+  // ];
 
   const handleModalToggle = () => {
     setIsModalOpen((prev) => !prev);
@@ -59,7 +70,7 @@ export default function MatchingCardList({
             ))}
           </div>
         );
-      case '매칭 대기':
+      case '매칭대기':
         return pending.length === 0 ? (
           <div className="flex flex-col px-24 py-26 gap-8 bg-SemiWhite rounded-xl">
             <p className="font-light text-12 text-SemiBlack">
@@ -70,12 +81,60 @@ export default function MatchingCardList({
             </p>
           </div>
         ) : (
-          <div className="flex flex-col gap-20 bg-pink-100">dfdf</div>
+          <div className="relative flex flex-col gap-20 pt-16">
+            <div className="relative">
+              <span className="absolute -top-8 left-24 z-10 px-10 py-3 rounded-[10px] bg-MainColor text-White text-14 font-normal ">
+                방장
+              </span>
+              <div className="flex flex-col px-24 py-20 bg-SemiWhite gap-13 rounded-[10px] min-h-234">
+                <div className="flex flex-row justify-between">
+                  <span className="text-14 text-SemiBlack font-medium">
+                    같이 직관 갈 두산 베어스 팬들 구합니다!
+                  </span>
+                  <span className="text-12 text-Gray font-medium">D - 4</span>
+                </div>
+
+                <div className="flex text-12 text-Gray font-normal leading-[140%] pb-13 border-solid border-b-[0.5px] border-Gray">
+                  먹는 거 좋아해요. 많이 먹고 싶어요! mbti E인 분들 환영합니다
+                  🐻
+                </div>
+
+                <div className="flex flex-row justify-between items-center">
+                  <div className="flex flex-wrap gap-4">
+                    {Object.entries(options)
+                      .filter(([key]) => key !== 'member') // "member"를 제외
+                      .map(
+                        (
+                          [key, value]: [string, string | number],
+                          index: number,
+                        ) => (
+                          <div
+                            key={index}
+                            className="px-14 py-4 border-solid border-1 border-BlockColor bg-White text-SemiBlack text-12 font-medium whitespace-nowrap"
+                            style={{ borderRadius: '30px' }}
+                          >
+                            {value}
+                          </div>
+                        ),
+                      )}
+                  </div>
+                  <div className="flex flex-col items-center justify-center min-w-64 leading-[100%] min-h-38 px-10 py-5 rounded-[10px] border-solid border-1 border-MainColor bg-White">
+                    <span className="text-11 text-MainColor font-medium">
+                      모집인원
+                    </span>
+                    <span className="text-11 text-MainColor font-medium">
+                      2/4
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         );
 
-      case '매칭 성사':
+      case '매칭성사':
 
-      case '매칭 거절':
+      case '매칭거절':
 
       default:
         return (

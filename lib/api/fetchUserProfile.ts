@@ -17,7 +17,7 @@ export const fetchUserProfile = async (): Promise<IUserProfile> => {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/v1/users/info`,
       {
-        method: 'GET',
+        credentials: 'include',
       },
     );
     const data: IApiResponse = await response.json();

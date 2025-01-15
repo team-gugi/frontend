@@ -25,11 +25,11 @@ export default function ProfileInfo() {
   }, []);
 
   if (loading) return <p>Loading...</p>;
-  if (!userProfile) return <p>Failed to load profile</p>;
+  if (!userProfile) return <p>프로필 조회 실패</p>;
 
   return (
     <>
-      <div className="flex flex-col px-24 py-24 gap-18">
+      <div className="flex flex-col px-24 pt-12 pb-24 gap-18">
         <div className="flex flex-row items-center gap-12">
           <Image
             src={userProfile.profileImg}
@@ -38,20 +38,20 @@ export default function ProfileInfo() {
             height={40}
           />
 
-          <p className="text-20 font-medium">
+          <p className="text-22 font-medium">
             <span className="text-SemiBlack">{userProfile.nickName}</span>{' '}
             <span className="text-MainColor">&gt;</span>
           </p>
         </div>
 
         <div className="flex flex-col gap-6">
-          <p className="text-12 font-normal">
+          <p className="text-14 font-normal leading-[140%]">
             <span className="text-MainColor">{userProfile.nickName}</span>님이
             응원하는 팀은{' '}
             <span className="text-MainColor">{userProfile.team}</span>
             입니다.
           </p>
-          <p className="text-12 font-normal">
+          <p className="text-14 font-normal">
             gugi에서 직관 메이트를 만들어보세요!
           </p>
         </div>
