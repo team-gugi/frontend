@@ -10,7 +10,7 @@ interface IApplicantInfo {
 }
 
 interface INotification {
-  requestID: string;
+  requestId: string;
   title: string;
   nickName: string;
   applicantInfo: IApplicantInfo;

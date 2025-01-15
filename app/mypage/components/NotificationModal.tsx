@@ -1,3 +1,4 @@
+import { updateRequestStatus } from '@/lib/api/updateRequestStatusApi';
 import Image from 'next/image';
 
 interface IApplicantInfo {
@@ -10,7 +11,7 @@ interface IApplicantInfo {
 
 interface INotificationModalProps {
   notification: {
-    requestID: string;
+    requestId: string;
     title: string;
     nickName: string;
     applicantInfo: IApplicantInfo;
@@ -23,6 +24,24 @@ export default function NotificationModal({
   onClose,
 }: INotificationModalProps) {
   const { title, nickName, applicantInfo } = notification;
+
+  const handleStatusUpdate = async (status: string) => {
+    // setLoading(true); // 로딩 시작
+
+    const { success, message } = await updateRequestStatus(
+      notification.requestId,
+      status,
+    ); // API 호출
+
+    // setLoading(false); // 로딩 종료
+
+    // alert(message); // 응답 메시지 표시
+
+    if (success) {
+      onClose(); // 성공 시 모달 닫기
+    }
+  };
+  console.log(notification.requestId);
 
   return (
     <div
@@ -85,10 +104,18 @@ export default function NotificationModal({
 
         {/* 모달 하단 버튼 */}
         <div className="flex items-center justify-around bg-SemiWhite rounded-b-lg border-solid border-t-[0.5px] border-Gray">
-          <button className="flex px-62 py-10 items-center justify-center font-normal text-16 text-Red border-solid border-r-[0.5px] border-Gray">
+          <button
+            onClick={() => handleStatusUpdate('거절')}
+            // onClick={() => handleStatusUpdate('rejected')}
+            className="flex px-62 py-10 items-center justify-center font-normal text-16 text-Red border-solid border-r-[0.5px] border-Gray"
+          >
             거절
           </button>
-          <button className="flex px-62 py-10 items-center justify-center font-normal text-16 text-MainColor">
+          <button
+            onClick={() => handleStatusUpdate('수락')}
+            // onClick={() => handleStatusUpdate('accepted')}
+            className="flex px-62 py-10 items-center justify-center font-normal text-16 text-MainColor"
+          >
             수락
           </button>
         </div>
