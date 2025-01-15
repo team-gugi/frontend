@@ -67,7 +67,7 @@ export default function MatchStatus() {
           <div>
             {notifications.notification.map((notification) => (
               <NotificationCard
-                key={notification.requestID}
+                key={notification.requestId}
                 notification={notification}
               />
             ))}

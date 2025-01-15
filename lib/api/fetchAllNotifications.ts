@@ -2,7 +2,7 @@ import { notificationsAtom } from '@/recoil/notificationsAtom';
 import { useRecoilState } from 'recoil';
 
 export interface INotification {
-  requestID: string;
+  requestId: string;
   title: string;
   nickName: string;
   applicantInfo: {
