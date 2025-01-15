@@ -8,6 +8,7 @@ import {
   IAllNotificationsResponse,
 } from '@/lib/api/fetchAllNotifications';
 import MatchStatusCard from './MatchStatusCard';
+import NotificationCard from './NotificationCard';
 
 export default function MatchStatus() {
   const [activeTab, setActiveTab] = useState('알림함');
@@ -63,16 +64,26 @@ export default function MatchStatus() {
     switch (activeTab) {
       case '알림함':
         return (
-          <></>
-          // <div>
-          //   {notifications.notification.map((notification) => (
-          //     <MatchStatusCard
-          //       key={notification.mateId}
-          //       notification={notification}
-          //     />
-          //   ))}
-          // </div>
+          <div>
+            {notifications.notification.map((notification) => (
+              <NotificationCard
+                key={notification.requestID}
+                notification={notification}
+              />
+            ))}
+          </div>
         );
+      // return (
+      //   <></>
+      //   // <div>
+      //   //   {notifications.notification.map((notification) => (
+      //   //     <MatchStatusCard
+      //   //       key={notification.mateId}
+      //   //       notification={notification}
+      //   //     />
+      //   //   ))}
+      //   // </div>
+      // );
       case '매칭대기':
         return (
           <div className="flex flex-col gap-24 mb-80">
