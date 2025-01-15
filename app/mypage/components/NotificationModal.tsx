@@ -1,4 +1,3 @@
-// NotificationModal.tsx
 import Image from 'next/image';
 
 interface IApplicantInfo {
@@ -32,12 +31,12 @@ export default function NotificationModal({
     >
       <div className="flex flex-col">
         <div
-          className="flex flex-col gap-18 max-w-[325px] bg-SemiWhite px-32 py-20 rounded-t-xl"
+          className="flex flex-col gap-18 max-w-[325px] bg-SemiWhite px-32 pt-20 pb-10 rounded-t-xl"
           onClick={(e) => e.stopPropagation()} // 클릭이 내부로 전달되지 않도록
         >
           {/* 제목, 닉네임, 프로필 이미지 */}
           <div className="flex flex-row">
-            <div className="flex flex-row items-center gap-24">
+            <div className="flex flex-row items-center gap-12">
               <Image
                 src={applicantInfo.profileImg}
                 alt="프로필 이미지"
@@ -45,13 +44,13 @@ export default function NotificationModal({
                 height={40}
                 className="rounded-full"
               />
-              <div className="flex flex-col gap-5">
-                <span className="text-12 font-medium text-SemiBlack">
+              <div className="flex flex-col gap-6">
+                <span className="text-14 font-medium text-SemiBlack ml-8">
                   {nickName}
                 </span>
                 <div className="flex gap-4">
                   <div
-                    className="px-14 py-4 border-solid border-1 border-BlockColor bg-White text-SemiBlack text-12 font-medium whitespace-nowrap"
+                    className="px-14 py-4 border-solid border-1 border-BlockColor bg-White text-SemiBlack text-14 font-medium whitespace-nowrap"
                     style={{ borderRadius: '30px' }}
                   >
                     {applicantInfo.team}
@@ -86,10 +85,7 @@ export default function NotificationModal({
 
         {/* 모달 하단 버튼 */}
         <div className="flex items-center justify-around bg-SemiWhite rounded-b-lg border-solid border-t-[0.5px] border-Gray">
-          <button
-            className="flex px-62 py-10 items-center justify-center font-normal text-16 text-Red border-solid border-r-[0.5px] border-Gray"
-            onClick={onClose} // 거절 버튼은 모달 닫기
-          >
+          <button className="flex px-62 py-10 items-center justify-center font-normal text-16 text-Red border-solid border-r-[0.5px] border-Gray">
             거절
           </button>
           <button className="flex px-62 py-10 items-center justify-center font-normal text-16 text-MainColor">
