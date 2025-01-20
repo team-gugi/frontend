@@ -4,10 +4,16 @@ import Image from 'next/image';
 import Icon from '../../public/icons/Group 960.png';
 import { useEffect, useState } from 'react';
 import { fetchUserProfile, IUserProfile } from '@/lib/api/fetchUserProfile';
+import { useRouter } from 'next/navigation';
 
 export default function ProfileInfo() {
   const [userProfile, setUserProfile] = useState<IUserProfile | null>(null);
   const [loading, setLoading] = useState(true);
+
+  const router = useRouter();
+  const handleEditClick = () => {
+    router.push(`/mypage/edit`);
+  };
 
   useEffect(() => {
     const getUserProfile = async () => {
@@ -38,7 +44,7 @@ export default function ProfileInfo() {
             height={40}
           />
 
-          <p className="text-22 font-medium">
+          <p className="text-22 font-medium" onClick={handleEditClick}>
             <span className="text-SemiBlack">{userProfile.nickName}</span>{' '}
             <span className="text-MainColor">&gt;</span>
           </p>
