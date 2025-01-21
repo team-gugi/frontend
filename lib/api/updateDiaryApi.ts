@@ -10,7 +10,6 @@ export interface IUpdateDiaryPayload {
     content: string;
   };
   gameImg: File;
-  // gameImg: string;
 }
 
 export const updateDiaryDetails = async (

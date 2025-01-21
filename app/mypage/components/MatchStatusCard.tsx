@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation';
 interface IMatchStatusCardProps {
   notification: {
     isOwner: boolean;
@@ -21,6 +22,25 @@ interface IMatchStatusCardProps {
 export default function MatchStatusCard({
   notification,
 }: IMatchStatusCardProps) {
+  const router = useRouter();
+
+  // const handleMatePostEdit = () => {
+  //   router.push(`/mate/edit/${notification.mateId}`);
+  // };
+  const handleMatePostEdit = () => {
+    const params = new URLSearchParams({
+      title: notification.title,
+      content: notification.content,
+      gender: notification.options.gender,
+      age: notification.options.age,
+      date: notification.options.date,
+      team: notification.options.team,
+      member: notification.options.member.toString(),
+      stadium: notification.options.stadium,
+    });
+    router.push(`/mate/edit/${notification.mateId}?${params.toString()}`);
+  };
+
   return (
     <div className="relative flex flex-col gap-20 pt-16">
       <div className="relative">
@@ -79,7 +99,7 @@ export default function MatchStatusCard({
             <div className="mt-10">
               <button
                 className="flex px-85 py-10 items-center justify-center bg-MainColor text-White text-16 font-medium rounded-xl"
-                // onClick={handleMatchRequestClick}
+                onClick={handleMatePostEdit}
               >
                 게시물 수정하기
               </button>
