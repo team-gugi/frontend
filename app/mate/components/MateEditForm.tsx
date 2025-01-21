@@ -4,11 +4,17 @@ import { useMateForm } from '@/hooks/useMateForm';
 import TextInput from '../components/TextInput';
 import OptionSelector from './OptionSelector';
 import SubmitButton from './SubmitButton';
-import { useState } from 'react';
-import BottomSheet from './BottomSheet';
-import { createMatePost } from '@/lib/api/postMateApi';
+import { useEffect, useState } from 'react';
+import { useParams, useSearchParams } from 'next/navigation';
 
-export default function MateForm() {
+import BottomSheet from './BottomSheet';
+import { updateMatePost } from '@/lib/api/updateMatePostApi';
+
+export default function MateEditForm() {
+  //   const { mateId } = useParams(); // mateId는 URL path에서 추출
+  const { mateId } = useParams<{ mateId: string }>();
+  const searchParams = useSearchParams(); // URL에서 쿼리 파라미터를 가져옴
+
   const { formState, handleInputChange, handleOptionSelect, resetForm } =
     useMateForm();
   const [isBottomSheetOpen, setBottomSheetOpen] = useState(false);
@@ -16,14 +22,6 @@ export default function MateForm() {
   const openBottomSheet = () => setBottomSheetOpen(true);
   const closeBottomSheet = () => setBottomSheetOpen(false);
 
-  // const [selectedOptions, setSelectedOptions] = useState({
-  //   gender: null,
-  //   age: null,
-  //   date: null,
-  //   team: null,
-  //   member: 1,
-  //   stadium: null,
-  // });
   const [selectedOptions, setSelectedOptions] = useState({
     gender: '',
     age: '',
@@ -32,6 +30,46 @@ export default function MateForm() {
     member: 1,
     stadium: '',
   });
+
+  useEffect(() => {
+    // URL 파라미터에서 데이터를 받아서 formState에 설정
+    const title = searchParams.get('title') || '';
+    const content = searchParams.get('content') || '';
+    const contact = searchParams.get('contact') || '';
+    const options = {
+      gender: searchParams.get('gender') || '',
+      age: searchParams.get('age') || '',
+      date: searchParams.get('date') || '',
+      team: searchParams.get('team') || '',
+      member: parseInt(searchParams.get('member') || '1', 10),
+      stadium: searchParams.get('stadium') || '',
+    };
+
+    //     setFormState({
+    //       title,
+    //       content,
+    //       contact,
+    //       options,
+    //     });
+    //     setSelectedOptions(options); // 선택된 옵션 상태 초기화
+    //   }, [searchParams]);
+    // 상태 업데이트 함수인 handleInputChange를 사용하여 formState 초기화
+    // handleInputChange({ target: { name: 'title', value: title } });
+    // handleInputChange({ target: { name: 'content', value: content } });
+    // handleInputChange({ target: { name: 'contact', value: contact } });
+    handleInputChange({
+      target: { name: 'title', value: title },
+    } as React.ChangeEvent<HTMLInputElement>);
+    handleInputChange({
+      target: { name: 'content', value: content },
+    } as React.ChangeEvent<HTMLInputElement>);
+    handleInputChange({
+      target: { name: 'contact', value: contact },
+    } as React.ChangeEvent<HTMLInputElement>);
+
+    // selectedOptions 설정
+    setSelectedOptions(options);
+  }, [searchParams]);
 
   // 바텀시트에서 선택된 옵션을 업데이트
   const handleApplyOptions = (filters: any) => {
@@ -44,13 +82,14 @@ export default function MateForm() {
       ...formState,
       options: selectedOptions, // 선택된 옵션을 formState에 추가
     };
-    console.log(postData);
+    console.log('mateId', mateId);
+    console.log('postData', postData);
 
     try {
-      const response = await createMatePost(postData);
-      if (response.isSuccess) {
-        alert('게시물이 성공적으로 등록되었습니다!');
-        console.log('직관메이트 게시물 등록 성공');
+      const response = await updateMatePost(mateId, postData); // 수정 API 호출
+      if (response && response.isSuccess) {
+        alert('게시물이 성공적으로 수정되었습니다!');
+        console.log('직관메이트 게시물 수정 성공');
         resetForm(); // 폼 상태 초기화
         setSelectedOptions({
           gender: '',
@@ -61,12 +100,12 @@ export default function MateForm() {
           stadium: '',
         }); // 선택된 옵션 초기화
       } else {
-        console.log('직관메이트 게시물 등록 실패');
-        alert('게시물 등록에 실패했습니다.');
+        console.log('직관메이트 게시물 수정 실패');
+        alert('게시물 수정에 실패했습니다.');
       }
     } catch (error: any) {
       console.error('API 호출 오류:', error);
-      alert(error.message || '게시물 등록 중 오류가 발생했습니다.');
+      alert(error.message || '게시물 수정 중 오류가 발생했습니다.');
     }
   };
 
@@ -113,7 +152,7 @@ export default function MateForm() {
           // onBlur={handleFinalSubmit}
         />
 
-        <SubmitButton onClick={handleSubmit} label="등록하기" />
+        <SubmitButton onClick={handleSubmit} label="수정하기" />
       </div>
       {isBottomSheetOpen && (
         <BottomSheet
