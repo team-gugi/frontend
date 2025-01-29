@@ -10,6 +10,7 @@ import AccountModal from './AccountModal';
 import AccountMoadal from './AccountModal';
 import { userLogout } from '@/lib/api/userLogoutApi';
 import { useRouter } from 'next/navigation';
+import { userWithdraw } from '@/lib/api/userWithdraw';
 
 export default function Account() {
   const router = useRouter();
@@ -35,12 +36,17 @@ export default function Account() {
       if (isSuccess) {
         alert('로그아웃 성공');
         router.push('/');
-        // window.location.href = '/'; // 메인 페이지로 이동
       } else {
         alert(`오류: ${message}`);
       }
     } else if (modalType === 'withdraw') {
-      console.log('회원 탈퇴 요청');
+      const { isSuccess, message } = await userWithdraw();
+      if (isSuccess) {
+        alert('회원 탈퇴 요청 성공');
+        router.push('/');
+      } else {
+        alert(`오류: ${message}`);
+      }
     }
     handleCloseModal();
   };
