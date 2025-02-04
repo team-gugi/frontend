@@ -84,6 +84,7 @@ export default function MateEditForm() {
     };
     console.log('mateId', mateId);
     console.log('postData', postData);
+    console.log('요청 데이터:', JSON.stringify(postData));
 
     try {
       const response = await updateMatePost(mateId, postData); // 수정 API 호출
