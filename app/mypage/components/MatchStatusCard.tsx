@@ -5,8 +5,10 @@ interface IMatchStatusCardProps {
     mateId: string;
     title: string;
     content: string;
+    contact: string;
     daysSinceWritten: number;
     daysUntilGame: number;
+
     confirmedMembers: number;
     options: {
       gender: string;
@@ -37,6 +39,7 @@ export default function MatchStatusCard({
       team: notification.options.team,
       member: notification.options.member.toString(),
       stadium: notification.options.stadium,
+      contact: notification.contact,
     });
     router.push(`/mate/edit/${notification.mateId}?${params.toString()}`);
   };
@@ -60,7 +63,7 @@ export default function MatchStatusCard({
               {notification.title}
             </span>
             <span className="text-12 text-Gray font-medium">
-              D{notification.daysUntilGame}
+              D-{notification.daysUntilGame}
             </span>
           </div>
 

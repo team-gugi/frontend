@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import plugin from 'tailwindcss/plugin';
 
 const px0_10 = {
   ...Array.from(Array(11), (_, i) => `${i}px`),

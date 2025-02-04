@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 import MateIcon from '../app/public/icons/Mate.svg';
 import DiaryIcon from '../app/public/icons/Diary.svg';
@@ -11,6 +12,10 @@ import BallIcon from '../app/public/icons/Ball.svg';
 import MypageIcon from '../app/public/icons/Mypage.svg';
 
 export default function Navigation() {
+  const pathname = usePathname();
+
+  const isActive = (path: string) => pathname === path;
+
   return (
     <nav className="fixed bottom-0 left-0 w-full px-16 gap-4 bg-White">
       <div className="flex justify-around">

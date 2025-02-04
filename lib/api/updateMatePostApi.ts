@@ -1,13 +1,17 @@
 export const updateMatePost = async (mateId: string, postData: any) => {
   try {
-    const response = await fetch(`/api/v1/mate?mateId=${mateId}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/v1/mate?mateId=${mateId}`,
+      // `${process.env.NEXT_PUBLIC_API_URL}/api/v1/mate/${mateId}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(postData),
+        credentials: 'include',
       },
-      body: JSON.stringify(postData),
-      credentials: 'include',
-    });
+    );
 
     const data = await response.json();
     if (response.ok && data.isSuccess) {
