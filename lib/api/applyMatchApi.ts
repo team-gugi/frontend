@@ -1,12 +1,15 @@
 export const applyMatch = async (mateId: string) => {
   try {
-    const response = await fetch(`/api/v1/mate/${mateId}/apply`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/v1/mate/${mateId}/apply`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
       },
-      credentials: 'include',
-    });
+    );
 
     const data = await response.json();
     return data; // 서버의 응답 반환
