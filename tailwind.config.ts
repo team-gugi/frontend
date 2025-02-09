@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import plugin from 'tailwindcss/plugin';
 
 const px0_10 = {
   ...Array.from(Array(11), (_, i) => `${i}px`),
@@ -54,6 +55,8 @@ const config: Config = {
         LightGray: '#DDDDDD',
         SemiWhite: '#F3F3F3',
         White: '#FFFFFF',
+        Red: '#E46662',
+        Toast: '#4E4E4E',
       },
     },
   },
