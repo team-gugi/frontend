@@ -16,27 +16,27 @@ export default function DiaryDetailPage({
   const { diaryId } = params;
   const [diaryDetails, setDiaryDetails] = useRecoilState(diaryDetailsAtom);
   const [error, setError] = useState<string | null>(null);
-  // useEffect(() => {
-  //   const getDiaryDetails = async () => {
-  //     try {
-  //       const data = await fetchDiaryDetails(diaryId);
-  //       setDiaryDetails(data);
-  //     } catch (error) {
-  //       console.log('일기 상세 정보를 가져오는데 실패했습니다.', error);
-  //       setError('일기 상세 정보를 가져오는데 실패했습니다.');
-  //     }
-  //   };
+  useEffect(() => {
+    const getDiaryDetails = async () => {
+      try {
+        const data = await fetchDiaryDetails(diaryId);
+        setDiaryDetails(data);
+      } catch (error) {
+        console.log('일기 상세 정보를 가져오는데 실패했습니다.', error);
+        setError('일기 상세 정보를 가져오는데 실패했습니다.');
+      }
+    };
 
-  //   getDiaryDetails();
-  // }, [diaryId, setDiaryDetails]);
+    getDiaryDetails();
+  }, [diaryId, setDiaryDetails]);
 
-  // if (error) {
-  //   return <div>{error}</div>;
-  // }
+  if (error) {
+    return <div>{error}</div>;
+  }
 
-  // if (!diaryDetails) {
-  //   return <div>로딩 중...</div>;
-  // }
+  if (!diaryDetails) {
+    return <div>로딩 중...</div>;
+  }
 
   return (
     <>

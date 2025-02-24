@@ -55,7 +55,7 @@ export default function Navigation() {
         </Link>
 
         <Link
-          href="/detail"
+          href="/chatbot"
           className="flex flex-col items-center justify-center    w-[20%] py-10 gap-6 "
         >
           <Image src={BallIcon} alt="야구정보 아이콘" width={18} height={18} />
