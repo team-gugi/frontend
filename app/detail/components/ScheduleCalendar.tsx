@@ -67,33 +67,6 @@ export default function ScheduleCalendar() {
       );
     });
   });
-  //   // 날짜 형식을 Date로 변환
-  //   const parseSpecificDate = (specificDate: string): Date | null => {
-  //     const match = specificDate.match(/(\d{2})\.(\d{2})/); // "03.24(일)"에서 "03.24" 추출
-  //     if (!match) return null;
-
-  //     const [, month, day] = match;
-  //     const year = moment().year(); // 현재 연도 사용
-  //     return new Date(year, parseInt(month) - 1, parseInt(day));
-  //   };
-
-  //   // 특정 날짜에 해당하는 schedule을 가져오는 함수
-  //   const getLogoForDate = (date: Date) => {
-  //     const daySchedule = schedule.flatMap((month) =>
-  //       month.specificSchedule.filter((game) => {
-  //         const gameDate = parseSpecificDate(game.specificDate);
-  //         return gameDate?.toDateString() === date.toDateString();
-  //       }),
-  //     );
-  //     return daySchedule.map((game, index) => (
-  //       <img
-  //         key={index}
-  //         src={game.logoUrl}
-  //         alt={`${game.homeTeam} vs ${game.awayTeam}`}
-  //         className="w-18 h-18 mx-auto mt-1"
-  //       />
-  //     ));
-  //   };
 
   const handleDateClick = (date: Date) => {
     // 선택한 날짜를 문자열로 변환하여 Recoil 상태에 저장
