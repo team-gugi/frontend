@@ -8,7 +8,40 @@ export interface DiaryEntry {
   gameStadium: string;
 }
 
+// export const diaryAtom = atom<DiaryEntry[]>({
+//   key: 'diaryAtom',
+//   default: [],
+// });
+
 export const diaryAtom = atom<DiaryEntry[]>({
   key: 'diaryAtom',
-  default: [],
+  default: [
+    {
+      diaryId: '1',
+      gameDate: '2024-02-04',
+      homeTeam: '삼성',
+      awayTeam: '롯데',
+      gameStadium: '광주 기아 챔피언스 필드',
+
+      gameResult: 'WIN', // 목업 데이터에 추가
+    },
+    {
+      diaryId: '2',
+      gameDate: '2024-02-04',
+      homeTeam: '삼성',
+      awayTeam: '롯데',
+      gameStadium: '광주 기아 챔피언스 필드',
+
+      gameResult: 'LOSE', // 목업 데이터에 추가
+    },
+    {
+      diaryId: '3',
+      gameDate: '2024-02-04',
+      homeTeam: '삼성',
+      awayTeam: '롯데',
+      gameStadium: '광주 기아 챔피언스 필드',
+
+      gameResult: 'WIN', // 목업 데이터에 추가
+    },
+  ],
 });
