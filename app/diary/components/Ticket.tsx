@@ -9,20 +9,20 @@ import { useRouter } from 'next/navigation';
 
 export default function Ticket() {
   // 목업 데이터 추가
-  const diaryDetails = {
-    diaryId: '1',
-    gameImg: '/app/public/icons/잠실2.png', // 실제 이미지 URL로 교체 필요
-    content:
-      '일기내용llfklkajflkajlfalkdjflkadjlfkajdlkfjalkdfjlakdfjlakalkdjflakdjflkajdlfkajdslkfjadlkfjasldkfjalsdkfjalsdkfjladskfjlasdkfjladskfjladkfjalksj',
-    gameDate: '2024-02-24',
-    homeTeam: '롯데 자이언츠',
-    awayTeam: '두산 베어스',
-    homeScore: 6,
-    awayScore: 3,
-    gameResult: 'WIN',
-    gameStadium: '부산 사직 야구장',
-  };
-  // const diaryDetails = useRecoilValue(diaryDetailsAtom);
+  // const diaryDetails = {
+  //   diaryId: '1',
+  //   gameImg: '/app/public/icons/잠실2.png', // 실제 이미지 URL로 교체 필요
+  //   content:
+  //     '일기내용llfklkajflkajlfalkdjflkadjlfkajdlkfjalkdfjlakdfjlakalkdjflakdjflkajdlfkajdslkfjadlkfjasldkfjalsdkfjalsdkfjladskfjlasdkfjladskfjladkfjalksj',
+  //   gameDate: '2024-02-24',
+  //   homeTeam: '롯데 자이언츠',
+  //   awayTeam: '두산 베어스',
+  //   homeScore: 6,
+  //   awayScore: 3,
+  //   gameResult: 'WIN',
+  //   gameStadium: '부산 사직 야구장',
+  // };
+  const diaryDetails = useRecoilValue(diaryDetailsAtom);
 
   const router = useRouter();
   const diaryId = diaryDetails?.diaryId;
@@ -38,12 +38,19 @@ export default function Ticket() {
   return (
     <>
       <div>
-        <div className="">
-          <Image src={TempImg} width={375} height={375} alt="임시이미지" />
+        <div className="flex items-center justify-center">
+          <Image
+            src={diaryDetails.gameImg}
+            width={375}
+            height={375}
+            alt="일기 이미지"
+            // className="w-[375px] h-[375px]"
+            className="w-full h-[375px] object-cover"
+          />
         </div>
 
         {/* Diary Content Container*/}
-        <div className="flex flex-col fixed min-h-[360px] bottom-0 left-0 w-full px-34 pt-20 pb-40 gap-12 rounded-tl-3xl rounded-tr-3xl bg-SemiWhite">
+        <div className="flex flex-col fixed min-h-[400px] bottom-0 left-0 w-full px-34 pt-20 pb-40 gap-12 rounded-tl-3xl rounded-tr-3xl bg-SemiWhite">
           {/* Date & Edit button */}
           <div className="flex justify-between items-center">
             <span className="text-SemiBlack font-semibold text-20">
@@ -89,7 +96,7 @@ export default function Ticket() {
               <span className="font-serif font-normal text-12 text-DarkGray">
                 Stadium
               </span>
-              <p className="text-12 font-semibold text-DarkGray">
+              <p className="text-12 font-semibold text-SemiBlack">
                 {diaryDetails.gameStadium}
               </p>
             </div>

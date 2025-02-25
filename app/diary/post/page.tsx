@@ -5,12 +5,16 @@ import Navigation from '@/components/Navigation';
 import PageTitle from '@/components/PageTitle';
 import DiaryForm from '../components/DiaryForm';
 import { useState } from 'react';
+
 import { IDiaryInfo, postDiaryApi } from '@/lib/api/createDiaryApi';
 import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 export default function DiaryPostPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
+
+  const router = useRouter();
 
   const handleSubmit = async (diaryInfo: IDiaryInfo, gameImg: File | null) => {
     setIsSubmitting(true);
@@ -18,9 +22,9 @@ export default function DiaryPostPage() {
 
     try {
       const response = await postDiaryApi(diaryInfo, gameImg || undefined);
-      if (response.isSuccess) {
+      if (response.isSuccess == true) {
         console.log('일기가 성공적으로 등록되었습니다');
-        redirect('/diary');
+        router.push('/diary');
       }
     } catch (error) {
       setError('일기 등록에 실패 했습니다. 다시 시도 해주세요');

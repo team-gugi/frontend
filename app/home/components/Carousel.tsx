@@ -7,24 +7,24 @@ import lotte from '../../public/icons/logo_lotte.svg';
 import SSG from '../../public/icons/logo_SSG.svg';
 import kt from '../../public/icons/logo_kt.svg';
 import kiwoom from '../../public/icons/logo_kiwoom.svg';
-import doosan from '../../public/icons/logo_doosan.svg';
+import doosan from '../../public/icons/logo_doosan_new.svg';
 import kia from '../../public/icons/logo_kia.svg';
 import nc from '../../public/icons/logo_nc.svg';
-import hanwha from '../../public/icons/logo_hanhwa.svg';
+import hanwha from '../../public/icons/logo_hanhwa_new.svg';
 import { useState, useRef } from 'react';
 
 export default function Carousel() {
   const images = [
-    { key: 'samsung', url: samsung },
-    { key: 'lg', url: lg },
-    { key: 'lotte', url: lotte },
-    { key: 'SSG', url: SSG },
-    { key: 'kt', url: kt },
-    { key: 'kiwoom', url: kiwoom },
-    { key: 'doosan', url: doosan },
     { key: 'kia', url: kia },
+    { key: 'doosan', url: doosan },
+    { key: 'lotte', url: lotte },
+    { key: 'lg', url: lg },
     { key: 'nc', url: nc },
+    { key: 'samsung', url: samsung },
+    { key: 'SSG', url: SSG },
     { key: 'hanwha', url: hanwha },
+    { key: 'kiwoom', url: kiwoom },
+    { key: 'kt', url: kt },
   ];
 
   const containerRef = useRef<HTMLDivElement>(null);

@@ -34,14 +34,12 @@ export const postDiaryApi = async (
     );
 
     console.log('FormData(array 형식):', Array.from(formData.entries()));
-    const responseBody = await response.text();
-    console.log('Response Body:', responseBody);
+    // const responseBody = await response.text();
+    // console.log('Response Body:', responseBody);
 
     if (!response.ok) {
       console.log(document.cookie);
-      throw new Error(
-        `직관 일기 등록에 실패했습니다. 상태코드: ${response.status}, 서버응답: ${responseBody}`,
-      );
+      throw new Error(`직관 일기 등록에 실패했습니다.`);
     }
 
     const result = (await response.json()) as IPostDiaryResponse;

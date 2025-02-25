@@ -58,7 +58,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import LocationIcon from '../../public/icons/Location_black.svg';
+import SpotIcon from '../../public/icons/Spot_MainColor.svg';
 import WinStampIcon from '../../public/icons/win_temp.svg';
 import { useRecoilValue } from 'recoil';
 import { diaryAtom, DiaryEntry } from '@/recoil/diary/diaryAtom';
@@ -82,29 +82,32 @@ export default function ListView() {
                 <p className="text-14 font-normal text-SemiBlack">
                   {diary.gameDate}
                 </p>
-                <p className="text-20 font-semibold text-SemiBlack">
+                <p className="text-18 font-semibold text-SemiBlack">
                   {diary.homeTeam} vs {diary.awayTeam}
                 </p>
                 <div className="flex items-center text-12 font-normal text-MainColor gap-1">
                   <Image
-                    src={LocationIcon}
+                    src={SpotIcon}
                     alt="위치 아이콘"
-                    width={12}
-                    height={12}
+                    width={14}
+                    height={14}
                   />
-                  <p>{diary.gameStadium}</p>
+                  <p className="text-14 text-MainColor font-normal">
+                    {diary.gameStadium}
+                  </p>
                 </div>
               </div>
 
               {/* Image */}
               <div className="flex-shrink-0">
                 <Image
-                  src={WinStampIcon}
+                  src={diary.gameImg}
                   // src={diary.gameImg || '/placeholder.png'}
                   alt="경기 이미지"
-                  width={96}
-                  height={96}
-                  className="rounded-lg object-cover"
+                  width={100}
+                  height={100}
+                  // className="rounded-lg object-cover"
+                  className="w-[100px] h-[100px] object-cover rounded-lg"
                 />
               </div>
             </div>
