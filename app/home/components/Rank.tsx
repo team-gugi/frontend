@@ -46,7 +46,7 @@ export default function Rank() {
         <tbody className="flex flex-col gap-20 max-h-[250px] overflow-y-auto">
           {kboRanking.map((team) => (
             <tr className="flex gap-14 items-center" key={team.teamRank}>
-              <td className="font-normal text-14 shrink-0 min-w-10">
+              <td className="font-normal text-14 shrink-0 max-w-10 text-right">
                 {team.teamRank}
               </td>
               <td className="flex font-normal items-center justify-center text-center text-14 shrink-0 w-[28px]">

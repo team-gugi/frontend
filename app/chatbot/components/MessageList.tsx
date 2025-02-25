@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Message from './Message';
-
+interface IMessage {
+  content: string;
+  sender: string;
+  timestamp: string;
+}
 interface IMessageListProps {
   messages: { content: string; sender: string; timestamp: string }[];
 }
@@ -12,12 +16,31 @@ const getCurrentDate = () => {
   //   return `${year}. ${month}. ${day}`;
   return `${year}년 ${month}월 ${day}일`;
 };
-export default function MessageList({ messages }: IMessageListProps) {
+
+export default function MessageList({
+  messages: initialMessages,
+}: IMessageListProps) {
+  // export default function MessageList({ messages }: IMessageListProps) {
   const currentDate = getCurrentDate();
+
+  const [messages, setMessages] = useState<IMessage[]>(initialMessages);
 
   const messageEndRef = useRef<HTMLDivElement | null>(null); // 스크롤 끝 참조용
   const messagesContainerRef = useRef<HTMLDivElement | null>(null); // 메시지 목록 참조용
   const [isAtBottom, setIsAtBottom] = useState(true); // 스크롤이 하단에 있는지 체크
+
+  // 웰컴 메시지 추가
+  useEffect(() => {
+    const welcomeMessage: IMessage = {
+      content: '안녕! 어떤 야구 용어가 궁금해? 👀',
+      sender: 'bot',
+      timestamp: new Date().toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+      }),
+    };
+    setMessages([welcomeMessage, ...initialMessages]);
+  }, [initialMessages]);
 
   // 스크롤 이벤트 리스너
   const handleScroll = () => {

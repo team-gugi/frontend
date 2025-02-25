@@ -6,6 +6,7 @@ export interface DiaryEntry {
   homeTeam: string;
   awayTeam: string;
   gameStadium: string;
+  gameImg: string;
 }
 
 export const diaryAtom = atom<DiaryEntry[]>({
