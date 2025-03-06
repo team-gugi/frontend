@@ -93,3 +93,29 @@ export default function MessageList({
     </div>
   );
 }
+
+// import React, { useEffect, useRef } from 'react';
+// import Message from './Message';
+
+// interface IMessageListProps {
+//   messages: { content: string; sender: string; timestamp: string }[];
+// }
+
+// export default function MessageList({ messages }: IMessageListProps) {
+//   const messageEndRef = useRef<HTMLDivElement | null>(null);
+
+//   useEffect(() => {
+//     if (messageEndRef.current) {
+//       messageEndRef.current.scrollIntoView({ behavior: 'smooth' });
+//     }
+//   }, [messages]);
+
+//   return (
+//     <div className="flex flex-col gap-4 p-4">
+//       {messages.map((msg, index) => (
+//         <Message key={index} content={msg.content} sender={msg.sender} timestamp={msg.timestamp} />
+//       ))}
+//       <div ref={messageEndRef}></div>
+//     </div>
+//   );
+// }
