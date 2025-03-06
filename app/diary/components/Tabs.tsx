@@ -48,7 +48,7 @@ export default function Tabs() {
 
       <div>{activeTab === 'calendar' ? <CalendarView /> : <ListView />}</div>
       {/* <Button text="새로운 직관 일기 작성하기" /> */}
-      <div className="flex items-center justify-center py-20">
+      <div className="flex items-center justify-center pt-20 pb-80">
         <button
           onClick={handleClick}
           className="flex items-center rounded-xl px-74 py-16 bg-MainColor text-White text-18 font-light"

@@ -33,7 +33,7 @@ export default function CalendarView() {
         if (diaryEntry.gameResult === 'WIN') {
           dotColor = 'bg-MainColor'; // 승리: 초록색
         } else if (diaryEntry.gameResult === 'LOSE') {
-          dotColor = 'bg-BlockColor';
+          dotColor = 'bg-Gray';
         } else {
           dotColor = 'bg-BlockColor';
         }
@@ -42,6 +42,8 @@ export default function CalendarView() {
           <div className={`w-10 h-10 rounded-full ${dotColor} mx-auto mt-1`} />
         );
       }
+      // 일기가 없는 경우 빈 칸 반환
+      return <div className="w-10 h-10 mx-auto mt-1" />;
     }
     return null;
   };
