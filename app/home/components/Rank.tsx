@@ -24,7 +24,7 @@ export default function Rank() {
   }, [setKboRanking]);
 
   return (
-    <section className="pt-10 pb-20 px-24">
+    <section className="pt-10 pb-80 px-24">
       <div className="flex flex-row gap-4 items-center">
         <span className="font-normal text-14 text-Gray">KBO 실시간 순위</span>
         <span className="font-normal text-12 text-LightGray text-self-end ">
