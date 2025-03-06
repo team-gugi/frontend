@@ -2,6 +2,7 @@ import Header from '@/components/Header';
 import { getTeamDetails } from '@/lib/api/teamDetailsApi';
 import TeamDetail from '../components/TeamDetail';
 import Navigation from '@/components/Navigation';
+import ScheuduleAndModal from '../components/ScheduleAndModal';
 
 interface ITeamDetails {
   teamCode: string;
@@ -26,7 +27,7 @@ export default async function TeamDetailPage({
     console.log(teamData);
 
     return (
-      <>
+      <div className="overflow-y-auto">
         <Header />
         <TeamDetail
           code={teamData.teamCode}
@@ -38,8 +39,9 @@ export default async function TeamDetailPage({
           ticketShop={teamData.ticketShop}
           mdShop={teamData.mdShop}
         />
+        <ScheuduleAndModal teamCode={teamData.teamCode} />
         <Navigation />
-      </>
+      </div>
     );
   } catch (error) {
     return (

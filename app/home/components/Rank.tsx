@@ -24,7 +24,7 @@ export default function Rank() {
   }, [setKboRanking]);
 
   return (
-    <section className="pt-10 pb-20 px-24">
+    <section className="pt-10 pb-80 px-24">
       <div className="flex flex-row gap-4 items-center">
         <span className="font-normal text-14 text-Gray">KBO 실시간 순위</span>
         <span className="font-normal text-12 text-LightGray text-self-end ">
@@ -46,7 +46,7 @@ export default function Rank() {
         <tbody className="flex flex-col gap-20 max-h-[250px] overflow-y-auto">
           {kboRanking.map((team) => (
             <tr className="flex gap-14 items-center" key={team.teamRank}>
-              <td className="font-normal text-14 shrink-0 min-w-10">
+              <td className="font-normal text-14 shrink-0 max-w-10 text-right">
                 {team.teamRank}
               </td>
               <td className="flex font-normal items-center justify-center text-center text-14 shrink-0 w-[28px]">
