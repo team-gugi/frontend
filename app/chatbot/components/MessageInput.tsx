@@ -17,10 +17,20 @@ export default function Message({ onSendMessage }: IMessageProps) {
     setMessage(e.target.value);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (message.trim()) {
       const timestamp = new Date().toLocaleString();
       onSendMessage({ content: message, sender: 'user', timestamp });
+
+      //서버로 메세지 전송
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/임시`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ content: message }),
+      });
+
       setMessage('');
     }
   };

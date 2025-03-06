@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MessageList from './MessageList';
 import MessageInput from './MessageInput';
 
@@ -8,6 +8,29 @@ export default function Chatbot() {
   const [messages, setMessages] = useState<
     { content: string; sender: string; timestamp: string }[]
   >([]);
+
+  useEffect(() => {
+    //SSE로 백엔드와 실시간 연결
+    const eventSource = new EventSource(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/v1/chat`,
+    ); //SSE endpoint
+
+    eventSource.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        {
+          content: data.message,
+          sender: data.sender,
+          timestamp: new Date().toLocaleString(),
+        },
+      ]);
+    };
+
+    return () => {
+      eventSource.close(); // 컴포넌트 언마운트 시 SSE 연결 종료
+    };
+  }, []);
 
   // 메시지 전송 처리 함수
   const handleSendMessage = (newMessage: {
