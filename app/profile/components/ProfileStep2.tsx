@@ -31,7 +31,21 @@ const ProfileStep2: React.FC<ProfileStep2Props> = ({ onNext, onBack }) => {
     <div className="flex flex-col items-center w-full gap-41">
       {/* 페이지 상단 타이틀 */}
       <p className="text-20 font-semibold">자신을 소개하는 한 줄 작성하기</p>
-      <div className="w-136 h-136 bg-SemiWhite rounded-full"></div>
+      {/* <div className="w-136 h-136 bg-SemiWhite rounded-full"></div> */}
+      {/* 프로필 이미지 표시 */}
+      <div className="w-136 h-136 bg-SemiWhite rounded-full overflow-hidden">
+        {profile.profileImg ? (
+          <img
+            src={URL.createObjectURL(profile.profileImg)} // profileImg가 있으면 이미지를 표시
+            alt="Profile"
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center text-gray-500">
+            +
+          </div>
+        )}
+      </div>
       {/* 자기 소개 입력 */}
       <div className="relative w-full max-w-[285px] max-h-[124px]">
         <textarea
