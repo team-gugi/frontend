@@ -34,11 +34,6 @@ export default function Banner() {
 
         {/* </div> */}
       </section>
-      {/* <div className="flex justify-center">
-        <Image src={carouselBlack} alt="케러셀_선택된 아이콘"></Image>
-        <Image src={carouselGray} alt="케러셀_비선택된 아이콘"></Image>
-        <Image src={carouselGray} alt="케러셀_비선택된 아이콘"></Image>
-      </div> */}
     </div>
   );
 }

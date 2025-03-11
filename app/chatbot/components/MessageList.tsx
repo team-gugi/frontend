@@ -76,46 +76,58 @@ export default function MessageList({
       }
     };
   }, []);
+
+  // 메시지 내용 \n 기준으로 분리하여 하나씩 보여주기
+  const splitMessages = (
+    content: string,
+  ): { content: string; sender: string; timestamp: string; key: string }[] => {
+    return content.split('\n\n').map((line, index) => ({
+      content: line,
+      sender: 'bot',
+      timestamp: new Date().toLocaleString(),
+      key: `${content}-${index}`, // 유니크 키로 구분
+    }));
+  };
+
   return (
-    <div className="flex flex-col gap-24 px-20 mb-100">
+    <div
+      className="flex flex-col gap-24 px-20 mb-100"
+      ref={messagesContainerRef}
+    >
       <div className="text-12 font-light text-Gray text-center py-10">
         {currentDate}
       </div>
-      {messages.map((msg, index) => (
-        <Message
-          key={index}
-          content={msg.content}
-          sender={msg.sender}
-          timestamp={msg.timestamp}
-        />
-      ))}
+
+      {messages.map((msg, index) =>
+        // splitMessages를 사용하여 개별 줄로 나눈 메시지를 렌더링
+        splitMessages(msg.content).map((part, idx) => (
+          <Message
+            key={part.key} // 유니크 키로 구분
+            content={part.content} // 메시지의 각 줄을 content로 전달
+            sender={msg.sender}
+            timestamp={msg.timestamp}
+            isFirstMessage={idx === 0} // 첫 번째 메시지일 때만 챗봇 이미지와 닉네임 표시
+          />
+        )),
+      )}
       <div ref={messageEndRef}></div>
     </div>
   );
+
+  // return (
+  //   <div className="flex flex-col gap-24 px-20 mb-100">
+  //     <div className="text-12 font-light text-Gray text-center py-10">
+  //       {currentDate}
+  //     </div>
+  //     {messages.map((msg, index) => (
+  //       <Message
+  //         key={index}
+  //         content={msg.content}
+  //         sender={msg.sender}
+  //         timestamp={msg.timestamp}
+  //       />
+  //     ))}
+  //     <div ref={messageEndRef}></div>
+  //   </div>
+  // );
 }
-
-// import React, { useEffect, useRef } from 'react';
-// import Message from './Message';
-
-// interface IMessageListProps {
-//   messages: { content: string; sender: string; timestamp: string }[];
-// }
-
-// export default function MessageList({ messages }: IMessageListProps) {
-//   const messageEndRef = useRef<HTMLDivElement | null>(null);
-
-//   useEffect(() => {
-//     if (messageEndRef.current) {
-//       messageEndRef.current.scrollIntoView({ behavior: 'smooth' });
-//     }
-//   }, [messages]);
-
-//   return (
-//     <div className="flex flex-col gap-4 p-4">
-//       {messages.map((msg, index) => (
-//         <Message key={index} content={msg.content} sender={msg.sender} timestamp={msg.timestamp} />
-//       ))}
-//       <div ref={messageEndRef}></div>
-//     </div>
-//   );
-// }
