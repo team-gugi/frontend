@@ -3,6 +3,8 @@ import Navigation from '@/components/Navigation';
 import Banner from './components/Banner';
 import Carousel from './components/Carousel';
 import Rank from './components/Rank';
+import { Suspense } from 'react';
+import LoadingSpinner from '@/components/LoadingSpinner';
 
 export default function HomePage() {
   return (
@@ -11,6 +13,10 @@ export default function HomePage() {
       <Banner />
       <Carousel />
       <Rank />
+      {/* <LoadingSpinner /> */}
+      {/* <Suspense fallback={<LoadingSpinner />}>
+        <Rank />
+      </Suspense> */}
       <Navigation />
     </>
   );
