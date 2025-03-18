@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Text from '../components/BannerText';
+import Link from 'next/link';
 
 import ArrowIcon from '../../public/icons/Arrow.svg';
 
@@ -12,21 +13,27 @@ export default function Banner() {
         </h2>
         <Text text="어렵지 않아요," />
         <Text text="gugi와 함께 시작해봐요!" />
-        <div className=" flex flex-row justify-end mt-39 overflow-hidden px-14 py-8 gap-8">
-          <p className="text-14 text-semiBlack font-light">야구 룰 배워보기</p>
+        {/* <div className=" flex flex-row justify-end mt-39 overflow-hidden px-14 py-8 gap-8"> */}
+        <Link
+          href="/chatbot"
+          className=" flex flex-row justify-end mt-39 overflow-hidden px-14 py-8 gap-8"
+        >
+          {' '}
+          {/* /chatbot 페이지로 이동하는 링크 추가 */}
+          <p className="text-14 text-semiBlack font-light cursor-pointer">
+            야구 룰 배워보기
+          </p>
           <Image
             src={ArrowIcon}
             alt="야구 룰 페이지 바로가기 버튼"
             width={22}
             height={8}
           />
-        </div>
+        </Link>
+        {/* <p className="text-14 text-semiBlack font-light">야구 룰 배워보기</p> */}
+
+        {/* </div> */}
       </section>
-      {/* <div className="flex justify-center">
-        <Image src={carouselBlack} alt="케러셀_선택된 아이콘"></Image>
-        <Image src={carouselGray} alt="케러셀_비선택된 아이콘"></Image>
-        <Image src={carouselGray} alt="케러셀_비선택된 아이콘"></Image>
-      </div> */}
     </div>
   );
 }

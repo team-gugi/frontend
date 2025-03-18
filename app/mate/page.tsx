@@ -102,11 +102,11 @@ export default function MateMainPage() {
   return (
     <>
       <Header />
-      <span className="flex px-24 text-12 font-extralight text-SemiBlack">
+      <span className="flex px-24 py-10 text-14 font-normal text-DarkGray">
         혼자보단 같이! 직관 친구들을 찾아 떠나볼까요? (🖐🏻'-' ){' '}
       </span>
-      <div className="flex flex-col gap-10 px-24 py-20 mb-16">
-        <span className="flex text-12 font-normal text-Gray ">
+      <div className="flex flex-col gap-12 px-24 mb-24">
+        <span className="flex text-14 font-normal text-DarkGray ">
           맞춤 조건을 설정해보세요!
         </span>
         {/* <Filter
@@ -175,7 +175,7 @@ export default function MateMainPage() {
           disabled={loading}
           className="block mx-auto px-80 py-20 bg-BlockColor text-Gray rounded-lg disabled:opacity-50"
         >
-          {loading ? '로딩 중...' : '더 보기'}
+          {loading ? '로딩 중...' : '더 많은 매칭 보기'}
         </button>
       )}
     </>

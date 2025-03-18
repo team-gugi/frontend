@@ -1,4 +1,6 @@
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import ContactModal from './ContactModal';
 interface IMatchStatusCardProps {
   notification: {
     isOwner: boolean;
@@ -42,6 +44,16 @@ export default function MatchStatusCard({
       contact: notification.contact,
     });
     router.push(`/mate/edit/${notification.mateId}?${params.toString()}`);
+  };
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleModalOpen = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -97,6 +109,18 @@ export default function MatchStatusCard({
               </span>
             </div>
           </div>
+
+          {!notification.isOwner && notification.contact && (
+            <div className="mt-10">
+              <button
+                className="flex px-56 py-10 items-center justify-center bg-MainColor text-White text-16 font-medium rounded-xl"
+                onClick={handleModalOpen}
+              >
+                모임 방장 연락처 확인하기
+              </button>
+            </div>
+          )}
+
           {/* 방장일 때만 버튼 표시 */}
           {notification.isOwner && (
             <div className="mt-10">
@@ -108,6 +132,20 @@ export default function MatchStatusCard({
               </button>
             </div>
           )}
+
+          {/* 방장이 아닌 경우에만 모달 렌더링 */}
+          {!notification.isOwner && (
+            <ContactModal
+              isOpen={isModalOpen}
+              onClose={handleModalClose}
+              contact={notification.contact}
+            />
+          )}
+          {/* <ContactModal
+            isOpen={isModalOpen}
+            onClose={handleModalClose}
+            contact={notification.contact}
+          /> */}
         </div>
       </div>
     </div>

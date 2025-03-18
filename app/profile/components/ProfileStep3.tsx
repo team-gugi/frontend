@@ -28,6 +28,7 @@ const ProfileStep3: React.FC<ProfileStep3Props> = ({
 
   const [selectedTeam, setSelectedTeam] = useState<string>('');
   const [profile, setProfile] = useRecoilState(profileAtom);
+  const [errorMessage, setErrorMessage] = useState<string>('');
   const router = useRouter();
 
   const handleTeamChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,10 +41,29 @@ const ProfileStep3: React.FC<ProfileStep3Props> = ({
   };
   console.log(profile);
 
+  // const handleProfileSubmit = async () => {
+  //   if (registerToken) {
+  //     await registerProfile(registerToken, profile);
+  //   } else {
+  //     console.log('register token이 없음!');
+  //   }
+  // };
+
   const handleProfileSubmit = async () => {
     if (registerToken) {
-      await registerProfile(registerToken, profile);
+      try {
+        const success = await registerProfile(registerToken, profile);
+
+        // registerProfile이 성공적으로 프로필을 등록했으면 /home으로 리디렉션
+        if (success) {
+          router.push('/home');
+        }
+      } catch (error) {
+        // 프로필 등록 실패 시 에러 메시지 표시
+        setErrorMessage('프로필 등록에 실패했습니다. 다시 시도해주세요.');
+      }
     } else {
+      setErrorMessage('프로필 등록에 실패했습니다. 다시 시도해주세요.');
       console.log('register token이 없음!');
     }
   };
@@ -86,6 +106,10 @@ const ProfileStep3: React.FC<ProfileStep3Props> = ({
       >
         프로필 설정 완료
       </button>
+
+      {errorMessage && (
+        <div className=" text-Red flex items-center py-20">{errorMessage}</div>
+      )}
     </div>
   );
 };

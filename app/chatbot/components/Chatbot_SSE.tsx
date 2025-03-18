@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import MessageList from './MessageList';
 import MessageInput from './MessageInput';
-import { sendChatMessage } from '@/lib/api/chatApi';
 
 export default function Chatbot() {
   // 메시지 상태
@@ -10,26 +9,46 @@ export default function Chatbot() {
     { content: string; sender: string; timestamp: string }[]
   >([]);
 
+  useEffect(() => {
+    //SSE로 백엔드와 실시간 연결
+    const eventSource = new EventSource(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/v1/chat`,
+    ); //SSE endpoint
+
+    eventSource.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        {
+          content: data.message,
+          sender: data.sender,
+          timestamp: new Date().toLocaleString(),
+        },
+      ]);
+    };
+
+    return () => {
+      eventSource.close(); // 컴포넌트 언마운트 시 SSE 연결 종료
+    };
+  }, []);
+
   // 메시지 전송 처리 함수
-  const handleSendMessage = async (newMessage: {
+  const handleSendMessage = (newMessage: {
     content: string;
     sender: string;
     timestamp: string;
   }) => {
     setMessages((prevMessages) => [...prevMessages, newMessage]);
 
-    try {
-      // 백엔드에 사용자 메시지 전송하고 응답 받기
-      const botResponse = await sendChatMessage(newMessage.content);
-      const botMessage = {
-        content: botResponse,
+    // 챗봇의 응답 처리 (여기서는 간단하게 "챗봇 메시지"를 추가하는 예시)
+    setTimeout(() => {
+      const botResponse = {
+        content: '챗봇의 응답입니다.',
         sender: 'bot',
         timestamp: new Date().toLocaleString(),
       };
-      setMessages((prevMessages) => [...prevMessages, botMessage]);
-    } catch (error) {
-      console.error('Error fetching chat response:', error);
-    }
+      setMessages((prevMessages) => [...prevMessages, botResponse]);
+    }, 1000);
   };
 
   return (
