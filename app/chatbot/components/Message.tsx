@@ -23,7 +23,7 @@ export default function Message({
   const time = getCurrentTime();
   return (
     <div
-      className={`flex gap-4 ${sender === 'user' ? 'justify-end' : 'justify-start'}`}
+      className={`flex gap-4 ${sender === 'user' ? 'justify-end' : 'justify-start'} `}
     >
       {/* Bot 메시지 */}
       {/* {sender === 'bot' && (

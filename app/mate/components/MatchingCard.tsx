@@ -84,7 +84,7 @@ export default function MatchingCard({
       <div className="relative flex flex-col gap-20 pt-16 border-solid border-t-1 border-LightGray">
         <div className="relative">
           <span className="absolute -top-8 left-24 z-10 px-10 py-3 rounded-[10px] bg-MainColor text-White text-14 font-normal ">
-            D{daysUntilGame}
+            D-{daysUntilGame}
             {/* {daysUntilGame >= 0
           ? `${daysUntilGame}일 후 경기`
           : `${Math.abs(daysUntilGame)}일 전 경기`} */}

@@ -23,6 +23,7 @@ export interface IMateInfo {
   daysUntilGame: number;
   confirmedMembers: number;
   updatedAt: string;
+  contact: string;
   options: {
     gender: string;
     age: string;
@@ -60,3 +61,35 @@ export const fetchAllNotifications =
       throw new Error('전체 매칭 정보 불러오는데 오류가 발생했습니다');
     }
   };
+// export const fetchAllNotifications =
+//   async (): Promise<IAllNotificationsResponse> => {
+//     // 목업 데이터 생성
+//     const mockData: IAllNotificationsResponse = {
+//       notification: [],
+//       pending: [],
+//       accepted: [
+//         {
+//           isOwner: false,
+//           mateId: 'mate-001',
+//           title: '이번 주말 축구 같이 하실 분!',
+//           content: '일요일 오후 3시에 경기가 있습니다. 함께 해요!',
+//           daysSinceWritten: 2,
+//           daysUntilGame: 5,
+//           confirmedMembers: 3,
+//           updatedAt: '2025-03-16T12:00:00Z',
+//           contact: 'chldbswl@example.com',
+//           options: {
+//             gender: '여성',
+//             age: '20대',
+//             date: '2025-03-21',
+//             team: '삼성',
+//             member: 5,
+//             stadium: '대구 삼성 라이온즈 파크',
+//           },
+//         },
+//       ],
+//       rejected: [],
+//     };
+
+//     return mockData;
+//   };
