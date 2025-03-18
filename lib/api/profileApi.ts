@@ -56,12 +56,14 @@ const registerProfile = async (registerToken: string, profile: any) => {
     document.cookie = `refresh_token=${data.refresh_token}; path=/; SameSite=None; Secure`;
 
     console.log(document.cookie);
+    return true;
     // window.location.href = '/home';
     // window.location.href = '/onboarding';
 
     // useRouter().push(redirectUrl);
   } catch (error) {
     console.log('프로필 등록 오류', error);
+    return false;
   }
 };
 export default registerProfile;
