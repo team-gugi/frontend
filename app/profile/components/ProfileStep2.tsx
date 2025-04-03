@@ -1,3 +1,4 @@
+'use client';
 import { profileAtom } from '@/recoil/profileAtom';
 import React, { useState } from 'react';
 import { useRecoilState } from 'recoil';

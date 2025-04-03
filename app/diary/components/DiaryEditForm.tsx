@@ -24,7 +24,10 @@ export default function DiaryEditForm({
     homeScore: formData.homeScore.toString(),
     awayScore: formData.awayScore.toString(),
     content: formData.content,
-    gameImg: formData.gameImg || '', // 초기값으로 이미지 URL 설정
+    // gameImg: formData.gameImg || '', // 초기값으로 이미지 URL 설정
+
+    gameImg: formData.gameImg || '', // string으로 초기화
+    gameImgFile: null as File | null, // 추가: File 타입 관리
   });
 
   // 필드값 변경 처리
@@ -45,7 +48,9 @@ export default function DiaryEditForm({
       const file = e.target.files[0];
       setFormState((prevState) => ({
         ...prevState,
-        gameImg: file ? URL.createObjectURL(file) : '',
+        // gameImg: file ? URL.createObjectURL(file) : '',
+        gameImg: URL.createObjectURL(file), // 미리보기용 URL
+        gameImgFile: file, // File 객체 저장
       }));
     }
   };
@@ -62,7 +67,8 @@ export default function DiaryEditForm({
         awayScore: parseInt(formState.awayScore),
         content: formState.content,
       },
-      gameImg: formState.gameImg,
+      // gameImg: formState.gameImg,
+      gameImg: formState.gameImgFile || formState.gameImg, // File 또는 string
     });
   };
   return (
