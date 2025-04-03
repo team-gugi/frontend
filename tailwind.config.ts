@@ -1,15 +1,28 @@
 import type { Config } from 'tailwindcss';
 import plugin from 'tailwindcss/plugin';
 
-const px0_10 = {
-  ...Array.from(Array(11), (_, i) => `${i}px`),
-};
-const px0_100 = {
-  ...Array.from(Array(101), (_, i) => `${i}px`),
-};
-const px0_200 = {
-  ...Array.from(Array(201), (_, i) => `${i}px`),
-};
+const px0_10 = Object.fromEntries(
+  Array.from(Array(11)).map((_, i) => [`${i}`, `${i}px`]),
+);
+const px0_100 = Object.fromEntries(
+  Array.from(Array(101)).map((_, i) => [`${i}`, `${i}px`]),
+);
+const px0_200 = Object.fromEntries(
+  Array.from(Array(201)).map((_, i) => [`${i}`, `${i}px`]),
+);
+// const px0_10 = { ...Array.from(Array(11)).map((_, i) => `${i}px`) };
+// const px0_100 = { ...Array.from(Array(101)).map((_, i) => `${i}px`) };
+// const px0_200 = { ...Array.from(Array(201)).map((_, i) => `${i}px`) };
+
+// const px0_10 = {
+//   ...Array.from(Array(11), (_, i) => `${i}px`),
+// };
+// const px0_100 = {
+//   ...Array.from(Array(101), (_, i) => `${i}px`),
+// };
+// const px0_200 = {
+//   ...Array.from(Array(201), (_, i) => `${i}px`),
+// };
 
 const config: Config = {
   content: [
@@ -25,14 +38,16 @@ const config: Config = {
           '100%': { opacity: '1' },
         },
         slideIn: {
-          '0%': { transform: 'translateY(20px)', opacity: 0 },
-          '100%': { transform: 'translateY(0)', opacity: 1 },
+          '0%': { transform: 'translateY(20px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
         },
       },
+
       animation: {
         fadeIn: 'fadeIn 1s ease-in-out',
         slideIn: 'slideIn 1s ease-in-out',
       },
+
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':

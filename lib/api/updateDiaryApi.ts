@@ -9,7 +9,8 @@ export interface IUpdateDiaryPayload {
     awayScore: number;
     content: string;
   };
-  gameImg: File;
+  // gameImg: File;
+  gameImg: File | string; // 수정: File 또는 string 허용
 }
 
 export const updateDiaryDetails = async (
