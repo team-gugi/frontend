@@ -11,12 +11,12 @@ import HomeIcon from '../app/public/icons/Home.svg';
 import BallIcon from '../app/public/icons/Ball.svg';
 import MypageIcon from '../app/public/icons/Mypage.svg';
 
-import MateIcon_Active from '../app/public/icons/Mate_Active.svg';
-import DiaryIcon_Active from '../app/public/icons/Diary_Active.svg';
-import HomeIcon_Active from '../app/public/icons/Home_Active.svg';
-import BallIcon_Active from '../app/public/icons/Ball_Active.svg';
-import MypageIcon_Active from '../app/public/icons/Mypage_Active.svg';
-
+import MateIcon_Active from '../app/public/icons/Mate_active.svg';
+import DiaryIcon_Active from '../app/public/icons/Diary_active.svg';
+import HomeIcon_Active from '../app/public/icons/Home_active.svg';
+import BallIcon_Active from '../app/public/icons/Ball_active.svg';
+import MypageIcon_Active from '../app/public/icons/Mypage_active.svg';
+``;
 export default function Navigation() {
   const pathname = usePathname();
 
