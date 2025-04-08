@@ -3,6 +3,7 @@ import { getTeamDetails } from '@/lib/api/teamDetailsApi';
 import TeamDetail from '../components/TeamDetail';
 import Navigation from '@/components/Navigation';
 import ScheuduleAndModal from '../components/ScheduleAndModal';
+import Error from '../components/Error';
 
 interface ITeamDetails {
   teamCode: string;
@@ -43,13 +44,16 @@ export default async function TeamDetailPage({
         <Navigation />
       </div>
     );
+    // } catch (error) {
+    //   return (
+    //     <div>
+    //       {error instanceof Error
+    //         ? error.message
+    //         : '팀 정보를 불러오는 데 실패했습니다.'}
+    //     </div>
+    //   );
+    // }
   } catch (error) {
-    return (
-      <div>
-        {error instanceof Error
-          ? error.message
-          : '팀 정보를 불러오는 데 실패했습니다.'}
-      </div>
-    );
+    return <Error errorMessage="팀 정보를 불러오지 못했습니다." />;
   }
 }

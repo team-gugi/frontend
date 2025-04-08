@@ -20,7 +20,7 @@ export const getTeamDetails = async (teamCode: string) => {
   );
 
   if (!response.ok) {
-    console.log('팀코드', teamCode);
+    console.log('teamCode : ', teamCode);
     throw new Error('팀별 상세 정보를 불러오는 데 실패했습니다');
   }
 
