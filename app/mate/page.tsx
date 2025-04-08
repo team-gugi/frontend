@@ -15,11 +15,12 @@ import {
   IMatePost,
 } from '@/lib/api/fetchMatchApi';
 import Filter from './components/Filter';
+import SkeletonMatchingCard from './components/SkeletonMatchingCard';
 
 export default function MateMainPage() {
   const [posts, setPosts] = useState<IMatePost[]>([]);
   const [cursor, setCursor] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [hasMore, setHasMore] = useState(true);
   const router = useRouter();
   const [isBottomSheetOpen, setBottomSheetOpen] = useState(false);
@@ -120,8 +121,25 @@ export default function MateMainPage() {
           onOpenBottomSheet={openBottomSheet}
           // onApply={handleApplyOptions} // 옵션 적용 시 필터 상태 업데이트
         />
+        {loading
+          ? Array.from({ length: 2 }).map((_, index) => (
+              <SkeletonMatchingCard key={index} />
+            ))
+          : posts.map((post) => (
+              <MatchingCard
+                key={post.mateId}
+                title={post.title}
+                content={post.content}
+                options={post.options}
+                confirmedMembers={post.confirmedMembers}
+                maxMembers={post.options.member}
+                daysUntilGame={post.daysUntilGame}
+                daysSinceWritten={post.daysSinceWritten}
+                mateId={post.mateId}
+              />
+            ))}
 
-        {posts.map((post) => (
+        {/* {posts.map((post) => (
           <MatchingCard
             key={post.mateId}
             title={post.title}
@@ -133,7 +151,7 @@ export default function MateMainPage() {
             daysSinceWritten={post.daysSinceWritten}
             mateId={post.mateId}
           />
-        ))}
+        ))} */}
       </div>
 
       <Navigation />
@@ -173,7 +191,7 @@ export default function MateMainPage() {
             }
           }}
           disabled={loading}
-          className="block mx-auto px-80 py-20 bg-BlockColor text-Gray rounded-lg disabled:opacity-50"
+          className="block mx-auto mt-40 px-136 py-12 border-1 border-Gray bg-White text-Gray text-16 font-normal rounded-lg disabled:opacity-50"
         >
           {loading ? '로딩 중...' : '더 많은 매칭 보기'}
         </button>
