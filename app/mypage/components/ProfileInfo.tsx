@@ -6,6 +6,30 @@ import { useEffect, useState } from 'react';
 import { fetchUserProfile, IUserProfile } from '@/lib/api/fetchUserProfile';
 import { useRouter } from 'next/navigation';
 
+const SkeletonProfile = () => (
+  <div className="flex flex-col px-24 pt-12 pb-24 gap-18 animate-pulse">
+    <div className="flex flex-row items-center gap-12">
+      <div className="w-40 h-40 bg-LightGray rounded   "></div>
+      <div className="w-66 h-24 bg-LightGray rounded"></div>
+    </div>
+    <div className="flex flex-col gap-6">
+      <div className="w-[224px] h-16 bg-LightGray rounded"></div>
+      <div className="w-[206px] h-16 bg-LightGray rounded"></div>
+    </div>
+  </div>
+);
+
+const ProfileFetchError = () => (
+  <div className="flex flex-col px-24 pt-12 pb-24 gap-12">
+    <p className="text-16 text-MainColor font-normal">
+      프로필 정보를 불러오지 못했습니다.😢
+    </p>
+    <p className="text-14 text-SemiBlack font-normal">
+      네트워크 상태를 확인하거나 새로고침 해주세요.
+    </p>
+  </div>
+);
+
 export default function ProfileInfo() {
   const [userProfile, setUserProfile] = useState<IUserProfile | null>(null);
   const [loading, setLoading] = useState(true);
@@ -30,8 +54,9 @@ export default function ProfileInfo() {
     getUserProfile();
   }, []);
 
-  if (loading) return <p>Loading...</p>;
-  if (!userProfile) return <p>프로필 조회 실패</p>;
+  if (loading) return <SkeletonProfile />;
+  // if (!userProfile) return <p>프로필 조회 실패</p>;
+  if (!userProfile) return <ProfileFetchError />;
 
   return (
     <>

@@ -25,10 +25,10 @@ export const fetchUserProfile = async (): Promise<IUserProfile> => {
     if (data.isSuccess) {
       return data.payload; // IUserProfile 타입 리턴
     } else {
-      throw new Error('유저 프로필 조회 실패');
+      throw new Error(data.message || '유저 프로필 조회 실패');
     }
   } catch (error) {
     console.error(error);
-    throw new Error('유저 프로필을 조회하는데 에러가 발생했습니다');
+    throw new Error('유저 프로필을 조회하는 중 문제가 발생했습니다');
   }
 };
