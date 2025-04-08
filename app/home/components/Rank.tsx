@@ -28,7 +28,7 @@ export default function Rank() {
       <div className="flex flex-row gap-4 items-center">
         <span className="font-normal text-14 text-Gray">KBO 실시간 순위</span>
         <span className="font-normal text-12 text-LightGray text-self-end ">
-          (2024.09.30. 기준)
+          (2025.XX.XX 기준)
         </span>
       </div>
 
