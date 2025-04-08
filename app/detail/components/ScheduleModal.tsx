@@ -56,7 +56,9 @@ export default function ScheduleModal({ onClose }: { onClose: () => void }) {
                       {game.homeTeam} vs {game.awayTeam}
                     </span>
                     <p className="text-16 font-bold text-SemiBlack">
-                      {game.homeScore ?? '-'} : {game.awayScore ?? '-'}
+                      {/* {game.homeScore ?? '-'} : {game.awayScore ?? '-'} */}
+                      {game.homeScore === -1 ? '-' : game.homeScore} :{' '}
+                      {game.awayScore === -1 ? '-' : game.awayScore}
                     </p>
                   </div>
                   <div className="flex flex-col gap-6">
