@@ -5,6 +5,7 @@ import Image from 'next/image';
 import CharacterIcon from '../../public/icons/직관일기임시캐릭터.png';
 import { useRecoilValue } from 'recoil';
 import { winRateAtom } from '@/recoil/diary/winRateAtom';
+import LoadingSpinner from '@/components/LoadingSpinner';
 
 export default function WinningRateBanner() {
   const winRateData = useRecoilValue(winRateAtom);
@@ -12,8 +13,10 @@ export default function WinningRateBanner() {
   if (!winRateData) {
     return (
       <div className="flex flex-row justify-center gap-24 mx-24 my-20 rounded-xl py-10 border-1 border-solid border-Gray">
-        <div className="flex flex-col items-end gap-8 justify-center">
-          <span>승률 정보 로딩중...</span>
+        <div className="flex items-center gap-8 justify-center">
+          <span className="text-16 font-normal text-SemiBlack">
+            승률 정보 로딩중...
+          </span>
         </div>
         <Image src={CharacterIcon} alt="승요 캐릭터" width={100} height={100} />
       </div>
