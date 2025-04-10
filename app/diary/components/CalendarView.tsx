@@ -23,7 +23,8 @@ export default function CalendarView() {
 
   const tileContent = ({ date, view }: { date: Date; view: string }) => {
     if (view === 'month') {
-      const formattedDate = date.toISOString().split('T')[0];
+      // const formattedDate = date.toISOString().split('T')[0];
+      const formattedDate = moment(date).format('YYYY-MM-DD');
       const diaryEntry = diaryEntries.find(
         (entry) => entry.gameDate === formattedDate,
       );
