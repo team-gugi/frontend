@@ -32,7 +32,7 @@ export default function Error({ errorMessage }: { errorMessage: string }) {
         </button> */}
         <button
           onClick={() => router.push('/home')}
-          className="flex flex-row items-center justify-center gap-12 px-24 py-12 text-SemiBlack rounded-md shadow hover:bg-SemiWhite"
+          className="cursor-pointer flex flex-row items-center justify-center gap-12 px-24 py-12 text-SemiBlack rounded-md shadow active:border active:border-MainColor duration-100 "
         >
           <Image src={HomeIcon} alt="홈 아이콘" width={24} height={24} />
 

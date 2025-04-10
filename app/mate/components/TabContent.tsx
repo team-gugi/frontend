@@ -113,7 +113,7 @@ export default function TabContent({
           <p className="text-16 font-semibold text-SemiBlack">
             🤔 언제 갈까요?
           </p>
-          <div className="flex">
+          <div className="flex justify-center">
             <Calendar
               onChange={handleDateChange}
               value={selectedDate}
