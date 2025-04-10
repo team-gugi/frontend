@@ -1,7 +1,7 @@
 'use client';
 import Header from '@/components/Header';
 import Navigation from '@/components/Navigation';
-import Ticket from '../components/Ticket';
+import Ticket, { ITicketProps } from '../components/Ticket';
 import { useRouter } from 'next/router';
 import { useRecoilState } from 'recoil';
 import { diaryDetailsAtom } from '@/recoil/diary/diaryDetailsAtom';
@@ -14,13 +14,15 @@ export default function DiaryDetailPage({
   params: { diaryId: string };
 }) {
   const { diaryId } = params;
-  const [diaryDetails, setDiaryDetails] = useRecoilState(diaryDetailsAtom);
+  // const [diaryDetails, setDiaryDetails] = useRecoilState(diaryDetailsAtom);
+  const [diaryDetails, setDiaryDetails] = useState<ITicketProps | null>(null);
   const [error, setError] = useState<string | null>(null);
   useEffect(() => {
     const getDiaryDetails = async () => {
       try {
         const data = await fetchDiaryDetails(diaryId);
-        setDiaryDetails(data);
+        // setDiaryDetails(data);
+        setDiaryDetails(data); // payload만 저장
       } catch (error) {
         console.log('일기 상세 정보를 가져오는데 실패했습니다.', error);
         setError('일기 상세 정보를 가져오는데 실패했습니다.');
@@ -41,7 +43,8 @@ export default function DiaryDetailPage({
   return (
     <>
       <Header />
-      <Ticket />
+      {/* <Ticket /> */}
+      <Ticket {...diaryDetails} />
       <Navigation />
     </>
   );
