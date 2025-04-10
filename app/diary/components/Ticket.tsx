@@ -246,12 +246,12 @@ export default function Ticket() {
                     Stadium
                   </span>
                   <p className="text-12 font-semibold text-SemiBlack">
-                    {diaryDetail.gameStadium}
+                    {diaryDetails.gameStadium}
                   </p>
                 </div>
               </div>
               <p className="text-17 font-normal text-SemiBlack leading-[150%] break-words">
-                {diaryDetail.content}
+                {diaryDetails.content}
               </p>
             </div>
           </div>
