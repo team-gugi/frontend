@@ -29,6 +29,7 @@ export default function Rank() {
       try {
         const rankingData = await getKboRanking();
         setKboRanking(rankingData);
+        setLoading(false); // 로딩 상태 종료
         console.log('rankingData:', rankingData);
       } catch (error) {
         console.error('KBO 순위 데이터를 가져오는 데 실패했습니다.', error);
