@@ -20,7 +20,7 @@ import SkeletonMatchingCard from './components/SkeletonMatchingCard';
 export default function MateMainPage() {
   const [posts, setPosts] = useState<IMatePost[]>([]);
   const [cursor, setCursor] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const router = useRouter();
   const [isBottomSheetOpen, setBottomSheetOpen] = useState(false);
@@ -191,7 +191,7 @@ export default function MateMainPage() {
             }
           }}
           disabled={loading}
-          className="block mx-auto mt-40 px-136 py-12 border-1 border-Gray bg-White text-Gray text-16 font-normal rounded-lg disabled:opacity-50"
+          className="flex w-[88%] mx-24 items-center justify-center text-center mt-40 px-100 py-12 border-1 border-Gray bg-White text-Gray text-16 font-normal rounded-lg disabled:opacity-50"
         >
           {loading ? '로딩 중...' : '더 많은 매칭 보기'}
         </button>
