@@ -7,6 +7,8 @@ interface IMessage {
 }
 interface IMessageListProps {
   messages: { content: string; sender: string; timestamp: string }[];
+  isLoading: boolean; // 로딩 상태 추가
+  error: string | null; // 에러 상태 추가
 }
 const getCurrentDate = () => {
   const date = new Date();
@@ -19,6 +21,8 @@ const getCurrentDate = () => {
 
 export default function MessageList({
   messages: initialMessages,
+  isLoading,
+  error,
 }: IMessageListProps) {
   // export default function MessageList({ messages }: IMessageListProps) {
   const currentDate = getCurrentDate();
@@ -110,6 +114,25 @@ export default function MessageList({
           />
         )),
       )}
+
+      {isLoading && (
+        <div className="flex flex-col gap-12 items-center py-20 justify-center">
+          <span className="font-normal text-MainColor text-14 animate-bounce">
+            답변 대기중
+          </span>
+
+          <div className="flex flex-row gap-4">
+            <div className="w-10 h-10 rounded-full bg-MainColor animate-bounce"></div>
+            <div className="w-10 h-10 rounded-full bg-MainColor animate-bounce [animation-delay:-.3s]"></div>
+            <div className="w-10 h-10 rounded-full bg-MainColor animate-bounce [animation-delay:-.5s]"></div>
+          </div>
+        </div>
+      )}
+      {/* {error && (
+        <div className=" flex px-40 leading-[140%] text-center white-space: pre-wrap font-normal text-Red">
+          <span>{error}</span>
+        </div>
+      )} */}
       <div ref={messageEndRef}></div>
     </div>
   );
