@@ -183,11 +183,11 @@ export default function Ticket() {
     <>
       <div>
         {/* 여러 일기를 map으로 순회하여 렌더링 */}
-        {diaryDetails.map((diaryDetail) => (
-          <div key={diaryDetail.diaryId}>
+        {diaryDetails.map((diaryDetails) => (
+          <div key={diaryDetails.diaryId}>
             <div className="flex items-center justify-center">
               <Image
-                src={diaryDetail.gameImg}
+                src={diaryDetails.gameImg}
                 width={375}
                 height={375}
                 alt="일기 이미지"
@@ -200,11 +200,11 @@ export default function Ticket() {
               {/* Date & Edit button */}
               <div className="flex justify-between items-center">
                 <span className="text-SemiBlack font-semibold text-20">
-                  {diaryDetail.gameDate}
+                  {diaryDetails.gameDate}
                 </span>
                 <button
                   className="flex justify-end"
-                  onClick={() => handleEditClick(diaryDetail.diaryId)}
+                  onClick={() => handleEditClick(diaryDetails.diaryId)}
                 >
                   <Image
                     src={EditIcon}
@@ -224,18 +224,18 @@ export default function Ticket() {
                   </span>
                   <p className="flex gap-10 items-center">
                     <span className="text-12 font-semibold text-SemiBlack">
-                      {diaryDetail.homeTeam}
+                      {diaryDetails.homeTeam}
                     </span>
                     <span className="text-20 font-bold text-MainColor">
-                      {diaryDetail.homeScore}
+                      {diaryDetails.homeScore}
                     </span>
                   </p>
                   <p className="flex gap-10 items-center">
                     <span className="text-12 font-semibold text-SemiBlack">
-                      {diaryDetail.awayTeam}
+                      {diaryDetails.awayTeam}
                     </span>
                     <span className="text-20 font-bold text-MainColor">
-                      {diaryDetail.awayScore}
+                      {diaryDetails.awayScore}
                     </span>
                   </p>
                 </div>
