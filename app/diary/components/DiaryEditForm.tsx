@@ -212,13 +212,20 @@ export default function DiaryEditForm({
           사진 첨부
         </label>
         <input
+          id="picture"
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange}
+          className="flex h-30 w-full rounded-md border border-input bg-white px-3 py-2 text-sm text-gray-400 file:border-0 file:bg-transparent file:text-gray-600 file:text-sm file:font-medium"
+        />
+        {/* <input
           required
           id="image-upload"
           type="file"
           accept="image/*"
           onChange={handleImageChange}
           className=" text-white px-4 py-2 rounded-lg transition-colors"
-        />
+        /> */}
         {formState.gameImg ? (
           <div className="mt-4">
             <img

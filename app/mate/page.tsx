@@ -156,7 +156,7 @@ export default function MateMainPage() {
 
       <Navigation />
       <button
-        className="fixed bottom-68 right-18 w-48 h-48 bg-Gray drop-shadow-md rounded-full flex items-center justify-center z-10 "
+        className="fixed bottom-68 right-18 w-48 h-48 bg-Gray drop-shadow-md rounded-full flex items-center justify-center z-10 animate-bounce"
         onClick={() => router.push('/mate/post')}
       >
         <Image src={PlusIcon} alt="추가 버튼" width={20} height={20} />
