@@ -16,14 +16,8 @@ export default function MateForm() {
   const openBottomSheet = () => setBottomSheetOpen(true);
   const closeBottomSheet = () => setBottomSheetOpen(false);
 
-  // const [selectedOptions, setSelectedOptions] = useState({
-  //   gender: null,
-  //   age: null,
-  //   date: null,
-  //   team: null,
-  //   member: 1,
-  //   stadium: null,
-  // });
+  const [errorMessage, setErrorMessage] = useState(''); // 에러 메시지 상태
+
   const [selectedOptions, setSelectedOptions] = useState({
     gender: '',
     age: '',
