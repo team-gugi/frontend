@@ -109,11 +109,11 @@ export default function TabContent({
       );
     case '직관일자':
       return (
-        <div className="flex flex-col gap-20 px-8">
+        <div className="flex flex-col gap-20 px-8 ">
           <p className="text-16 font-semibold text-SemiBlack">
             🤔 언제 갈까요?
           </p>
-          <div className="flex justify-center">
+          <div className="flex justify-center items-center pb-60">
             <Calendar
               onChange={handleDateChange}
               value={selectedDate}
