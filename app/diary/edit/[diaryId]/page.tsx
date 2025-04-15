@@ -2,6 +2,9 @@
 import Header from '@/components/Header';
 import Navigation from '@/components/Navigation';
 import PageTitle from '@/components/PageTitle';
+
+import CheckIcon from '../../../public/icons/Circlecheck.svg';
+
 import { fetchDiaryDetails } from '@/lib/api/diaryDetailsApi';
 import { diaryDetailsAtom } from '@/recoil/diary/diaryDetailsAtom';
 import {
@@ -14,6 +17,8 @@ import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import DiaryForm from '../../components/DiaryForm';
 import { updateDiaryDetails } from '@/lib/api/updateDiaryApi';
+import router from 'next/navigation';
+import Image from 'next/image';
 
 interface IDiaryDetails {
   gameDate: string;
@@ -31,7 +36,9 @@ export default function DiaryEditPage() {
   const [diaryDetails, setDiaryDetails] = useState<IDiaryDetails | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  // const router = useRouter();
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태
+
+  const router = useRouter();
   // const { diaryId } = router.query;
   const { diaryId } = useParams();
 
@@ -71,6 +78,12 @@ export default function DiaryEditPage() {
 
       await updateDiaryDetails(updatedData); // 수정 API 호출
 
+      setIsModalOpen(true); // 모달 열기
+      setTimeout(() => {
+        setIsModalOpen(false); // 모달 닫기
+        router.push('/diary'); // /diary 페이지로 이동
+      }, 20000);
+
       // router.push('/diary');
     } catch (err) {
       console.log('수정 실패');
@@ -97,6 +110,19 @@ export default function DiaryEditPage() {
         <div>Loading...</div> // 데이터가 없을 경우 대체 UI 표시
       )}
       <Navigation />
+      {isModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-SemiBlack bg-opacity-50">
+          <div className="flex flex-col items-center justify-center gap-12 bg-BlockColor px-30 py-45 rounded-xl shadow-lg">
+            <Image src={CheckIcon} alt="check icon" width={20} height={20} />
+            <p className="text-18 font-extralight text-SemiBlack">
+              <span className="text-MainColor font-extralight text-18">
+                일기 수정
+              </span>
+              이 완료되었습니다.
+            </p>
+          </div>
+        </div>
+      )}
     </>
   );
 }
