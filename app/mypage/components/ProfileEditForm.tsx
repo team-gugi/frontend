@@ -2,11 +2,19 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation'; // useRouter를 임포트
+
+import CheckIcon from '../../public/icons/Circlecheck.svg';
+import ErrorIcon from '../../public/icons/Circleerror.svg';
 
 import { fetchUserProfile, IUserProfile } from '@/lib/api/fetchUserProfile';
 import { updateUserProfile } from '@/lib/api/updateUserProfile';
 
 export default function ProfileEditForm() {
+  const router = useRouter();
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
+
   const [profile, setProfile] = useState<IUserProfile>({
     nickName: '',
     profileImg: '',
@@ -42,10 +50,15 @@ export default function ProfileEditForm() {
       });
 
       alert('프로필이 성공적으로 수정되었습니다!');
+      setShowSuccessModal(true); // 프로필 수정 성공 시 모달 표시
       setProfile(updatedProfile); // 성공한 데이터로 상태 업데이트
+      setTimeout(() => {
+        router.push('/mypage');
+      }, 1500);
     } catch (error) {
       console.error(error);
       alert('프로필 수정에 실패했습니다.');
+      setShowErrorModal(true); // 프로필 수정 실패 시 실패 모달 표시
     }
   };
 
@@ -145,6 +158,32 @@ export default function ProfileEditForm() {
           수정 완료
         </button>
       </form>
+      {showSuccessModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-SemiBlack bg-opacity-50">
+          <div className="flex flex-col items-center justify-center gap-12 bg-BlockColor px-30 py-45 rounded-xl shadow-lg">
+            <Image src={CheckIcon} alt="check icon" width={20} height={20} />
+            <p className="text-18 font-extralight text-SemiBlack">
+              <span className="text-MainColor font-extralight text-18">
+                성공적으로 프로필 수정
+              </span>
+              이 완료되었습니다.
+            </p>
+          </div>
+        </div>
+      )}
+
+      {showErrorModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-SemiBlack bg-opacity-50">
+          <div className="flex flex-col items-center justify-center gap-12 bg-BlockColor px-30 py-45 rounded-xl shadow-lg">
+            <Image src={ErrorIcon} alt="check icon" width={20} height={20} />
+            <p className="text-18 font-extralight text-SemiBlack">
+              프로필 수정에
+              <span className="text-Red font-extralight text-18">실패</span>
+              했습니다. 다시 시도해주세요.
+            </p>
+          </div>
+        </div>
+      )}
     </>
   );
 }
