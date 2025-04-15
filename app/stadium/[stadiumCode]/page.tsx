@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Header from '@/components/Header';
 import Navigation from '@/components/Navigation';
+import Error from '../components/Error';
 
 import LocationIcon from '../../public/icons/Location.svg';
 import LocationWhiteIcon from '../../public/icons/Locaation_white.svg';
@@ -120,12 +121,13 @@ export default async function StadiumPage({
       </>
     );
   } catch (error) {
-    return (
-      <div>
-        {error instanceof Error
-          ? error.message
-          : '구장 정보를 불러오는 데 실패했습니다.'}
-      </div>
-    );
+    return <Error errorMessage="구장 정보를 불러오지 못했습니다." />;
+    // return (
+    //   <div>
+    //     {error instanceof Error
+    //       ? error.message
+    //       : '구장 정보를 불러오는 데 실패했습니다.'}
+    //   </div>
+    // );
   }
 }
