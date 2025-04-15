@@ -174,7 +174,31 @@ export default function MateMainPage() {
           {loading ? '로딩 중...' : '더 보기'}
         </button>
       )} */}
-      {hasMore && (
+      <div className="flex items-center justify-center ">
+        {hasMore && (
+          <button
+            onClick={() => {
+              if (
+                !selectedOptions.gender &&
+                !selectedOptions.age &&
+                !selectedOptions.date &&
+                !selectedOptions.team &&
+                selectedOptions.member === 1 &&
+                !selectedOptions.stadium
+              ) {
+                loadLatestPosts(); // 필터 옵션이 기본값일 때
+              } else {
+                loadFilteredPosts(); // 필터 옵션이 적용되었을 때
+              }
+            }}
+            disabled={loading}
+            className="flex justify-center text-center mt-40 px-116 py-10 border-1 border-Gray bg-White text-Gray text-16 font-normal rounded-xl disabled:opacity-50"
+          >
+            {loading ? '로딩 중...' : '더 많은 매칭 보기'}
+          </button>
+        )}
+      </div>
+      {/* {hasMore && (
         <button
           onClick={() => {
             if (
@@ -191,11 +215,11 @@ export default function MateMainPage() {
             }
           }}
           disabled={loading}
-          className="flex w-[88%] mx-24 items-center justify-center text-center mt-40 px-100 py-12 border-1 border-Gray bg-White text-Gray text-16 font-normal rounded-lg disabled:opacity-50"
+          className="flex mx-24 justify-center text-center mt-40 px-100 py-10 border-1 border-Gray bg-White text-Gray text-16 font-normal rounded-xl disabled:opacity-50"
         >
           {loading ? '로딩 중...' : '더 많은 매칭 보기'}
         </button>
-      )}
+      )} */}
     </>
   );
 }
