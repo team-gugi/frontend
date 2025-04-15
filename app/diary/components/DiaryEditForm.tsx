@@ -92,7 +92,7 @@ export default function DiaryEditForm({
           type="date"
           value={formState.gameDate}
           onChange={handleChange}
-          className="border-1 border-solid border-Gray bg-SemiWhite rounded-xl px-15 py-8 focus:outline-none focus:border-MainColor"
+          className="border-1 border-solid border-Gray bg-transparent rounded-xl px-15 py-8 focus:outline-none focus:border-MainColor"
         />
       </div>
 
@@ -107,7 +107,7 @@ export default function DiaryEditForm({
           id="gameStadium"
           value={formState.gameStadium}
           onChange={handleChange}
-          className="border-1 border-solid border-Gray bg-SemiWhite rounded-xl px-14 py-8 focus:outline-none focus:border-MainColor"
+          className="border-1 border-solid border-Gray bg-transparent rounded-xl px-14 py-8 focus:outline-none focus:border-MainColor"
         >
           <option>구장을 선택하세요</option>
           <option value="고척 스카이돔">고척 스카이돔</option>
@@ -140,7 +140,7 @@ export default function DiaryEditForm({
             id="homeTeam"
             value={formState.homeTeam}
             onChange={handleChange}
-            className="border-1 border-solid border-Gray bg-SemiWhite rounded-xl px-14 py-8 focus:outline-none focus:border-MainColor w-full"
+            className="border-1 border-solid border-Gray bg-transparent rounded-xl px-14 py-8 focus:outline-none focus:border-MainColor w-full"
           >
             <option className="text-Gray">응원팀</option>
             <option value="키움 히어로즈">키움 히어로즈</option>
@@ -159,7 +159,7 @@ export default function DiaryEditForm({
             id="awayTeam"
             value={formState.awayTeam}
             onChange={handleChange}
-            className="border-1 border-solid border-Gray  bg-SemiWhite rounded-xl px-14 py-8 focus:outline-none focus:border-MainColor w-full "
+            className="border-1 border-solid border-Gray  bg-transparent rounded-xl px-14 py-8 focus:outline-none focus:border-MainColor w-full "
           >
             <option className="text-Gray">상대팀</option>
             <option value="키움 히어로즈">키움 히어로즈</option>
