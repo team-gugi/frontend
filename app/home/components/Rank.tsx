@@ -20,11 +20,20 @@ const SkeletonRow = () => (
   </tr>
 );
 
+const formatDate = (date: Date): string => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}.${month}.${day}`;
+};
+
 export default function Rank() {
   const [kboRanking, setKboRanking] = useRecoilState(kboRankingAtom);
   const [loading, setLoading] = useState(true);
+  const [currentDate, setCurrentDate] = useState('');
 
   useEffect(() => {
+    setCurrentDate(formatDate(new Date())); // 현재 날짜 설정
     const fetchRanking = async () => {
       try {
         const rankingData = await getKboRanking();
@@ -44,7 +53,7 @@ export default function Rank() {
       <div className="flex flex-row gap-4 items-center">
         <span className="font-normal text-14 text-Gray">KBO 실시간 순위</span>
         <span className="font-normal text-12 text-LightGray text-self-end ">
-          (2025.XX.XX 기준)
+          ({currentDate} 기준)
         </span>
       </div>
 
