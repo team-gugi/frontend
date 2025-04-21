@@ -4,7 +4,7 @@ interface IChatbotResponse {
 
 export async function sendChatMessage(message: string): Promise<string> {
   console.log('user message : ', message);
-  const response = await fetch(`/chat`, {
+  const response = await fetch(`https://chat.team-gugi.site/chat`, {
     // const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/chat`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

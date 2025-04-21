@@ -73,6 +73,9 @@ export default async function StadiumPage({
             <span className="flex px-10 font-light text-12 text-DarkGray items-center">
               각 구장의 대표 먹거리를 찾아보세요!
             </span>
+            <span className="flex px-10 font-light text-12 text-DarkGray items-center">
+              (이미지는 '자리어때' 에서 제공하는 사진을 사용하였습니다)
+            </span>
           </div>
 
           <div className="w-full grid grid-cols-2 gap-4">
