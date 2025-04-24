@@ -85,15 +85,18 @@ export default function ScheduleCalendar() {
       <span className="flex px-24 items-start text-Gray font-medium text-14">
         경기 일정
       </span>
-      <Calendar
-        locale="ko-KR" // 한국어 locale 설정
-        calendarType="gregory" //일요일부터 시작
-        tileContent={({ date }) => <>{getLogoForDate(date)}</>} // 각 날짜에 로고 표시
-        formatDay={(locale, date) => moment(date).format('DD')} //'일' 생략
-        next2Label={null} // +1년 & +10년 이동 버튼 숨기기
-        prev2Label={null} // -1년 & -10년 이동 버튼 숨기기
-        onClickDay={handleDateClick}
-      />
+      <div className="flex justify-center">
+        <Calendar
+          locale="ko-KR" // 한국어 locale 설정
+          calendarType="gregory" //일요일부터 시작
+          tileContent={({ date }) => <>{getLogoForDate(date)}</>} // 각 날짜에 로고 표시
+          formatDay={(locale, date) => moment(date).format('DD')} //'일' 생략
+          next2Label={null} // +1년 & +10년 이동 버튼 숨기기
+          prev2Label={null} // -1년 & -10년 이동 버튼 숨기기
+          onClickDay={handleDateClick}
+        />
+      </div>
+
       {isModalOpen && (
         <ScheduleModal onClose={() => setIsModalOpen(false)} /> // 모달 렌더링
       )}
