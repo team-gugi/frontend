@@ -1,3 +1,27 @@
+// import { atom } from 'recoil';
+
+// interface IProfileState {
+//   nickName: string;
+//   profileImg: File | null;
+//   introduction: string;
+//   team: string;
+
+//   accessToken: string | null;
+//   refreshToken: string | null;
+// }
+// export const profileAtom = atom<IProfileState>({
+//   key: 'profileAtom',
+//   default: {
+//     nickName: '',
+//     profileImg: null,
+//     introduction: '',
+//     team: '',
+
+//     accessToken: null,
+//     refreshToken: null,
+//   },
+// });
+
 import { atom } from 'recoil';
 
 interface IProfileState {
@@ -5,6 +29,9 @@ interface IProfileState {
   profileImg: File | null;
   introduction: string;
   team: string;
+
+  age: string;
+  sex: string;
 
   accessToken: string | null;
   refreshToken: string | null;
@@ -16,6 +43,9 @@ export const profileAtom = atom<IProfileState>({
     profileImg: null,
     introduction: '',
     team: '',
+
+    age: '',
+    sex: '',
 
     accessToken: null,
     refreshToken: null,
