@@ -91,7 +91,7 @@ export default function ScheduleCalendar() {
           calendarType="gregory" //일요일부터 시작
           tileContent={({ date }) => <>{getLogoForDate(date)}</>} // 각 날짜에 로고 표시
           formatDay={(locale, date) => moment(date).format('DD')} //'일' 생략
-          next2Label={null} // +1년 & +10년 이동 버튼 숨기기
+          next2Label={null} // +1년 & +10년 이동 버튼 숨기s기
           prev2Label={null} // -1년 & -10년 이동 버튼 숨기기
           onClickDay={handleDateClick}
         />
