@@ -144,6 +144,7 @@ import Image from 'next/image';
 import Header from '@/components/Header';
 import Navigation from '@/components/Navigation';
 import Error from '../components/Error';
+import StadiumSkeleton from '../components/Skeleton';
 
 import LocationIcon from '../../public/icons/Location.svg';
 import LocationWhiteIcon from '../../public/icons/Locaation_white.svg';
@@ -191,7 +192,13 @@ export default function StadiumPage({
   }
 
   if (!stadiumData) {
-    return <div>로딩 중...</div>;
+    return (
+      <>
+        <Header />
+        <StadiumSkeleton />
+        <Navigation />
+      </>
+    );
   }
 
   return (
