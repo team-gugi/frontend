@@ -46,14 +46,19 @@ export default function TabContent({
     });
   };
 
-  const [selectedDate, setSelectedDate] = useState<SelectedDate>(new Date());
-  // 날짜가 변경될 때마다 필터를 업데이트
+  // const [selectedDate, setSelectedDate] = useState<SelectedDate>(new Date());
+  // // 날짜가 변경될 때마다 필터를 업데이트
+  // const handleDateChange = (date: SelectedDate) => {
+  //   const formattedDate =
+  //     date && !Array.isArray(date) ? moment(date).format('YYYY-MM-DD') : null;
+  //   if (formattedDate) {
+  //     onUpdateFilter('date', formattedDate);
+  //   }
+  // };
   const handleDateChange = (date: SelectedDate) => {
     const formattedDate =
       date && !Array.isArray(date) ? moment(date).format('YYYY-MM-DD') : null;
-    if (formattedDate) {
-      onUpdateFilter('date', formattedDate);
-    }
+    onUpdateFilter('date', formattedDate); // 선택된 날짜를 상위 컴포넌트에 업데이트
   };
 
   switch (activeTab) {
@@ -116,7 +121,8 @@ export default function TabContent({
           <div className="flex justify-center items-center mb-20 pb-60">
             <Calendar
               onChange={handleDateChange}
-              value={selectedDate}
+              // value={selectedDate}
+              value={filters.date ? new Date(filters.date) : null} // 선택된 날짜를 표시
               locale="ko-KR"
               calendarType="gregory"
               view="month"

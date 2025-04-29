@@ -50,7 +50,7 @@ export default function WinningRateBanner() {
           </p>
           <p className="font-extralight text-DarkGray  text-14">
             (총 {totalDiaryCount} 경기 중 {totalWins}승 {totalLoses}패{' '}
-            {totalDraws}패)
+            {totalDraws}무)
           </p>
         </div>
         <Image src={CharacterIcon} alt="승요 캐릭터" width={100} height={100} />

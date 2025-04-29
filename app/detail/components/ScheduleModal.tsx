@@ -81,7 +81,9 @@ export default function ScheduleModal({ onClose }: { onClose: () => void }) {
                   </div>
 
                   {game.cancellationReason && (
-                    <p>취소 사유: {game.cancellationReason}</p>
+                    <p className="text-18 font-extrabold text-MainColor ">
+                      취소 사유 : {game.cancellationReason}
+                    </p>
                   )}
                 </div>
               ))
