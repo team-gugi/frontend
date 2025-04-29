@@ -5,6 +5,8 @@ export interface IWinRateData {
   winRate: string;
   totalDiaryCount: number;
   totalWins: number;
+  totalLoses: number;
+  totalDraws: number;
 }
 
 export const winRateAtom = atom<IWinRateData | null>({

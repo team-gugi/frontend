@@ -23,7 +23,14 @@ export default function WinningRateBanner() {
     );
   }
 
-  const { nickName, winRate, totalDiaryCount, totalWins } = winRateData;
+  const {
+    nickName,
+    winRate,
+    totalDiaryCount,
+    totalWins,
+    totalLoses,
+    totalDraws,
+  } = winRateData;
   const formattedWinRate = Math.floor(parseFloat(winRate));
 
   return (
@@ -41,8 +48,9 @@ export default function WinningRateBanner() {
             </span>{' '}
             입니다.
           </p>
-          <p className="font-extralight text-Gray text-12">
-            (총 {totalDiaryCount} 경기 중 {totalWins}회 승리)
+          <p className="font-extralight text-DarkGray  text-14">
+            (총 {totalDiaryCount} 경기 중 {totalWins}승 {totalLoses}패{' '}
+            {totalDraws}패)
           </p>
         </div>
         <Image src={CharacterIcon} alt="승요 캐릭터" width={100} height={100} />
