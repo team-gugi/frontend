@@ -1,8 +1,12 @@
 'use client';
+
+import Image from 'next/image';
+
 import { profileAtom } from '@/recoil/profileAtom';
 import React, { use, useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 
+import ConfirmIcon from '../../public/icons/Confrim.svg';
 interface ProfileStep1Props {
   onNext: () => void;
 }
@@ -16,10 +20,30 @@ const ProfileStep1: React.FC<ProfileStep1Props> = ({ onNext }) => {
 
   const [profile, setProfile] = useRecoilState(profileAtom);
 
-  const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const [isNicknameValid, setIsNicknameValid] = useState<boolean | null>(null);
+
+  const handleNicknameChange = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     const value = e.target.value;
     if (value.length <= 15) setNickName(value);
     setProfile((prev) => ({ ...prev, nickName: value }));
+
+    if (value.length > 2) {
+      const isValid = await validateNickname(value);
+      setIsNicknameValid(isValid);
+    } else {
+      setIsNicknameValid(false);
+      // setIsNicknameValid(null);
+    }
+  };
+
+  const validateNickname = async (nickname: string): Promise<boolean> => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(nickname !== '이미사용중인닉네임');
+      }, 500);
+    });
   };
 
   const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -96,7 +120,7 @@ const ProfileStep1: React.FC<ProfileStep1Props> = ({ onNext }) => {
         </div>
 
         {/* 닉네임 입력창 */}
-        <div className="w-full flex items-center justify-center">
+        <div className="w-full flex flex-col items-center justify-center">
           <input
             type="text"
             value={nickName}
@@ -104,6 +128,25 @@ const ProfileStep1: React.FC<ProfileStep1Props> = ({ onNext }) => {
             onChange={handleNicknameChange}
             className="w-[236px] px-10 py-10 text-17 text-center font-normal border-b-1 border-Gray outline-none placeholder:text-Gray focus:border-MainColor text-MainColor"
           />
+
+          {isNicknameValid === true && (
+            <div className="flex flex-row mt-16 gap-10">
+              <Image
+                src={ConfirmIcon}
+                alt="닉네임 사용 가능 아이콘"
+                width={18}
+                height={18}
+              />
+              <p className="text-Gray text-16 font-normal ">
+                사용 가능한 닉네임입니다
+              </p>
+            </div>
+          )}
+          {/* {isNicknameValid === false && (
+            <p className="text-Red text-16 font-normal mt-16">
+              사용 불가한 닉네임입니다
+            </p>
+          )} */}
         </div>
       </div>
 

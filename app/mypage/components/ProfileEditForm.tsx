@@ -103,7 +103,7 @@ export default function ProfileEditForm() {
             onChange={(e) =>
               setProfile({ ...profile, nickName: e.target.value })
             }
-            className="w-[236px] px-10 py-10 text-17 text-center font-normal border-b-1 border-Gray outline-none placeholder:text-Gray focus:border-MainColor text-MainColor"
+            className="w-[236px] px-10 py-10 text-17 text-center font-normal border-b-1 border-Gray bg-transparent outline-none placeholder:text-Gray focus:border-MainColor text-MainColor"
             required
           />
         </div>
