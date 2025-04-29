@@ -222,7 +222,7 @@ export default function StadiumPage({
         </div>
       </section>
 
-      <section className="flex flex-col gap-11 mx-24">
+      <section className="flex flex-col gap-11 mx-24 h-full overflow-y-auto">
         <div className="flex flex-col gap-4">
           <div className="flex flex-row gap-8 items-center">
             <Image src={TriangleIcon} alt="삼각형" width={24} height={24} />
@@ -238,7 +238,7 @@ export default function StadiumPage({
           </span>
         </div>
 
-        <div className="w-full grid grid-cols-2 gap-4">
+        <div className="w-full grid grid-cols-2 gap-4 max-h-[432px] overflow-y-auto scroll-mb-40">
           {stadiumData.foodList.map((food, index) => (
             <div
               key={index}
@@ -252,12 +252,12 @@ export default function StadiumPage({
                 alt={`${food.foodName} 이미지`}
                 layout="responsive"
                 width={160}
-                height={120}
+                height={160}
                 className="object-cover"
               />
               <div className="absolute left-10 bottom-10 flex justify-center items-center rounded-xl">
                 <div className="flex flex-col text-White gap-6 ">
-                  <p className="font-bold text-18">{food.foodName}</p>
+                  <p className="font-semibold text-18">{food.foodName}</p>
                   <div className="flex flex-row items-center gap-2">
                     <Image
                       src={LocationWhiteIcon}

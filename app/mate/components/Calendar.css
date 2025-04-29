@@ -153,7 +153,10 @@
   /* background: #2aa971; */
   /* color: #ffffff;
   border-radius: 50px; */
-  color: #2aa971;
+  /* color: #2aa971; */
+  background: #2aa971;
+  color: #ffffff;
+  border-radius: 50px;
 }
 
 .react-calendar__tile--active:enabled:hover,
