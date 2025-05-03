@@ -34,7 +34,3 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-<<<<<<< HEAD
-.next.zip
-=======
->>>>>>> 89b9b769507f1bf2d22174abf5d426c69ed0f215
