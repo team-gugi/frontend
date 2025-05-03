@@ -14,6 +14,8 @@ const registerProfile = async (registerToken: string, profile: any) => {
       nickName: profile.nickName,
       introduction: profile.introduction,
       team: profile.team,
+      age: profile.age,
+      sex: profile.sex,
     }),
   );
 
