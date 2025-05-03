@@ -34,6 +34,7 @@ export default function TextInput({
           placeholder={placeholder}
           className="w-full py-7 placeholder-opacity-20 border-b border-lightGray placeholder:text-opacity-70 text-18 font-light resize-none"
           style={{ height: '93.14px', lineHeight: '1.3' }}
+          required
         />
       ) : (
         <input
@@ -43,6 +44,7 @@ export default function TextInput({
           onChange={onChange}
           placeholder={placeholder}
           className="w-full py-7 placeholder-opacity-20 border-b border-lightGray placeholder:text-opacity-70 text-18 font-light"
+          required
         />
       )}
     </div>

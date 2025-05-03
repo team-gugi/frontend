@@ -1,6 +1,9 @@
 .react-calendar {
   /* min-width: 343px;
   max-width: 100%; */
+  width: 100%; /* 부모의 크기를 따릅니다 */
+  max-width: 600px; /* 최대 크기 제한 */
+  min-width: 343px; /* 최소 크기 제한 */
   margin-left: 10px;
   margin-right: 10px;
   background: none;

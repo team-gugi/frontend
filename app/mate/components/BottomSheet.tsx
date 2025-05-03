@@ -70,13 +70,13 @@ export default function BottomSheet({ onClose, onApply }: IBottomSheetProps) {
   return (
     <>
       <div
-        className="fixed inset-0 z-50 flex items-end"
+        className="fixed inset-0 z-50 flex items-end justify-center"
         onClick={handleOverlayClick}
       >
         {/* 어둡게 처리된 배경 */}
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div
-          className="flex flex-col fixed min-h-[523px] bottom-0 left-0 w-full px-24 pt-20 pb-40 gap-23 rounded-tl-2xl rounded-tr-2xl bg-White"
+          className="flex flex-col fixed min-h-[523px] bottom-0 transform -translate-x-1/2 left-1/2 w-full px-24 pt-20 pb-40 gap-23 rounded-tl-2xl rounded-tr-2xl bg-White min-w-[320px] max-w-[600px] mx-auto"
           onClick={handleSheetClick}
         >
           <div
