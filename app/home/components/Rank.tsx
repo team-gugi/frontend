@@ -104,8 +104,12 @@ export default function Rank() {
                   <TableBodyText text={team.win.toString()} />
                   <TableBodyText text={team.lose.toString()} />
                   <TableBodyText text={team.draw.toString()} />
+<<<<<<< HEAD
                   {/* <TableBodyText text={team.winningRate.toFixed()} /> */}
                   <TableBodyText text={team.winningRate.toString()} />
+=======
+                  <TableBodyText text={team.winningRate.toFixed(3)} />
+>>>>>>> 89b9b769507f1bf2d22174abf5d426c69ed0f215
                   <TableBodyText text={team.difference.toString()} />
                 </tr>
               ))}
