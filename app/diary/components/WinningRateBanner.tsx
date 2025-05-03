@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 
 import CharacterIcon from '../../public/icons/직관일기임시캐릭터.png';
+import CryingIcon from '../../public/icons/Crying.svg';
+import SmileIcon from '../../public/icons/Smiling.svg';
 import { useRecoilValue } from 'recoil';
 import { winRateAtom } from '@/recoil/diary/winRateAtom';
 import LoadingSpinner from '@/components/LoadingSpinner';
@@ -18,7 +20,7 @@ export default function WinningRateBanner() {
             승률 정보 로딩중...
           </span>
         </div>
-        <Image src={CharacterIcon} alt="승요 캐릭터" width={100} height={100} />
+        <Image src={SmileIcon} alt="캐릭터" width={100} height={100} />
       </div>
     );
   }
@@ -32,6 +34,8 @@ export default function WinningRateBanner() {
     totalDraws,
   } = winRateData;
   const formattedWinRate = Math.floor(parseFloat(winRate));
+
+  const Icon = formattedWinRate > 50 ? SmileIcon : CryingIcon; // 승률에 따른 아이콘 선택
 
   return (
     <>
@@ -53,7 +57,8 @@ export default function WinningRateBanner() {
             {totalDraws}무)
           </p>
         </div>
-        <Image src={CharacterIcon} alt="승요 캐릭터" width={100} height={100} />
+        <Image src={Icon} alt="승요 캐릭터" width={100} height={100} />
+        {/* <Image src={CharacterIcon} alt="승요 캐릭터" width={100} height={100} /> */}
       </div>
     </>
   );

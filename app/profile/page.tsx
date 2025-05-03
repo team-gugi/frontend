@@ -52,6 +52,7 @@ export default function ProfilePage() {
     setStep((prevStep) => Math.max(prevStep - 1, 1));
   };
 
+  console.log('Profile:', profile);
   return (
     <>
       <div className="flex flex-col items-center justify-center min-h-screen p-4">
