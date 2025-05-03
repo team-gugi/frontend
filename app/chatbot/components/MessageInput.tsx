@@ -40,7 +40,7 @@ export default function Message({
   // };
 
   return (
-    <div className="flex fixed bottom-58 left-0 px-13 py-8 w-full items-center gap-10  ">
+    <div className="flex fixed bottom-58 px-13 py-8 w-full min-w-[375px] max-w-[600px] items-center gap-10   ">
       <input
         type="text"
         value={message}

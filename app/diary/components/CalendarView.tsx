@@ -50,7 +50,7 @@ export default function CalendarView() {
   };
 
   return (
-    <div className="flex justify-center ">
+    <div className="flex justify-center min-w-[375px] max-w-[600px] mx-auto ">
       <Calendar
         locale="ko-KR" // 한국어 locale 설정
         calendarType="gregory" //일요일부터 시작

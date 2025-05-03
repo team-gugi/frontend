@@ -29,7 +29,7 @@ export default function Navigation() {
         boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.05)',
       }}
     >
-      <div className="flex">
+      <div className="flex min-w-[375px] max-w-[600px] mx-auto">
         <Link
           href="/mate"
           className="flex flex-col items-center justify-center w-[20%] py-10 gap-6 "

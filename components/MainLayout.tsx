@@ -9,7 +9,9 @@ export default function MainLayout({
 }) {
   return (
     <RecoilRoot>
-      <div className="min-w-375 max-w-600 mx-auto">{children}</div>
+      <div className="min-w-[375px] max-w-[600px] mx-auto bg-white min-h-screen">
+        {children}
+      </div>
     </RecoilRoot>
   );
 }
