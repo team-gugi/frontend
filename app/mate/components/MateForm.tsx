@@ -7,6 +7,7 @@ import SubmitButton from './SubmitButton';
 import { useState } from 'react';
 import BottomSheet from './BottomSheet';
 import { createMatePost } from '@/lib/api/postMateApi';
+import { useRouter } from 'next/navigation';
 
 export default function MateForm() {
   const { formState, handleInputChange, handleOptionSelect, resetForm } =
@@ -17,6 +18,8 @@ export default function MateForm() {
   const closeBottomSheet = () => setBottomSheetOpen(false);
 
   const [errorMessage, setErrorMessage] = useState(''); // 에러 메시지 상태
+
+  const router = useRouter();
 
   const [selectedOptions, setSelectedOptions] = useState({
     gender: '',
@@ -54,7 +57,7 @@ export default function MateForm() {
           member: 1,
           stadium: '',
         }); // 선택된 옵션 초기화
-      } else {
+        router.push('/mate');
         console.log('직관메이트 게시물 등록 실패');
         alert('게시물 등록에 실패했습니다.');
       }
