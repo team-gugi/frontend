@@ -51,7 +51,7 @@ export default function Tabs() {
       <div className="flex items-center justify-center pt-20 pb-80">
         <button
           onClick={handleClick}
-          className="flex items-center justify-center rounded-xl mx-40 px-74 py-16 bg-MainColor text-White text-18 font-light  w-full sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] min-w-[210px]"
+          className="flex items-center justify-center rounded-xl mx-40  py-16 bg-MainColor text-White text-18 font-light  w-full sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] min-w-[210px]"
         >
           새로운 직관 일기 작성하기
         </button>
