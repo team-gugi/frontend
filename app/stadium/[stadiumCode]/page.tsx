@@ -152,6 +152,12 @@ import HomeIcon from '../../public/icons/Home_full.svg';
 import TriangleIcon from '../../public/icons/Triangle.svg';
 import { getStadiumDetails } from '@/lib/api/stadiumApi';
 
+interface IStadiumInfo {
+  stadiumName: string;
+  stadiumLocation: string;
+  teamName: string;
+}
+
 interface IFood {
   foodName: string;
   foodLocation: string;
@@ -159,11 +165,22 @@ interface IFood {
 }
 
 interface IStadiumDetails {
-  stadiumName: string;
-  stadiumLocation: string;
-  teamName: string;
+  stadiumInfo: IStadiumInfo;
   foodList: IFood[];
 }
+
+// interface IFood {
+//   foodName: string;
+//   foodLocation: string;
+//   foodImg: string;
+// }
+
+// interface IStadiumDetails {
+//   stadiumName: string;
+//   stadiumLocation: string;
+//   teamName: string;
+//   foodList: IFood[];
+// }
 
 export default function StadiumPage({
   params,
@@ -213,18 +230,21 @@ export default function StadiumPage({
             height={18}
           />
           <span className="font-normal text-14 text-Gray">
-            {stadiumData.stadiumLocation}
+            {/* {stadiumData.stadiumLocation} */}
+            {stadiumData.stadiumInfo.stadiumLocation}
           </span>
         </div>
 
         <h1 className="font-bold text-28 text-SemiBlack items-center">
-          {stadiumData.stadiumName}
+          {/* {stadiumData.stadiumName} */}
+          {stadiumData.stadiumInfo.stadiumName}
         </h1>
 
         <div className="flex flex-row gap-6 items-center pl-4">
           <Image src={HomeIcon} alt="홈 아이콘" width={16} height={16} />
           <span className="font-light text-14 text-DarkGray items-center">
-            {stadiumData.teamName}
+            {/* {stadiumData.teamName} */}
+            {stadiumData.stadiumInfo.teamName}
           </span>
         </div>
       </section>
@@ -234,7 +254,8 @@ export default function StadiumPage({
           <div className="flex flex-row gap-8 items-center">
             <Image src={TriangleIcon} alt="삼각형" width={24} height={24} />
             <span className="font-semibold text-18 text-MainColor">
-              {stadiumData.teamName} Best 6
+              {/* {stadiumData.teamName} Best 6 */}
+              {stadiumData.stadiumInfo.teamName} Best 6
             </span>
           </div>
           <span className="flex px-10 font-light text-12 text-DarkGray items-center">
