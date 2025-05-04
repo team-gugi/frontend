@@ -129,6 +129,9 @@ export default function TabContent({
               formatDay={(locale, date) => moment(date).format('DD')}
               next2Label={null}
               prev2Label={null}
+              tileDisabled={({ date }) =>
+                moment(date).isBefore(moment(), 'day')
+              } // 오늘 이전 날짜 비활성화
             />
           </div>
         </div>
