@@ -1,4 +1,6 @@
+import { useRouter } from 'next/navigation';
 export const applyMatch = async (mateId: string) => {
+  const router = useRouter();
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/v1/mate/${mateId}/apply`,
@@ -10,6 +12,11 @@ export const applyMatch = async (mateId: string) => {
         credentials: 'include',
       },
     );
+
+    if (response.status === 404 || response.status === 401) {
+      router.push('/login'); // /login 페이지로 리다이렉트
+      return Promise.reject(new Error(`매칭 신청 실패 - ${response.status}`));
+    }
 
     const data = await response.json();
     return data; // 서버의 응답 반환

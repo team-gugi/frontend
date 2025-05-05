@@ -29,6 +29,7 @@ export default function DiaryPostPage() {
       const response = await postDiaryApi(diaryInfo, gameImg || undefined);
       if (response.isSuccess == true) {
         console.log('일기가 성공적으로 등록되었습니다');
+        setIsSubmitting(false);
 
         // 모달 표시
         setIsModalOpen(true);
@@ -55,6 +56,20 @@ export default function DiaryPostPage() {
         )} */}
         <Navigation />
       </div>
+
+      {/* 로딩 상태일 때 화면 어둡게 */}
+      {isSubmitting && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="flex flex-col items-center gap-4">
+            <div className="flex flex-row gap-4">
+              <div className="w-10 h-10 rounded-full bg-MainColor animate-bounce"></div>
+              <div className="w-10 h-10 rounded-full bg-MainColor animate-bounce [animation-delay:-.3s]"></div>
+              <div className="w-10 h-10 rounded-full bg-MainColor animate-bounce [animation-delay:-.5s]"></div>
+            </div>
+            <p className="text-white">일기를 등록 중입니다...</p>
+          </div>
+        </div>
+      )}
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-SemiBlack bg-opacity-50">
           <div className="flex flex-col items-center justify-center gap-12 bg-BlockColor px-30 py-45 rounded-xl shadow-lg">

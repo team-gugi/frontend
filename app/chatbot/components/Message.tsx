@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Character from '../../public/icons/직관일기임시캐릭터.png';
+import Character from '../../public/icons/avatar.svg';
 interface IMessageProps {
   content: string;
   sender: string; // 보내는 사람 ('user' 또는 'bot')
@@ -62,9 +62,7 @@ export default function Message({
                 height={40}
                 style={{ borderRadius: '50%', border: '1px solid #ccc' }}
               />
-              <span className="font-medium text-14 text-SemiBlack">
-                AI 구기
-              </span>
+              <span className="font-medium text-14 text-SemiBlack">구기</span>
             </div>
           )}
           <div className="flex ml-40 items-end gap-4">

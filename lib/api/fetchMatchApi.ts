@@ -37,6 +37,7 @@ export async function fetchLatestPosts(
   const response = await fetch(url, {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
   });
 
   if (!response.ok) {
@@ -96,6 +97,7 @@ export async function fetchFilteredPosts(
     {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
     },
   );
 
