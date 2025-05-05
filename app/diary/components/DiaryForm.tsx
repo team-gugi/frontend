@@ -28,8 +28,8 @@ export default function DiaryForm({
   const [homeTeam, setHomeTeam] = useState(initialData?.homeTeam || '');
   const [awayTeam, setAwayTeam] = useState(initialData?.awayTeam || '');
 
-  const [homeScore, setHomeScore] = useState(initialData?.homeScore || '');
-  const [awayScore, setAwayScore] = useState(initialData?.awayScore || '');
+  const [homeScore, setHomeScore] = useState(initialData?.homeScore || '0');
+  const [awayScore, setAwayScore] = useState(initialData?.awayScore || '0');
 
   const [content, setContent] = useState(initialData?.content || '');
   const [selectedImage, setSelectedImage] = useState<File | null>(null);

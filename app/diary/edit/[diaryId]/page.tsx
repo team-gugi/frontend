@@ -19,6 +19,7 @@ import DiaryForm from '../../components/DiaryForm';
 import { updateDiaryDetails } from '@/lib/api/updateDiaryApi';
 import router from 'next/navigation';
 import Image from 'next/image';
+import Loading from '../../components/loading';
 
 interface IDiaryDetails {
   gameDate: string;
@@ -82,7 +83,7 @@ export default function DiaryEditPage() {
       setTimeout(() => {
         setIsModalOpen(false); // 모달 닫기
         router.push('/diary'); // /diary 페이지로 이동
-      }, 20000);
+      }, 2000);
 
       // router.push('/diary');
     } catch (err) {
@@ -100,7 +101,7 @@ export default function DiaryEditPage() {
         onSubmit={handleSubmit} // 제출 시 처리할 함수
       />
        */}
-      {diaryDetails ? (
+      {/* {diaryDetails ? (
         <DiaryForm
           buttonText="수정 완료"
           initialData={diaryDetails} // 수정할 일기 데이터
@@ -108,7 +109,19 @@ export default function DiaryEditPage() {
         />
       ) : (
         <div>Loading...</div> // 데이터가 없을 경우 대체 UI 표시
+      )} */}
+      {loading ? (
+        <Loading />
+      ) : diaryDetails ? (
+        <DiaryForm
+          buttonText="수정 완료"
+          initialData={diaryDetails} // 수정할 일기 데이터
+          onSubmit={handleSubmit} // 제출 시 처리할 함수
+        />
+      ) : (
+        <div>Failed to load diary details.</div> // 데이터 로딩 실패 시 메시지
       )}
+
       <Navigation />
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-SemiBlack bg-opacity-50">

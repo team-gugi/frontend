@@ -31,6 +31,17 @@ export default function DiaryEditForm({
   });
 
   // 필드값 변경 처리
+  // const handleChange = (
+  //   e: React.ChangeEvent<
+  //     HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+  //   >,
+  // ) => {
+  //   const { name, value } = e.target;
+  //   setFormState((prevState) => ({
+  //     ...prevState,
+  //     [name]: value, // 동적으로 상태의 값을 갱신
+  //   }));
+  // };
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -39,7 +50,7 @@ export default function DiaryEditForm({
     const { name, value } = e.target;
     setFormState((prevState) => ({
       ...prevState,
-      [name]: value, // 동적으로 상태의 값을 갱신
+      [name]: value, // 항상 문자열로 처리
     }));
   };
 

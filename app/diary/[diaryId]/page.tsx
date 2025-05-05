@@ -7,6 +7,7 @@ import { useRecoilState } from 'recoil';
 import { diaryDetailsAtom } from '@/recoil/diary/diaryDetailsAtom';
 import { useEffect, useState } from 'react';
 import { fetchDiaryDetails } from '@/lib/api/diaryDetailsApi';
+import Loading from '../components/loading';
 
 export default function DiaryDetailPage({
   params,
@@ -37,7 +38,11 @@ export default function DiaryDetailPage({
   }
 
   if (!diaryDetails) {
-    return <div>로딩 중...</div>;
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
   }
 
   return (
