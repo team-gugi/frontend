@@ -25,6 +25,15 @@ export default function MateMainPage() {
   const router = useRouter();
   const [isBottomSheetOpen, setBottomSheetOpen] = useState(false);
 
+  const DEFAULT_OPTIONS = {
+    gender: '',
+    age: '',
+    date: '',
+    team: '',
+    member: 1,
+    stadium: '',
+  };
+
   const [selectedOptions, setSelectedOptions] = useState({
     gender: '',
     age: '',
@@ -80,6 +89,15 @@ export default function MateMainPage() {
   // 필터가 적용된 후 게시물 로드
   const loadFilteredPosts = async () => {
     if (loading || !hasMore) return;
+
+    // 기본값과 비교해 필터링 조건이 있는지 확인
+    const isDefaultFilters =
+      JSON.stringify(selectedOptions) === JSON.stringify(DEFAULT_OPTIONS);
+
+    if (isDefaultFilters) {
+      console.log('기본값 필터 요청을 막았습니다.');
+      return; // 기본값이면 요청 중단
+    }
 
     setLoading(true);
     console.log('selected options : ', selectedOptions);
