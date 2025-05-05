@@ -68,6 +68,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import SpotIcon from '../../public/icons/Spot_MainColor.svg';
 import WinStampIcon from '../../public/icons/win_temp.svg';
+import Avatar from '../../public/icons/avatar.svg';
 import { useRecoilValue } from 'recoil';
 import { diaryAtom, DiaryEntry } from '@/recoil/diary/diaryAtom';
 
@@ -143,6 +144,12 @@ export default function ListView() {
             <div className="flex-shrink-0">
               <div className="w-[100px] h-[100px] bg-LightGray rounded-lg flex items-center justify-center text-Gray">
                 {/* 이미지 없음 */}
+                {/* <Image
+                  src={Avatar}
+                  width={100}
+                  height={100}
+                  alt="구기 캐릭터"
+                /> */}
               </div>
             </div>
           </div>

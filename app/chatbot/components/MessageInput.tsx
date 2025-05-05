@@ -49,7 +49,7 @@ export default function Message({
         disabled={isDisabled || isLoading} // 로딩 중 비활성화
         // onKeyDown={handleKeyDown} // 엔터 키 입력 처리
         placeholder="메시지를 입력하세요"
-        className="w-full rounded-xl px-8 py-12 font-normal text-SemiBlack text-16 placeholder:text-Gray outline-[0.5px] outline-MainColor"
+        className="w-full rounded-xl px-8 py-12 font-normal text-SemiBlack text-16 border-1 border-BlockColor placeholder:text-Gray outline-[0.5px] outline-MainColor"
       />
       <button
         onClick={handleSubmit}

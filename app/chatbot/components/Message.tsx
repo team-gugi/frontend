@@ -60,7 +60,7 @@ export default function Message({
                 alt="챗봇 이미지"
                 width={40}
                 height={40}
-                style={{ borderRadius: '50%', border: '1px solid #ccc' }}
+                // style={{ borderRadius: '50%', border: '1px solid #ccc' }}
               />
               <span className="font-medium text-14 text-SemiBlack">구기</span>
             </div>

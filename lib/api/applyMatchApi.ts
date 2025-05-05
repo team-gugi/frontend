@@ -14,8 +14,7 @@ export const applyMatch = async (mateId: string) => {
     );
 
     if (response.status === 404 || response.status === 401) {
-      router.push('/login'); // /login 페이지로 리다이렉트
-      return Promise.reject(new Error(`매칭 신청 실패 - ${response.status}`));
+      router.push('/login');
     }
 
     const data = await response.json();
