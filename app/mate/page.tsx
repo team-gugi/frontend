@@ -50,12 +50,17 @@ export default function MateMainPage() {
     loadLatestPosts();
   }, []);
 
+  // useEffect(() => {
+  //   if (selectedOptions) {
+  //     console.log('updated selected options on UseEffect : ', selectedOptions);
+  //     loadFilteredPosts(); // selectedOptions가 변경될 때마다 호출
+  //   }
+  // }, [selectedOptions]); // selectedOptions가 변경될 때마다 실행
   useEffect(() => {
-    if (selectedOptions) {
-      console.log('updated selected options on UseEffect : ', selectedOptions);
-      loadFilteredPosts(); // selectedOptions가 변경될 때마다 호출
+    if (cursor === null && selectedOptions !== DEFAULT_OPTIONS) {
+      loadFilteredPosts();
     }
-  }, [selectedOptions]); // selectedOptions가 변경될 때마다 실행
+  }, [cursor, selectedOptions]);
 
   const handleApplyOptions = (filters: any) => {
     console.log('filters on page.tsx : ', filters);
@@ -63,7 +68,7 @@ export default function MateMainPage() {
     setPosts([]); // 이전 게시물 초기화
     setHasMore(true); // 새로운 요청 시 더보기 버튼 활성화
     setCursor(null); // 커서 초기화
-    loadFilteredPosts(); // 필터된 게시물 로드
+    // loadFilteredPosts(); // 필터된 게시물 로드
   };
 
   const loadLatestPosts = async () => {

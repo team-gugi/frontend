@@ -33,7 +33,8 @@ export default function WinningRateBanner() {
     totalLoses,
     totalDraws,
   } = winRateData;
-  const formattedWinRate = Math.floor(parseFloat(winRate));
+  // const formattedWinRate = Math.floor(parseFloat(winRate));
+  const formattedWinRate = parseFloat(winRate);
 
   const Icon = formattedWinRate > 50 ? SmileIcon : CryingIcon; // 승률에 따른 아이콘 선택
 
