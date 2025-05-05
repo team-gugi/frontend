@@ -78,7 +78,7 @@ export default function NotificationModal({
                     className="px-14 py-4 border-solid border-1 border-BlockColor bg-White text-SemiBlack text-12 font-medium whitespace-nowrap"
                     style={{ borderRadius: '30px' }}
                   >
-                    {applicantInfo.age}세
+                    {applicantInfo.age}
                   </div>
                   <div
                     className="px-14 py-4 border-solid border-1 border-BlockColor bg-White text-SemiBlack text-12 font-medium whitespace-nowrap"

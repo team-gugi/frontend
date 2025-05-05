@@ -63,7 +63,7 @@ export default function MatchStatusCard({
           {notification.isOwner ? '방장' : '참여자'}
         </span> */}
         <span
-          className={`absolute -top-8 left-24 z-10 px-10 py-3 rounded-[10px] text-White text-14 font-normal ${
+          className={`absolute -top-8 left-24 z-5 px-10 py-3 rounded-[10px] text-White text-14 font-normal ${
             notification.isOwner ? 'bg-MainColor' : 'bg-Gray'
           }`}
         >
