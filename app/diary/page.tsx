@@ -2,6 +2,8 @@
 import Header from '@/components/Header';
 import Navigation from '@/components/Navigation';
 import Tabs from './components/Tabs';
+
+import { useRouter } from 'next/navigation';
 import { useRecoilState } from 'recoil';
 import { diaryAtom } from '@/recoil/diary/diaryAtom';
 import { useEffect, useState } from 'react';
@@ -15,13 +17,19 @@ export default function DiaryPage() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
+  const router = useRouter();
+
   useEffect(() => {
     const getDiaryList = async () => {
       try {
         const diaryData = await fetchDiaryList();
         setDiaries(diaryData);
-      } catch (error) {
-        setError('일기 데이터를 가져오는데 실패했습니다. 다시 시도해주세요.');
+      } catch (error: any) {
+        if (error.message.includes('401') || error.message.includes('404')) {
+          router.push('/login');
+        } else {
+          setError('일기 데이터를 가져오는데 실패했습니다. 다시 시도해주세요.');
+        }
       }
     };
 
