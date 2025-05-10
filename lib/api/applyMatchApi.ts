@@ -1,6 +1,4 @@
-import { useRouter } from 'next/navigation';
 export const applyMatch = async (mateId: string) => {
-  const router = useRouter();
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/v1/mate/${mateId}/apply`,
@@ -12,10 +10,6 @@ export const applyMatch = async (mateId: string) => {
         credentials: 'include',
       },
     );
-
-    if (response.status === 404 || response.status === 401) {
-      router.push('/login');
-    }
 
     const data = await response.json();
     return data; // 서버의 응답 반환
