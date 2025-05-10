@@ -1,5 +1,3 @@
-import { useRouter } from 'next/navigation';
-
 export interface IUserProfile {
   nickName: string;
   profileImg: string;
@@ -15,7 +13,6 @@ export interface IApiResponse {
 }
 
 export const fetchUserProfile = async (): Promise<IUserProfile> => {
-  const router = useRouter();
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/v1/users/info`,
@@ -24,9 +21,6 @@ export const fetchUserProfile = async (): Promise<IUserProfile> => {
       },
     );
 
-    if (response.status === 404 || response.status === 401) {
-      router.push('/login');
-    }
     const data: IApiResponse = await response.json();
 
     if (data.isSuccess) {

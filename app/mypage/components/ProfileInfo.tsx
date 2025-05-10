@@ -44,15 +44,33 @@ export default function ProfileInfo() {
       try {
         const profileData = await fetchUserProfile();
         setUserProfile(profileData);
-      } catch (error) {
-        console.error(error);
+      } catch (error: any) {
+        console.error(error.message);
+        if (error.message.includes('401') || error.message.includes('404')) {
+          router.push('/login');
+        }
       } finally {
         setLoading(false);
       }
     };
 
     getUserProfile();
-  }, []);
+  }, [router]);
+
+  // useEffect(() => {
+  //   const getUserProfile = async () => {
+  //     try {
+  //       const profileData = await fetchUserProfile();
+  //       setUserProfile(profileData);
+  //     } catch (error) {
+  //       console.error(error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   getUserProfile();
+  // }, []);
 
   if (loading) return <SkeletonProfile />;
   // if (!userProfile) return <p>프로필 조회 실패</p>;
