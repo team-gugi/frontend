@@ -52,7 +52,7 @@ export default function Account() {
   };
   return (
     <>
-      <div className="flex flex-row gap-80 items-center justify-center py-20">
+      <div className="flex flex-row gap-80 items-center justify-center py-20 mb-80">
         <button
           className="flex flex-row gap-16"
           onClick={() => handleOpenModal('logout')}
