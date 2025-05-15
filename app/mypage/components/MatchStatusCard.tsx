@@ -113,7 +113,7 @@ export default function MatchStatusCard({
           {!notification.isOwner && notification.contact && (
             <div className="mt-10">
               <button
-                className="flex px-56 py-10 items-center justify-center bg-MainColor text-White text-16 font-medium rounded-xl"
+                className="flex w-full px-56 py-10 items-center justify-center bg-MainColor text-White text-16 font-medium rounded-xl"
                 onClick={handleModalOpen}
               >
                 모임 방장 연락처 확인하기
@@ -125,7 +125,7 @@ export default function MatchStatusCard({
           {notification.isOwner && (
             <div className="mt-10">
               <button
-                className="flex px-85 py-10 items-center justify-center bg-MainColor text-White text-16 font-medium rounded-xl"
+                className="flex w-full px-85 py-10 items-center justify-center bg-MainColor text-White text-16 font-medium rounded-xl"
                 onClick={handleMatePostEdit}
               >
                 게시물 수정하기
