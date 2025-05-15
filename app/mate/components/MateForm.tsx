@@ -64,6 +64,7 @@ export default function MateForm() {
       }
     } catch (error: any) {
       console.error('API 호출 오류:', error);
+      setIsLoading(false); // 로딩 종료
       alert(error.message || '게시물 등록 중 오류가 발생했습니다.');
     }
   };
