@@ -58,8 +58,6 @@ export default function MateForm() {
           stadium: '',
         }); // 선택된 옵션 초기화
         router.push('/mate');
-        console.log('직관메이트 게시물 등록 실패');
-        alert('게시물 등록에 실패했습니다.');
       }
     } catch (error: any) {
       console.error('API 호출 오류:', error);
