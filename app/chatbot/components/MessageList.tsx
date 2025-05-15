@@ -60,25 +60,13 @@ export default function MessageList({
       }
     }
   };
-  const [hasScrolled, setHasScrolled] = useState(false);
 
+  // 메시지가 추가될 때 스크롤을 하단으로 이동
   useEffect(() => {
-    if (!hasScrolled) {
-      setHasScrolled(true); // 첫 렌더링 이후 플래그를 true로 설정
-      return;
-    }
-
     if (isAtBottom && messageEndRef.current) {
       messageEndRef.current.scrollIntoView({ behavior: 'smooth' });
     }
-  }, [messages, isAtBottom]);
-
-  // // 메시지가 추가될 때 스크롤을 하단으로 이동
-  // useEffect(() => {
-  //   if (isAtBottom && messageEndRef.current) {
-  //     messageEndRef.current.scrollIntoView({ behavior: 'smooth' });
-  //   }
-  // }, [messages, isAtBottom]); // 메시지가 업데이트되거나 isAtBottom이 변경될 때마다 실행
+  }, [messages, isAtBottom]); // 메시지가 업데이트되거나 isAtBottom이 변경될 때마다 실행
 
   // 스크롤 이벤트 추가
   useEffect(() => {
