@@ -54,7 +54,7 @@ const ProfileStep2: React.FC<ProfileStep2Props> = ({ onNext, onBack }) => {
           onChange={handleIntroductionChange}
           placeholder="간단한 소개로 많은 사람들이 당신에 대해 알 수 있게 해주세요! (최대 100자)"
           maxLength={maxLength}
-          className="w-full px-25 py-16 text-14 font-light leading-[1.6] rounded-[10px] bg-SemiWhite border focus:border-MainColor"
+          className="w-full px-25 py-16 text-16 font-light leading-[1.6] rounded-[10px] bg-SemiWhite border focus:border-MainColor"
           rows={5}
         />
 
