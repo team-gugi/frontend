@@ -1,1 +1,1 @@
-![gugi_이미지_최종](https://github.com/user-attachments/assets/34efe0ab-053a-4fc7-adf8-cd676fc24be1)
+![Group 1597880447 (1)](https://github.com/user-attachments/assets/e4c0b278-2c9f-45a1-b1a4-ca543aef180a)
