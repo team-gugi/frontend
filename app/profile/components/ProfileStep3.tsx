@@ -30,6 +30,9 @@ const ProfileStep3: React.FC<ProfileStep3Props> = ({
   const [selectedTeam, setSelectedTeam] = useState<string>('');
   const [profile, setProfile] = useRecoilState(profileAtom);
   const [errorMessage, setErrorMessage] = useState<string>('');
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const router = useRouter();
 
   const handleTeamChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,19 +55,23 @@ const ProfileStep3: React.FC<ProfileStep3Props> = ({
 
   const handleProfileSubmit = async () => {
     if (registerToken) {
+      setIsLoading(true);
       try {
         const success = await registerProfile(registerToken, profile);
 
         // registerProfile이 성공적으로 프로필을 등록했으면 /home으로 리디렉션
         if (success) {
+          setIsLoading(false);
           router.push('/home');
         }
       } catch (error) {
         // 프로필 등록 실패 시 에러 메시지 표시
+        setIsLoading(false);
         setErrorMessage('프로필 등록에 실패했습니다. 다시 시도해주세요.');
       }
     } else {
       setErrorMessage('프로필 등록에 실패했습니다. 다시 시도해주세요.');
+      setIsLoading(false);
       console.log('register token이 없음!');
     }
   };
@@ -107,6 +114,19 @@ const ProfileStep3: React.FC<ProfileStep3Props> = ({
       >
         프로필 설정 완료
       </button>
+
+      {isLoading && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="flex flex-col items-center gap-4">
+            <div className="flex flex-row gap-4">
+              <div className="w-10 h-10 rounded-full bg-MainColor animate-bounce"></div>
+              <div className="w-10 h-10 rounded-full bg-MainColor animate-bounce [animation-delay:-.3s]"></div>
+              <div className="w-10 h-10 rounded-full bg-MainColor animate-bounce [animation-delay:-.5s]"></div>
+            </div>
+            <p className="text-white">프로필 등록 중입니다...</p>
+          </div>
+        </div>
+      )}
 
       {errorMessage && (
         <div className=" text-Red flex items-center py-20">{errorMessage}</div>
