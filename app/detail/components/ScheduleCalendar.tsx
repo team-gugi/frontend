@@ -81,11 +81,11 @@ export default function ScheduleCalendar() {
   console.log('selectedDate', selectedDate);
 
   return (
-    <div className="flex flex-col justify-center pt-40 pb-60 gap-10">
+    <div className="flex flex-col justify-center pt-40 pb-60 gap-10 ">
       <span className="flex px-24 items-start text-Gray font-medium text-14">
         경기 일정
       </span>
-      <div className="flex justify-center">
+      <div className="flex justify-center min-w-[375px] max-w-[600px] mx-auto">
         <Calendar
           locale="ko-KR" // 한국어 locale 설정
           calendarType="gregory" //일요일부터 시작

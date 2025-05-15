@@ -1,6 +1,7 @@
 .react-calendar {
+  width: 100%;
+  max-width: 600px !important;
   min-width: 343px !important;
-  max-width: 100%;
   justify-content: center !important;
   margin-left: 10px !important;
   margin-right: 10px !important;
