@@ -18,12 +18,14 @@ export default function DiaryPostPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태
+  const [isLoading, setIsLoading] = useState(false); // 로딩 상태 추가
 
   const router = useRouter();
 
   const handleSubmit = async (diaryInfo: IDiaryInfo, gameImg: File | null) => {
     setIsSubmitting(true);
     setError('');
+    setIsLoading(true); // 로딩 시작
 
     try {
       const response = await postDiaryApi(diaryInfo, gameImg || undefined);

@@ -18,6 +18,7 @@ export default function MateForm() {
   const closeBottomSheet = () => setBottomSheetOpen(false);
 
   const [errorMessage, setErrorMessage] = useState(''); // 에러 메시지 상태
+  const [isLoading, setIsLoading] = useState(false); // 로딩 상태 추가
 
   const router = useRouter();
 
@@ -42,10 +43,12 @@ export default function MateForm() {
       options: selectedOptions, // 선택된 옵션을 formState에 추가
     };
     console.log(postData);
+    setIsLoading(true); // 로딩 시작
 
     try {
       const response = await createMatePost(postData);
       if (response.isSuccess) {
+        setIsLoading(false); // 로딩 종료
         alert('게시물이 성공적으로 등록되었습니다!');
         console.log('직관메이트 게시물 등록 성공');
         resetForm(); // 폼 상태 초기화
@@ -116,6 +119,18 @@ export default function MateForm() {
           onClose={closeBottomSheet}
           onApply={handleApplyOptions} // 선택한 옵션 반영
         />
+      )}
+      {isLoading && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="flex flex-col items-center gap-4">
+            <div className="flex flex-row gap-4">
+              <div className="w-10 h-10 rounded-full bg-MainColor animate-bounce"></div>
+              <div className="w-10 h-10 rounded-full bg-MainColor animate-bounce [animation-delay:-.3s]"></div>
+              <div className="w-10 h-10 rounded-full bg-MainColor animate-bounce [animation-delay:-.5s]"></div>
+            </div>
+            <p className="text-white">게시물 등록 중입니다...</p>
+          </div>
+        </div>
       )}
     </>
   );
