@@ -116,7 +116,7 @@ export default function ProfileEditForm() {
           <select
             value={profile.team}
             onChange={(e) => setProfile({ ...profile, team: e.target.value })}
-            className="border-1 border-solid border-Gray rounded-xl px-14 py-8 focus:outline-none focus:border-MainColor w-full"
+            className="border-1 border-solid bg-transparent border-Gray rounded-xl px-14 py-8 focus:outline-none focus:border-MainColor w-full"
           >
             {/* <option className="text-Gray">응원팀</option> */}
             <option value="키움 히어로즈">키움 히어로즈</option>
