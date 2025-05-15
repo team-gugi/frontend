@@ -67,7 +67,7 @@ export default function MateForm() {
 
   return (
     <>
-      <div className="flex flex-col px-24 py-14 gap-34 mb-60 max-h-[520px] overflow-y-auto scroll-mb-40">
+      <div className="flex flex-col px-24 py-14 gap-34 mb-60 overflow-y-auto scroll-mb-40">
         <TextInput
           label="제목"
           placeholder="제목을 입력해 주세요."

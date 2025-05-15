@@ -197,7 +197,7 @@ export default function MateMainPage() {
           {loading ? '로딩 중...' : '더 보기'}
         </button>
       )} */}
-      <div className="flex items-center justify-center ">
+      <div className="flex items-center justify-center mb-40">
         {hasMore && (
           <button
             onClick={() => {

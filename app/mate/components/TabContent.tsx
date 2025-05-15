@@ -223,9 +223,7 @@ export default function TabContent({
             <option value="대구 삼성 라이온즈 파크">
               대구 삼성 라이온즈 파크
             </option>
-            <option value="대전 한화생명 이글스파크">
-              대전 한화생명 이글스파크
-            </option>
+            <option value="대전 한화생명 볼파크">대전 한화생명 볼파크</option>
             <option value="부산 사직 야구장">부산 사직 야구장</option>
             <option value="수원 KT 위즈 파크">수원 KT 위즈 파크</option>
             <option value="인천 SSG 랜더스필드">인천 SSG 랜더스필드</option>

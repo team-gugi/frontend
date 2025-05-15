@@ -1,6 +1,7 @@
 'use client';
 
-import React from 'react';
+// import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
@@ -22,12 +23,38 @@ export default function Navigation() {
 
   const isActive = (path: string) => pathname === path;
 
+  const [isHidden, setIsHidden] = useState(false); // 네비게이션 숨김 상태
+  const [lastScrollY, setLastScrollY] = useState(0); // 마지막 스크롤 위치
+
+  // 스크롤 방향 감지 및 네비게이션 숨김/표시 처리
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > lastScrollY && currentScrollY > 50) {
+        setIsHidden(true);
+      } else {
+        setIsHidden(false);
+      }
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [lastScrollY]);
+
   return (
+    // <nav
+    //   className="fixed bottom-0 left-0 w-full bg-White"
+    //   style={{
+    //     boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.05)',
+    //   }}
+    // >
     <nav
-      className="fixed bottom-0 left-0 w-full bg-White"
-      style={{
-        boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.05)',
-      }}
+      className={`fixed bottom-0 left-0 w-full bg-white shadow-lg transition-transform duration-300 ${
+        isHidden ? 'translate-y-full' : 'translate-y-0'
+      }`}
     >
       <div className="flex min-w-[375px] max-w-[600px] mx-auto">
         <Link
