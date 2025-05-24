@@ -64,7 +64,7 @@ export default function DiaryPage() {
       <Tabs />
       {modal && (
         <DiaryErrorModal
-          message="로그인이 필요한 서비스 입니다. 로그인 후 더 자유롭게 구기를 즐겨보세요!"
+          // message="로그인이 필요한 서비스 입니다. 로그인 후 더 자유롭게 구기를 즐겨보세요!"
           onClose={onClose}
           onConfirm={onConfirm}
         />
