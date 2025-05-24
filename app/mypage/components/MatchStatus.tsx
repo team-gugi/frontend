@@ -64,7 +64,7 @@ export default function MatchStatus() {
     switch (activeTab) {
       case '알림함':
         return (
-          <div>
+          <div className="flex flex-col gap-24">
             {notifications.notification.map((notification) => (
               <NotificationCard
                 key={notification.requestId}

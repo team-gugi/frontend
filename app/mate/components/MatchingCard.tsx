@@ -68,6 +68,7 @@ export default function MatchingCard({
         setToastMessage('마이페이지의 알림창에서 매칭 결과를 확인해보세요! ⚾');
       } else {
         setToastMessage(response.message); // 실패 메시지 표시
+        // setToastMessage('로그인이 필요한 서비스 입니다. 로그인 후 진행해주세요.'); // 실패 메시지 표시
       }
 
       setIsModalOpen(false); // 모달 닫기

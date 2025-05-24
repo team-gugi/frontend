@@ -35,7 +35,7 @@ export default function Banner() {
           </p>
           <Image
             src={WhiteArrowIcon}
-            alt="야구 룰 페이지 바로가기 버튼"
+            alt="AI 챗봇 바로가기 버튼"
             width={22}
             height={8}
           />

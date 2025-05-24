@@ -1,8 +1,10 @@
 'use client';
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import kakakIcon from '../public/icons/Kakao.svg';
+import WhiteArrowIcon from '../public/icons/Arrow_green.svg';
 import { redirectToKakao } from '@/lib/api/kakaoAuthApi';
 export default function LoginPage() {
   // const router = useRouter();
@@ -71,6 +73,7 @@ export default function LoginPage() {
       </div>
 
       <div className="flex px-40 py-10 items-center mt-63">
+        {/* <div className="flex px-40 py-10 items-center mt-20"> */}
         <button
           onClick={redirectToKakao}
           className="flex flex-row w-full px-20 items-center justify-center py-20 gap-8 bg-[#FEE500] rounded-lg"
@@ -82,9 +85,29 @@ export default function LoginPage() {
             height={18}
           />
           <span className="font-normal text-SemiBlack text-16">
-            카카오 로그인
+            카카오 간편 로그인
           </span>
         </button>
+      </div>
+
+      <div className="flex flex-row justify-end">
+        <Link
+          href="/home"
+          className="flex flex-row justify-end mt-18 px-42 py-8 gap-8"
+          // className="flex flex-row justify-end mt-39 overflow-hidden px-14 py-8 gap-8"
+        >
+          {' '}
+          {/* /chatbot 페이지로 이동하는 링크 추가 */}
+          <p className="text-16 text-SemiBlack font-normal cursor-pointer">
+            로그인 없이 서비스 둘러보기
+          </p>
+          <Image
+            src={WhiteArrowIcon}
+            alt="AI 챗봇 바로가기 버튼"
+            width={23}
+            height={8}
+          />
+        </Link>
       </div>
     </>
   );
