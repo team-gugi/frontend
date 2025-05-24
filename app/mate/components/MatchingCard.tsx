@@ -92,10 +92,10 @@ export default function MatchingCard({
           </span>
           <div className="flex flex-col px-24 py-20 bg-SemiWhite gap-13 rounded-[10px] min-h-234">
             <div className="flex flex-row justify-between">
-              <span className="text-14 text-SemiBlack font-medium">
+              <span className="text-14 text-SemiBlack font-medium leading-[140%]">
                 {title}
               </span>
-              <span className="text-12 text-Gray font-medium">
+              <span className="text-12 text-Gray font-medium min-w-[32px] flex items-center justify-center">
                 {daysSinceWritten}일 전
               </span>
             </div>
